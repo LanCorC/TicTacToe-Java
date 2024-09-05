@@ -73,8 +73,10 @@ public class HelloApplication extends Application {
                 button.maxWidthProperty().bind(gameGridVisual.widthProperty());
                 button.maxHeightProperty().bind(gameGridVisual.heightProperty());
                 button.setOnAction((x)->{
-                    button.setText(Game.symbol);
-                    Game.play(new Pair<>(GridPane.getRowIndex(button), GridPane.getColumnIndex(button)));
+                    Pair<Integer, Integer> pair = Game.play(new Pair<>(GridPane.getRowIndex(button), GridPane.getColumnIndex(button)));
+                    if(pair!=null) {
+                        button.setText(Game.symbol);
+                    }
                 });
                 gameGridVisual.add(button, i, j);
             }

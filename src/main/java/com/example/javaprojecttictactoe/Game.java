@@ -95,17 +95,16 @@ public class Game {
 
     public static Pair<Integer, Integer> play(Pair<Integer, Integer> turn) {
         //TODO:
-        System.out.println("HEYY!!");
         if(!validTurn(turn)) {
             //TODO: temporary demo of 'restartGame'
-            restartGame();
+            nextText(true);
             return null; //skips all processing
         }
         gameBoard[turn.getKey()][turn.getValue()] = currentPlayer;
 
 
         nextTurn();
-        return null;
+        return turn;
     }
 
     //input 'player', so i can use 'another player' to check if THEY can win
@@ -131,19 +130,22 @@ public class Game {
         currentPlayer *= -1;
         symbol = symbol.equals("X") ? "O" : "X";
 
-        BorderPane bp = (BorderPane) root;
-        Label lb = (Label) bp.getBottom();
-        lb.setText(symbol + "'s turn!");
+        nextText(false);
     }
 
-    private void nextText() {
-
+    private static void nextText(boolean badMove) {
+        BorderPane bp = (BorderPane) root;
+        Label lb = (Label) bp.getBottom();
+        if(badMove) {
+            lb.setText("Bad move, " + symbol + ". Try again!");
+        } else {
+            lb.setText(symbol + "'s turn!");
+        }
     }
 
     public static void restartGame() {
         //reset all text of grid, reset gameBoard, reset turn order
         //Game class gameBoard
-        System.out.println("HEYY!!");
         gameBoard = new int[3][3];
         //UI gameBoard
         BorderPane bp = (BorderPane) root;

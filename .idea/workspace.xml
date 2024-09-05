@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="edb67b4a-933c-4dbc-af65-5928ba10f626" name="Changes" comment="Implemented a lot of Game code&#10;Implemented simple on-click, change button symbol, then change turn">
+    <list default="true" id="edb67b4a-933c-4dbc-af65-5928ba10f626" name="Changes" comment="Implemented a way to reset game-state and validate moves&#10;Current changes demonstrate -&gt; when invalid, restart game">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/HelloApplication.java" afterDir="false" />
@@ -136,7 +136,15 @@
       <option name="project" value="LOCAL" />
       <updated>1725519595032</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Implemented a way to reset game-state and validate moves&#10;Current changes demonstrate -&gt; when invalid, restart game">
+      <option name="closed" value="true" />
+      <created>1725520981557</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1725520981557</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -148,6 +156,7 @@
     <MESSAGE value="Adjusted 'Button' background to create classic TicTacToe look.&#10;Started Game.java class variables." />
     <MESSAGE value="Adjusted 'Button' background to create classic TicTacToe look.&#10;Started Game.java class implementation." />
     <MESSAGE value="Implemented a lot of Game code&#10;Implemented simple on-click, change button symbol, then change turn" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented a lot of Game code&#10;Implemented simple on-click, change button symbol, then change turn" />
+    <MESSAGE value="Implemented a way to reset game-state and validate moves&#10;Current changes demonstrate -&gt; when invalid, restart game" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented a way to reset game-state and validate moves&#10;Current changes demonstrate -&gt; when invalid, restart game" />
   </component>
 </project>
