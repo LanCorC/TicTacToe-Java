@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="edb67b4a-933c-4dbc-af65-5928ba10f626" name="Changes" comment="Replaced Menu with Settings button (Mobile-app-esque)">
+    <list default="true" id="edb67b4a-933c-4dbc-af65-5928ba10f626" name="Changes" comment="Added a cell-separator by completely filling in the node, and adding a background color with inset">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/HelloApplication.java" afterDir="false" />
     </list>
@@ -12,6 +13,13 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -104,7 +112,15 @@
       <option name="project" value="LOCAL" />
       <updated>1725498854987</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Added a cell-separator by completely filling in the node, and adding a background color with inset">
+      <option name="closed" value="true" />
+      <created>1725508357154</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1725508357154</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -112,6 +128,7 @@
     <MESSAGE value="Switched to BorderPane&#10;Added MenuBar on BorderPane's .setTop()&#10;Demonstration of GridPane column and row constraints" />
     <MESSAGE value="Allowed GridPane node to resize with gridSize.&#10;Added placeholder for update text on the bottom" />
     <MESSAGE value="Replaced Menu with Settings button (Mobile-app-esque)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Replaced Menu with Settings button (Mobile-app-esque)" />
+    <MESSAGE value="Added a cell-separator by completely filling in the node, and adding a background color with inset" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added a cell-separator by completely filling in the node, and adding a background color with inset" />
   </component>
 </project>

@@ -47,6 +47,8 @@ public class HelloApplication extends Application {
 //        gameGridVisual.;
         Node[][] gameGrid = new Text[3][3];
 
+        System.out.println(root.getStyle());
+
 
         for(int i = 0; i < 3; i++) {
             for(int j = 0; j < 3; j++) {
@@ -62,6 +64,8 @@ public class HelloApplication extends Application {
 //                button.fontProperty().bind();
 //                button.setAlignment(Pos.CENTER);
                 button.widthProperty().addListener((observableValue, oldValue, newValue) -> button.setFont(new Font(newValue.doubleValue()/3.0)));
+                button.setStyle("-fx-background-color: %s; -fx-background-radius: 0".formatted("WHITESMOKE"));
+//                button.setBackground(Background.EMPTY);
 
                 GridPane.setConstraints(button, i, j, 1, 1, HPos.CENTER, VPos.CENTER, Priority.ALWAYS, Priority.ALWAYS);
 //                button.maxWidthProperty().bind(gameGridVisual.widthProperty().divide(5));
@@ -104,6 +108,7 @@ public class HelloApplication extends Application {
         //Set status messages
             //e.g. "Player's turn" or "X wins!"
         Label updateText = new Label("X's turn!");
+        updateText.setFont(Font.font(25));
         BorderPane.setAlignment(updateText, Pos.TOP_CENTER);
         root.setBottom(updateText);
 
