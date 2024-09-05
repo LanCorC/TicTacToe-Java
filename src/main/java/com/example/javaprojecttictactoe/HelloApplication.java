@@ -73,7 +73,7 @@ public class HelloApplication extends Application {
                 button.maxWidthProperty().bind(gameGridVisual.widthProperty());
                 button.maxHeightProperty().bind(gameGridVisual.heightProperty());
                 button.setOnAction((x)->{
-                    Pair<Integer, Integer> pair = Game.play(new Pair<>(GridPane.getRowIndex(button), GridPane.getColumnIndex(button)));
+                    Game.play(new Pair<>(GridPane.getRowIndex(button), GridPane.getColumnIndex(button)));
                 });
                 gameGridVisual.add(button, i, j);
             }
@@ -98,7 +98,8 @@ public class HelloApplication extends Application {
         //Set buttons on top, e.g. Menu, restart, potentially a win counter
             //Mobile app version will have buttons and corresponding popup, not a menu drop-down
             //else, just create a single anchored button on the corner and have it call a popup menu to 'emulate' mobile in PC
-        Button settings = new Button("Settings");
+        Button settings = new Button("Settings-Restart");
+        settings.setOnAction(x-> Game.restartGame());
 //        settings.setPadding(new Insets(50,50,50,50));
         BorderPane.setMargin(settings, new Insets(5, 0, 0, 5));
         BorderPane.setAlignment(settings, Pos.TOP_LEFT);

@@ -37,8 +37,8 @@ public class Game {
     //Dev note: we will use Button.getColumn() and .getRow to find the appropriate cell
     private static int[][] gameBoard = new int[3][3]; //defaults 0 = empty, 1 = player1, -1 = player2
     //TBD if required; notice there are only 9 tiles, i can use this to determine RNG modulo
-    private int remaining = 9;
-    private Random rand = new Random();
+    private static int remaining = 9;
+    private static Random rand = new Random();
 
     private Game() {
     }
@@ -51,7 +51,7 @@ public class Game {
     }
 
     public void setRoot(Node root) {
-        this.root = root;
+        Game.root = root;
     }
 
     public static int getGameMode() {
@@ -63,54 +63,78 @@ public class Game {
     }
 
     //note: Pair<row, column>; for automating the robot
-    public static Pair<Integer, Integer> playTurn() {
+    public static void playTurn() {
         if(gameMode == VS_ROBOT) {
-            return playRobot();
+            playRobot();
         } else {
-            return playRandom();
+            playRandom();
         }
     }
 
-    public static Pair<Integer, Integer> playRobot() {
+    public static void playRobot() {
         Pair<Integer, Integer> move = canWin(currentPlayer);
         if(move != null) {
-            return play(move);
+            play(move);
         }
         move = canWin(opponent());
         if(move != null) {
-            return play(move);
+            play(move);
         }
 
         //if cannot win, or deny, play random
-        return playRandom();
+        playRandom();
+//        return null;
     }
 
-    public static Pair<Integer, Integer> playRandom() {
+    public static void playRandom() {
         //TODO:
+        if(remaining == 0) {
+            System.out.println("No more turns available(?)!");
+            return null;
+        }
 
-        nextTurn();
-        return null;
+        //rng counts 0, but i need non-zero
+        int candidate = 0;
+        while(candidate == 0) {
+            candidate = (rand.nextInt(remaining+1));
+        }
+
+        for(int i = 0; i < 3; i++) {
+            for(int j = 0; j < 3; j++) {
+                //If not taken,
+                if(gameBoard[i][j] == 0 && --candidate == 0) {
+                    play(new Pair<>(i, j));
+                    return;
+                }
+            }
+        }
+        System.out.println("Could not find a random empty spot!");
+
+//        return null;
     }
 
 
-    public static Pair<Integer, Integer> play(Pair<Integer, Integer> turn) {
+    public static void play(Pair<Integer, Integer> turn) {
         //TODO:
         if(!validTurn(turn)) {
-            //TODO: temporary demo of 'restartGame'
-            nextText(true);
-            return null; //skips all processing
+            System.out.println(currentPlayer + " tried to play: " + turn);
+            nextTurn(true);
+            return; //skips all processing
         }
+        remaining--;
+        System.out.println(currentPlayer + " played Row: %d Col: %d".formatted(turn.getKey(), turn.getValue()));
         gameBoard[turn.getKey()][turn.getValue()] = currentPlayer;
 
         GridPane gp = (GridPane) ((BorderPane) root).getCenter();
         gp.getChildren().forEach((x)->{
             if(GridPane.getColumnIndex(x).equals(turn.getValue()) && GridPane.getRowIndex(x).equals(turn.getKey())) {
                 ((Button) x).setText(symbol);
+                //Todo: can be improved by turning into list, For each, break once found
             }
         });
 
         nextTurn();
-        return turn;
+//        return turn;
     }
 
     //input 'player', so i can use 'another player' to check if THEY can win
@@ -118,7 +142,96 @@ public class Game {
         //TODO:
         //checks all rows, cols, diagonals, if "Current Player" can win
 
+        //Tally and final result
+        int count = 0;
+        Pair<Integer, Integer> move;
+
+        //Check all rows
+        for(int i = 0; i < 3; i++) {
+            //Reset tally
+            count = 0;
+            move = null;
+            for(int j = 0; j < 3; j++) {
+                if(gameBoard[i][j]==player) {
+                    count++;
+                } else if(gameBoard[i][j] == 0) {
+                    move = new Pair<>(i, j);
+                } else {
+                    //Disqualify
+                    count = 0;
+                    break;
+                }
+            }
+
+            //Validate
+            if(validate(count, move)) return move;
+        }
+
+        //Check columns
+        for(int i = 0; i < 3; i++) {
+            count = 0;
+            move = null;
+            for(int j = 0; j < 3; j++) {
+                int num = gameBoard[j][i];
+                if(num == player) {
+                    count++;
+                } else if (num == 0) {
+                    move = new Pair<>(i, j);
+                } else {
+                    count = 0;
+                    break;
+                }
+            }
+
+            //Validate
+            if(validate(count, move)) return move;
+        }
+
+        //Check diagonal 1:
+        count = 0;
+        move = null;
+        for(int i = 0; i < 3; i++) {
+            int num = gameBoard[i][i];
+            if(num == player) {
+                count++;
+            } else if(num == 0) {
+                move = new Pair<>(i, i);
+            } else {
+                count = 0;
+                break;
+            }
+        }
+        //validate
+        if(validate(count, move)) return move;
+
+        count = 0;
+        move = null;
+        //Check diagonal 2:
+        for(int i = 0; i < 3; i++) {
+            int num = gameBoard[2-i][i];
+            if(num == player) {
+                count++;
+            } else if (num == 0) {
+                move = new Pair<>(2-i, i);
+            } else {
+                count = 0;
+                break;
+            }
+        }
+        if(validate(count, move)) return move;
+
         return null;
+    }
+
+
+    private static boolean validate(int count, Pair<Integer, Integer> move) {
+        if(count == 2 && move != null) {
+            return true;
+        } else if (count == 3) {
+            //TODO: winning line, e.g. small animation, or msg update! + pause all button pressing until restart, or option to auto-restart and tally wins
+            System.out.println("You should win here somewhere!");
+        }
+        return false;
     }
 
     private static int opponent() {
@@ -130,25 +243,30 @@ public class Game {
         return gameBoard[move.getKey()][move.getValue()] == 0;
     }
 
-    //called at the end of a turn to 'switch' players
-    //option in the future to select which symbol?
     private static void nextTurn() {
-        //TODO: refactor. this is redundant
-        nextText(false);
+        nextTurn(false);
     }
 
-    private static void nextText(boolean badMove) {
+    private static void nextTurn(boolean badMove) {
         BorderPane bp = (BorderPane) root;
         Label lb = (Label) bp.getBottom();
         if(badMove) {
+            //Should only trigger on player misclick
             lb.setText("Bad move, " + symbol + ". Try again!");
+            //For troubleshooting
+            if(currentPlayer == PLAYER2 && gameMode != VS_PLAYER) {
+                lb.setText("Robot made a mistake! Call the dev!");
+                System.out.println("Robot made a mistake! Call the dev!");
+            }
         } else {
-
-
-
             currentPlayer *= -1;
             symbol = symbol.equals("X") ? "O" : "X";
-            lb.setText(symbol + "'s turn!");
+            switch(gameMode) {
+                case VS_PLAYER: lb.setText(symbol + "'s turn!");
+                    break;
+                default: playTurn();
+            }
+
         }
     }
 
@@ -156,6 +274,9 @@ public class Game {
         //reset all text of grid, reset gameBoard, reset turn order
         //Game class gameBoard
         gameBoard = new int[3][3];
+        currentPlayer = PLAYER1;
+        symbol = "X";
+        remaining = 9;
         //UI gameBoard
         BorderPane bp = (BorderPane) root;
         GridPane gridPane = (GridPane) bp.getCenter();
@@ -167,6 +288,7 @@ public class Game {
                 System.out.println("hey! " + x.getClass());
             }
         });
+        ((Label) bp.getBottom()).setText(symbol + "'s turn!");
     }
 
     //Troubleshooting

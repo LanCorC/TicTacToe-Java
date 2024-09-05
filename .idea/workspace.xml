@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="edb67b4a-933c-4dbc-af65-5928ba10f626" name="Changes" comment="Full implementation of turn validation">
+    <list default="true" id="edb67b4a-933c-4dbc-af65-5928ba10f626" name="Changes" comment="Fixed bug where Symbol places does not correlate with Text updates">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/HelloApplication.java" afterDir="false" />
@@ -152,7 +152,15 @@
       <option name="project" value="LOCAL" />
       <updated>1725521700886</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Fixed bug where Symbol places does not correlate with Text updates">
+      <option name="closed" value="true" />
+      <created>1725523258285</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1725523258285</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -166,6 +174,7 @@
     <MESSAGE value="Implemented a lot of Game code&#10;Implemented simple on-click, change button symbol, then change turn" />
     <MESSAGE value="Implemented a way to reset game-state and validate moves&#10;Current changes demonstrate -&gt; when invalid, restart game" />
     <MESSAGE value="Full implementation of turn validation" />
-    <option name="LAST_COMMIT_MESSAGE" value="Full implementation of turn validation" />
+    <MESSAGE value="Fixed bug where Symbol places does not correlate with Text updates" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed bug where Symbol places does not correlate with Text updates" />
   </component>
 </project>
