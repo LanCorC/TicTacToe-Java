@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="edb67b4a-933c-4dbc-af65-5928ba10f626" name="Changes" comment="Adjusted 'Button' background to create classic TicTacToe look.&#10;Started Game.java class implementation.">
+    <list default="true" id="edb67b4a-933c-4dbc-af65-5928ba10f626" name="Changes" comment="Implemented a lot of Game code&#10;Implemented simple on-click, change button symbol, then change turn">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/HelloApplication.java" afterDir="false" />
@@ -128,7 +128,15 @@
       <option name="project" value="LOCAL" />
       <updated>1725510856261</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Implemented a lot of Game code&#10;Implemented simple on-click, change button symbol, then change turn">
+      <option name="closed" value="true" />
+      <created>1725519595032</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1725519595032</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -139,6 +147,7 @@
     <MESSAGE value="Added a cell-separator by completely filling in the node, and adding a background color with inset" />
     <MESSAGE value="Adjusted 'Button' background to create classic TicTacToe look.&#10;Started Game.java class variables." />
     <MESSAGE value="Adjusted 'Button' background to create classic TicTacToe look.&#10;Started Game.java class implementation." />
-    <option name="LAST_COMMIT_MESSAGE" value="Adjusted 'Button' background to create classic TicTacToe look.&#10;Started Game.java class implementation." />
+    <MESSAGE value="Implemented a lot of Game code&#10;Implemented simple on-click, change button symbol, then change turn" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented a lot of Game code&#10;Implemented simple on-click, change button symbol, then change turn" />
   </component>
 </project>

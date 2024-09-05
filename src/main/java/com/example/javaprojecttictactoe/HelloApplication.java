@@ -20,6 +20,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import javafx.util.Pair;
 
 import java.io.IOException;
 
@@ -71,9 +72,9 @@ public class HelloApplication extends Application {
 //                button.maxHeightProperty().bind(gameGridVisual.heightProperty().divide(5));
                 button.maxWidthProperty().bind(gameGridVisual.widthProperty());
                 button.maxHeightProperty().bind(gameGridVisual.heightProperty());
-                button.setOnMouseClicked((x)->{
+                button.setOnAction((x)->{
                     button.setText(Game.symbol);
-                    Game.playTurn();
+                    Game.play(new Pair<>(GridPane.getRowIndex(button), GridPane.getColumnIndex(button)));
                 });
                 gameGridVisual.add(button, i, j);
             }
@@ -114,8 +115,6 @@ public class HelloApplication extends Application {
         updateText.setFont(Font.font(25));
         BorderPane.setAlignment(updateText, Pos.TOP_CENTER);
         root.setBottom(updateText);
-
-
 
 
         Scene scene = new Scene(root, 500, 500);

@@ -1,10 +1,14 @@
 package com.example.javaprojecttictactoe;
 
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.util.Pair;
+import org.controlsfx.control.spreadsheet.Grid;
+
 import java.util.Random;
 
 public class Game {
@@ -31,7 +35,7 @@ public class Game {
     private static Node root = null;
 
     //Dev note: we will use Button.getColumn() and .getRow to find the appropriate cell
-    private int[][] gameBoard = new int[3][3]; //defaults 0 = empty, 1 = player1, -1 = player2
+    private static int[][] gameBoard = new int[3][3]; //defaults 0 = empty, 1 = player1, -1 = player2
     //TBD if required; notice there are only 9 tiles, i can use this to determine RNG modulo
     private int remaining = 9;
     private Random rand = new Random();
@@ -83,6 +87,7 @@ public class Game {
 
     public static Pair<Integer, Integer> playRandom() {
         //TODO:
+
         nextTurn();
         return null;
     }
@@ -90,6 +95,15 @@ public class Game {
 
     public static Pair<Integer, Integer> play(Pair<Integer, Integer> turn) {
         //TODO:
+        System.out.println("HEYY!!");
+        if(!validTurn(turn)) {
+            //TODO: temporary demo of 'restartGame'
+            restartGame();
+            return null; //skips all processing
+        }
+        gameBoard[turn.getKey()][turn.getValue()] = currentPlayer;
+
+
         nextTurn();
         return null;
     }
@@ -104,6 +118,11 @@ public class Game {
 
     private static int opponent() {
         return currentPlayer*-1;
+    }
+
+    //Note: Row,Column
+    private static boolean validTurn(Pair<Integer, Integer> move) {
+        return gameBoard[move.getKey()][move.getValue()] == 0;
     }
 
     //called at the end of a turn to 'switch' players
@@ -123,8 +142,23 @@ public class Game {
 
     public static void restartGame() {
         //reset all text of grid, reset gameBoard, reset turn order
+        //Game class gameBoard
+        System.out.println("HEYY!!");
+        gameBoard = new int[3][3];
+        //UI gameBoard
+        BorderPane bp = (BorderPane) root;
+        GridPane gridPane = (GridPane) bp.getCenter();
+        gridPane.getChildren().forEach(x-> {
+            if(x.getClass() == Button.class) {
+                Button btn = (Button) x;
+                btn.setText("=");
+            } else {
+                System.out.println("hey! " + x.getClass());
+            }
+        });
     }
 
+    //Troubleshooting
     @Override
     public String toString() {
         String gm = gameMode == 0 ? "VS_ROBOT" :
