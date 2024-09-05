@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="edb67b4a-933c-4dbc-af65-5928ba10f626" name="Changes" comment="Demo for Gridpane">
+    <list default="true" id="edb67b4a-933c-4dbc-af65-5928ba10f626" name="Changes" comment="Switched to BorderPane&#10;Added MenuBar on BorderPane's .setTop()&#10;Demonstration of GridPane column and row constraints">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/HelloApplication.java" afterDir="false" />
     </list>
@@ -23,9 +23,9 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 1
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="2laZCCq9fidL5zOm38QRBjUjs1f" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -39,7 +39,8 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/lance/Documents/CodingJava/JavaProject-TicTacToe/src/main/resources/com/example/javaprojecttictactoe/hello-view.fxml"
+    "last_opened_file_path": "C:/Users/lance/Documents/CodingJava/JavaProject-TicTacToe/src/main/resources/com/example/javaprojecttictactoe/hello-view.fxml",
+    "run.code.analysis.last.selected.profile": "pProject Default"
   }
 }]]></component>
   <component name="RunManager">
@@ -79,11 +80,20 @@
       <option name="project" value="LOCAL" />
       <updated>1725421976878</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Switched to BorderPane&#10;Added MenuBar on BorderPane's .setTop()&#10;Demonstration of GridPane column and row constraints">
+      <option name="closed" value="true" />
+      <created>1725428105404</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1725428105404</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Demo for Gridpane" />
-    <option name="LAST_COMMIT_MESSAGE" value="Demo for Gridpane" />
+    <MESSAGE value="Switched to BorderPane&#10;Added MenuBar on BorderPane's .setTop()&#10;Demonstration of GridPane column and row constraints" />
+    <option name="LAST_COMMIT_MESSAGE" value="Switched to BorderPane&#10;Added MenuBar on BorderPane's .setTop()&#10;Demonstration of GridPane column and row constraints" />
   </component>
 </project>

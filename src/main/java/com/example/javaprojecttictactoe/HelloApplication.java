@@ -2,19 +2,25 @@ package com.example.javaprojecttictactoe;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.HPos;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+
 
 public class HelloApplication extends Application {
     @Override
@@ -32,38 +38,79 @@ public class HelloApplication extends Application {
 //        gameGridVisual.setPrefHeight();
         gameGridVisual.setPrefSize(stage.getWidth(), stage.getHeight());
 //        gameGridVisual.setStyle("-fx-border-color: black");
+//        gameGridVisual.setStyle("-fx-background-color: aqua");
         gameGridVisual.setAlignment(Pos.CENTER);
+        gameGridVisual.setPadding(new Insets(15, 15, 15, 15));
+
+//        gameGridVisual.;
         Node[][] gameGrid = new Text[3][3];
+
 
         for(int i = 0; i < 3; i++) {
             for(int j = 0; j < 3; j++) {
-                Text text = new Text((i + j)% 2 == 0 ? "X" : "O");
-                gameGrid[i][j] = text;
-                gameGridVisual.add(text, i, j);
-                text.setFont(new Font(50));
+//                Text text = new Text((i + j)% 2 == 0 ? "X" : "O");
+//                text.setTextAlignment(TextAlignment.CENTER);
+//                gameGrid[i][j] = text;
+//                text.setStyle("-fx-background-color: aqua");
+//                gameGridVisual.add(text, i, j);
+//                text.setFont(new Font(15));
+
+                Button button = new Button();
+                button.setText((i + j)% 2 == 0 ? "X" : "O");
+                button.setAlignment(Pos.CENTER);
+
+                GridPane.setConstraints(button, i, j, 1, 1, HPos.CENTER, VPos.CENTER, Priority.ALWAYS, Priority.ALWAYS);
+//                GridPane.setConstraints(button, i, j, 1, 1, HPos.CENTER, VPos.CENTER);
+//                GridPane.setFillHeight(button, true);
+//                GridPane.setFillWidth(button, true);
+                button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+                gameGridVisual.add(button, i, j);
             }
         }
 
+        //TODO: do not include in final, debugging
+        gameGridVisual.setGridLinesVisible(true);
+
+        //Add constraints to all columns
         ColumnConstraints cc = new ColumnConstraints();
         cc.setPercentWidth(33);
         RowConstraints rc = new RowConstraints();
         rc.setPercentHeight(33);
+        for(int i = 0; i < 3; i++) {
+            gameGridVisual.getColumnConstraints().add(cc);
+            gameGridVisual.getRowConstraints().add(rc);
+        }
 
-        gameGridVisual.getColumnConstraints().addAll(cc);
-        gameGridVisual.getRowConstraints().add(rc);
+//        gameGridVisual.getChildren().forEach(btn -> GridPane.setConstraints(btn, ));
+
+
+
 //        gameGridVisual.get
 
         root.setCenter(gameGridVisual);
 
         //Set buttons on top, e.g. Menu, restart, potentially a win counter
             //Mobile app version will have buttons and corresponding popup, not a menu drop-down
+            //else, just create a single anchored button on the corner and have it call a popup menu to 'emulate' mobile in PC
         MenuBar menu = new MenuBar();
-        Menu settings = new Menu("..."); //triple line settings, or cogwheel symbol
+        Menu settings = new Menu("Menu"); //triple line settings, or cogwheel symbol
             //Modes- vs Player, vs Random, vs Robot
             //First turn- Player, Player2, Random
+            //Restart
 
-        Menu restart = new Menu("Restart"); //'loop back' emoji or symbol
-        menu.getMenus().addAll(settings, restart);
+//        Menu restart = new Menu("Restart"); //'loop back' emoji or symbol
+//        menu.getMenus().addAll(settings, restart);
+        //TODO: going from single Menu and nested options to multiple buttons; else it's very bare
+            //split the nests into multiple buttons, e.g. button for Mode, First, Other (?)
+            //Other could display e.g. win tally; Restart (clear the map and action First turn)
+
+        Label updateText = new Label("X's turn!");
+//        updateText.setAlignment(Pos.TOP_CENTER);
+        BorderPane.setAlignment(updateText, Pos.TOP_CENTER);
+        root.setBottom(updateText);
+
+
+        menu.getMenus().add(settings);
         root.setTop(menu);
         //Set status messages
                 //e.g. "Player's turn" or "X wins!"
