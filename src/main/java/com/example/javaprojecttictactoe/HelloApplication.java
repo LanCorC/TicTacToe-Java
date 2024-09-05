@@ -2,6 +2,7 @@ package com.example.javaprojecttictactoe;
 
 import javafx.application.Application;
 import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -45,10 +46,8 @@ public class HelloApplication extends Application {
 //        gameGridVisual.setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.FULL)));
 
 //        gameGridVisual.;
+        Game.getInstance().setRoot(root);
         Node[][] gameGrid = new Text[3][3];
-
-        System.out.println(root.getStyle());
-
 
         for(int i = 0; i < 3; i++) {
             for(int j = 0; j < 3; j++) {
@@ -72,6 +71,10 @@ public class HelloApplication extends Application {
 //                button.maxHeightProperty().bind(gameGridVisual.heightProperty().divide(5));
                 button.maxWidthProperty().bind(gameGridVisual.widthProperty());
                 button.maxHeightProperty().bind(gameGridVisual.heightProperty());
+                button.setOnMouseClicked((x)->{
+                    button.setText(Game.symbol);
+                    Game.playTurn();
+                });
                 gameGridVisual.add(button, i, j);
             }
         }

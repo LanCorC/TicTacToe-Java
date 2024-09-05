@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="edb67b4a-933c-4dbc-af65-5928ba10f626" name="Changes" comment="Added a cell-separator by completely filling in the node, and adding a background color with inset">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/Game.java" afterDir="false" />
+    <list default="true" id="edb67b4a-933c-4dbc-af65-5928ba10f626" name="Changes" comment="Adjusted 'Button' background to create classic TicTacToe look.&#10;Started Game.java class implementation.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/HelloApplication.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -120,7 +120,15 @@
       <option name="project" value="LOCAL" />
       <updated>1725508357154</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Adjusted 'Button' background to create classic TicTacToe look.&#10;Started Game.java class implementation.">
+      <option name="closed" value="true" />
+      <created>1725510856261</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1725510856261</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -129,6 +137,8 @@
     <MESSAGE value="Allowed GridPane node to resize with gridSize.&#10;Added placeholder for update text on the bottom" />
     <MESSAGE value="Replaced Menu with Settings button (Mobile-app-esque)" />
     <MESSAGE value="Added a cell-separator by completely filling in the node, and adding a background color with inset" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added a cell-separator by completely filling in the node, and adding a background color with inset" />
+    <MESSAGE value="Adjusted 'Button' background to create classic TicTacToe look.&#10;Started Game.java class variables." />
+    <MESSAGE value="Adjusted 'Button' background to create classic TicTacToe look.&#10;Started Game.java class implementation." />
+    <option name="LAST_COMMIT_MESSAGE" value="Adjusted 'Button' background to create classic TicTacToe look.&#10;Started Game.java class implementation." />
   </component>
 </project>
