@@ -102,6 +102,12 @@ public class Game {
         }
         gameBoard[turn.getKey()][turn.getValue()] = currentPlayer;
 
+        GridPane gp = (GridPane) ((BorderPane) root).getCenter();
+        gp.getChildren().forEach((x)->{
+            if(GridPane.getColumnIndex(x).equals(turn.getValue()) && GridPane.getRowIndex(x).equals(turn.getKey())) {
+                ((Button) x).setText(symbol);
+            }
+        });
 
         nextTurn();
         return turn;
@@ -127,9 +133,7 @@ public class Game {
     //called at the end of a turn to 'switch' players
     //option in the future to select which symbol?
     private static void nextTurn() {
-        currentPlayer *= -1;
-        symbol = symbol.equals("X") ? "O" : "X";
-
+        //TODO: refactor. this is redundant
         nextText(false);
     }
 
@@ -139,6 +143,11 @@ public class Game {
         if(badMove) {
             lb.setText("Bad move, " + symbol + ". Try again!");
         } else {
+
+
+
+            currentPlayer *= -1;
+            symbol = symbol.equals("X") ? "O" : "X";
             lb.setText(symbol + "'s turn!");
         }
     }
