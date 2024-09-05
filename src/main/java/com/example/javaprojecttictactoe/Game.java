@@ -28,7 +28,7 @@ public class Game {
     public static final int PLAYER2 = -1;
 
     private static final int startMode = FIRST_START;
-    private static final int gameMode = VS_ROBOT;
+    private static final int gameMode = VS_RANDOM;
     private static int currentPlayer = PLAYER1;
     public static String symbol = "X";
     //the parent scene
@@ -90,7 +90,7 @@ public class Game {
         //TODO:
         if(remaining == 0) {
             System.out.println("No more turns available(?)!");
-            return null;
+            return;
         }
 
         //rng counts 0, but i need non-zero
@@ -264,7 +264,11 @@ public class Game {
             switch(gameMode) {
                 case VS_PLAYER: lb.setText(symbol + "'s turn!");
                     break;
-                default: playTurn();
+                default:
+                    if(currentPlayer == PLAYER2) {
+                        playTurn();
+                    }
+
             }
 
         }
