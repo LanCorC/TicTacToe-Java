@@ -1,6 +1,7 @@
 package com.example.javaprojecttictactoe;
 
 import javafx.application.Application;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -35,12 +36,13 @@ public class HelloApplication extends Application {
         GridPane gameGridVisual = new GridPane();
         gameGridVisual.setHgap(5);
         gameGridVisual.setVgap(5);
-//        gameGridVisual.setPrefHeight();
+
         gameGridVisual.setPrefSize(stage.getWidth(), stage.getHeight());
-//        gameGridVisual.setStyle("-fx-border-color: black");
-//        gameGridVisual.setStyle("-fx-background-color: aqua");
+
         gameGridVisual.setAlignment(Pos.CENTER);
-        gameGridVisual.setPadding(new Insets(15, 15, 15, 15));
+//        gameGridVisual.setPadding(new Insets(15, 15, 15, 15));
+        //TODO: temporary. i want lines inside the grids, between grids, not a 'border'
+//        gameGridVisual.setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.FULL)));
 
 //        gameGridVisual.;
         Node[][] gameGrid = new Text[3][3];
@@ -55,21 +57,23 @@ public class HelloApplication extends Application {
 //                gameGridVisual.add(text, i, j);
 //                text.setFont(new Font(15));
 
-                Button button = new Button();
-                button.setText((i + j)% 2 == 0 ? "X" : "O");
-                button.setAlignment(Pos.CENTER);
+                Button button = new Button("=");
+//                button.setText((i + j)% 2 == 0 ? "X" : "O");
+//                button.fontProperty().bind();
+//                button.setAlignment(Pos.CENTER);
+                button.widthProperty().addListener((observableValue, oldValue, newValue) -> button.setFont(new Font(newValue.doubleValue()/3.0)));
 
                 GridPane.setConstraints(button, i, j, 1, 1, HPos.CENTER, VPos.CENTER, Priority.ALWAYS, Priority.ALWAYS);
-//                GridPane.setConstraints(button, i, j, 1, 1, HPos.CENTER, VPos.CENTER);
-//                GridPane.setFillHeight(button, true);
-//                GridPane.setFillWidth(button, true);
-                button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+//                button.maxWidthProperty().bind(gameGridVisual.widthProperty().divide(5));
+//                button.maxHeightProperty().bind(gameGridVisual.heightProperty().divide(5));
+                button.maxWidthProperty().bind(gameGridVisual.widthProperty());
+                button.maxHeightProperty().bind(gameGridVisual.heightProperty());
                 gameGridVisual.add(button, i, j);
             }
         }
 
         //TODO: do not include in final, debugging
-        gameGridVisual.setGridLinesVisible(true);
+//        gameGridVisual.setGridLinesVisible(true);
 
         //Add constraints to all columns
         ColumnConstraints cc = new ColumnConstraints();
@@ -81,12 +85,7 @@ public class HelloApplication extends Application {
             gameGridVisual.getRowConstraints().add(rc);
         }
 
-//        gameGridVisual.getChildren().forEach(btn -> GridPane.setConstraints(btn, ));
-
-
-
-//        gameGridVisual.get
-
+        BorderPane.setMargin(gameGridVisual, new Insets(15, 15, 15, 15));
         root.setCenter(gameGridVisual);
 
         //Set buttons on top, e.g. Menu, restart, potentially a win counter
@@ -99,6 +98,8 @@ public class HelloApplication extends Application {
 //        settings.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         root.setTop(settings);
 
+
+        gameGridVisual.setBackground(new Background(new BackgroundFill(Color.BLACK, new CornerRadii(4, false), new Insets(5, 5, 5, 5))));
 
         //Set status messages
             //e.g. "Player's turn" or "X wins!"
@@ -114,6 +115,20 @@ public class HelloApplication extends Application {
         stage.setScene(scene);
         stage.show();
 
+//        //TODO: this is for debugging
+//        System.out.println(gameGridVisual.getWidth());
+//        gameGridVisual.getChildren().forEach(x-> {
+//            if(x.getClass() != Button.class) {
+//                System.out.println("skip");
+//            } else {
+//                Button btn = (Button) x;
+//                System.out.println(btn.getWidth());
+//                btn.setFont(new Font(31));
+//                System.out.println(btn.fontProperty());
+//                System.out.println(btn.widthProperty());
+//            }
+//
+//        });
 
     }
 
