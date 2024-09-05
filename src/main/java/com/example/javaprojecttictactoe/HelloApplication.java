@@ -92,28 +92,23 @@ public class HelloApplication extends Application {
         //Set buttons on top, e.g. Menu, restart, potentially a win counter
             //Mobile app version will have buttons and corresponding popup, not a menu drop-down
             //else, just create a single anchored button on the corner and have it call a popup menu to 'emulate' mobile in PC
-        MenuBar menu = new MenuBar();
-        Menu settings = new Menu("Menu"); //triple line settings, or cogwheel symbol
-            //Modes- vs Player, vs Random, vs Robot
-            //First turn- Player, Player2, Random
-            //Restart
+        Button settings = new Button("Settings");
+//        settings.setPadding(new Insets(50,50,50,50));
+        BorderPane.setMargin(settings, new Insets(5, 0, 0, 5));
+        BorderPane.setAlignment(settings, Pos.TOP_LEFT);
+//        settings.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        root.setTop(settings);
 
-//        Menu restart = new Menu("Restart"); //'loop back' emoji or symbol
-//        menu.getMenus().addAll(settings, restart);
-        //TODO: going from single Menu and nested options to multiple buttons; else it's very bare
-            //split the nests into multiple buttons, e.g. button for Mode, First, Other (?)
-            //Other could display e.g. win tally; Restart (clear the map and action First turn)
 
+        //Set status messages
+            //e.g. "Player's turn" or "X wins!"
         Label updateText = new Label("X's turn!");
-//        updateText.setAlignment(Pos.TOP_CENTER);
         BorderPane.setAlignment(updateText, Pos.TOP_CENTER);
         root.setBottom(updateText);
 
 
-        menu.getMenus().add(settings);
-        root.setTop(menu);
-        //Set status messages
-                //e.g. "Player's turn" or "X wins!"
+
+
         Scene scene = new Scene(root, 500, 500);
         stage.setTitle("XO Game");
         stage.setScene(scene);

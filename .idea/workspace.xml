@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="edb67b4a-933c-4dbc-af65-5928ba10f626" name="Changes" comment="Switched to BorderPane&#10;Added MenuBar on BorderPane's .setTop()&#10;Demonstration of GridPane column and row constraints">
+    <list default="true" id="edb67b4a-933c-4dbc-af65-5928ba10f626" name="Changes" comment="Allowed GridPane node to resize with gridSize.&#10;Added placeholder for update text on the bottom">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/HelloApplication.java" afterDir="false" />
     </list>
@@ -88,12 +88,21 @@
       <option name="project" value="LOCAL" />
       <updated>1725428105404</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Allowed GridPane node to resize with gridSize.&#10;Added placeholder for update text on the bottom">
+      <option name="closed" value="true" />
+      <created>1725498333683</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1725498333683</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Demo for Gridpane" />
     <MESSAGE value="Switched to BorderPane&#10;Added MenuBar on BorderPane's .setTop()&#10;Demonstration of GridPane column and row constraints" />
-    <option name="LAST_COMMIT_MESSAGE" value="Switched to BorderPane&#10;Added MenuBar on BorderPane's .setTop()&#10;Demonstration of GridPane column and row constraints" />
+    <MESSAGE value="Allowed GridPane node to resize with gridSize.&#10;Added placeholder for update text on the bottom" />
+    <option name="LAST_COMMIT_MESSAGE" value="Allowed GridPane node to resize with gridSize.&#10;Added placeholder for update text on the bottom" />
   </component>
 </project>
