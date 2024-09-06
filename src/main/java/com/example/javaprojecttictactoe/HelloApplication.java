@@ -59,7 +59,7 @@ public class HelloApplication extends Application {
 //                gameGridVisual.add(text, i, j);
 //                text.setFont(new Font(15));
 
-                Button button = new Button("=");
+                Button button = new Button("~");
 //                button.setText((i + j)% 2 == 0 ? "X" : "O");
 //                button.fontProperty().bind();
 //                button.setAlignment(Pos.CENTER);
@@ -95,14 +95,17 @@ public class HelloApplication extends Application {
         BorderPane.setMargin(gameGridVisual, new Insets(15, 15, 15, 15));
         root.setCenter(gameGridVisual);
 
+
+        HBox topBar = new HBox();
         //Set buttons on top, e.g. Menu, restart, potentially a win counter
             //Mobile app version will have buttons and corresponding popup, not a menu drop-down
             //else, just create a single anchored button on the corner and have it call a popup menu to 'emulate' mobile in PC
         Button settings = new Button("Settings-Restart");
         settings.setOnAction(x-> Game.restartGame());
 //        settings.setPadding(new Insets(50,50,50,50));
-        BorderPane.setMargin(settings, new Insets(5, 0, 0, 5));
-        BorderPane.setAlignment(settings, Pos.TOP_LEFT);
+        HBox.setMargin(settings, new Insets(5, 0, 0, 5));
+
+        HBox.setHgrow(settings, Priority.ALWAYS);
 //        settings.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         root.setTop(settings);
 

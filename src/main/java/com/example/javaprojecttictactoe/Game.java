@@ -15,28 +15,47 @@ public class Game {
 
     private static Game INSTANCE;
 
-    //Dev note: under Controller.class, for text and state changes, use if output == Game.VS_ROBOT, etc
-    public static final int VS_ROBOT = 0;
-    public static final int VS_RANDOM = 1;
-    public static final int VS_PLAYER = 2;
+    enum VersusMode {
+        VS_ROBOT,
+        VS_RANDOM,
+        VS_PLAYER
+    }
 
-    public static final int FIRST_START = 0;
-    public static final int SECOND_START = 1;
-    public static final int RANDOM_START = 2;
+    enum StartMode {
+        FIRST_START,
+        SECOND_START,
+        RANDOM_START
+    }
+
+    enum WinState {
+        PENDING,
+        DRAW,
+        PLAYER1,
+        PLAYER2
+    }
+
+    //Dev note: under Controller.class, for text and state changes, use if output == Game.VS_ROBOT, etc
+//    public static final int VS_ROBOT = 0;
+//    public static final int VS_RANDOM = 1;
+//    public static final int VS_PLAYER = 2;
+//
+//    public static final int FIRST_START = 0;
+//    public static final int SECOND_START = 1;
+//    public static final int RANDOM_START = 2;
 
     public static final int PLAYER1 = 1;
     public static final int PLAYER2 = -1;
 
-    private static final int startMode = FIRST_START;
-    private static final int gameMode = VS_ROBOT;
+    private static StartMode startMode = StartMode.FIRST_START;
+    private static  VersusMode gameMode = VersusMode.VS_ROBOT;
     private static int currentPlayer = PLAYER1;
 
-    public static final int PENDING = 0;
-    public static final int DRAW = 1;
-    public static final int PLAYER1WIN = 2;
-    public static final int PLAYER2WIN = 3;
+//    public static final int PENDING = 0;
+//    public static final int DRAW = 1;
+//    public static final int PLAYER1WIN = 2;
+//    public static final int PLAYER2WIN = 3;
 
-    private static int winCondition = PENDING;
+    private static WinState winCondition = WinState.PENDING;
     private static String playerOneSymbol = "X";
     private static String playerTwoSymbol = "O";
     //the parent scene
@@ -62,18 +81,18 @@ public class Game {
     }
 
     public static int getGameMode() {
-        return gameMode;
+        return gameMode.ordinal();
     }
 
     public static int getStartMode() {
-        return startMode;
+        return startMode.ordinal();
     }
 
     //note: Pair<row, column>; for automating the robot
     public static void playTurn() {
-        if(winCondition != PENDING) {
+        if(winCondition != WinState.PENDING) {
             //do nothing
-        } else if(gameMode == VS_ROBOT) {
+        } else if(gameMode == VersusMode.VS_ROBOT) {
             playRobot();
         } else {
             playRandom();
@@ -94,7 +113,6 @@ public class Game {
 
         //if cannot win, or deny, play random
         playRandom();
-//        return null;
     }
 
     public static void playRandom() {
@@ -119,9 +137,8 @@ public class Game {
                 }
             }
         }
-        System.out.println("Could not find a random empty spot!");
 
-//        return null;
+        System.out.println("Could not find a random empty spot!");
     }
 
     private static String currentSymbol() {
@@ -130,7 +147,7 @@ public class Game {
 
 
     public static void play(Pair<Integer, Integer> turn) {
-        if(winCondition != PENDING) {
+        if(winCondition != WinState.PENDING) {
             //do nothing
             return;
         }
@@ -141,11 +158,11 @@ public class Game {
             return; //skips all processing
         }
         remaining--;
-        System.out.println(currentPlayer + " played Row: %d Col: %d".formatted(turn.getKey(), turn.getValue()));
+        System.out.println(currentSymbol() + " played Row: %d Col: %d".formatted(turn.getKey(), turn.getValue()));
         gameBoard[turn.getKey()][turn.getValue()] = currentPlayer;
 
         //Not efficient, but re-uses code
-        canWin(currentPlayer);
+        if(winner()) winCondition = currentPlayer == PLAYER1 ? WinState.PLAYER1 : WinState.PLAYER2;
 
         GridPane gp = (GridPane) ((BorderPane) root).getCenter();
         gp.getChildren().forEach((x)->{
@@ -155,18 +172,66 @@ public class Game {
             }
         });
 
-        if(winCondition == PENDING && remaining == 0) {
-            winCondition = DRAW;
-        } else if(winCondition == PENDING) {
+        if(winCondition == WinState.PENDING && remaining == 0) {
+            winCondition = WinState.DRAW;
+        } else if(winCondition == WinState.PENDING) {
             nextTurn();
             return;
         }
 
         winSequence();
-
-//        return turn;
     }
 
+    //Checks the board for winning line/s
+    //Space available to animate (recolor) winning lines
+    private static boolean winner() {
+        int countRow;
+        int countCol;
+        //check rows
+        for(int i = 0; i < 3; i++) {
+            countRow = 0;
+            countCol = 0;
+            for(int j = 0; j < 3; j++) {
+                //row
+                if(gameBoard[i][j] == currentPlayer) {
+                    countRow++;
+                } else {
+                    countRow = -3;
+                }
+                //column
+                if(gameBoard[j][i] == currentPlayer) {
+                    countCol++;
+                } else {
+                    countCol = -3;
+                }
+            }
+            if(countRow == 3 || countCol == 3){
+                return true;
+            }
+        }
+
+        //downslant
+        int countDown = 0; //down slant, left right
+        int countUp = 0; //up slant, left to right
+        for(int i = 0; i < 3; i++) {
+            if(gameBoard[i][i] == currentPlayer) {
+                countDown++;
+            } else {
+                countDown = -3;
+            }
+
+            if(gameBoard[2-i][i] == currentPlayer) {
+                countUp++;
+            } else {
+                countUp = -3;
+            }
+        }
+        if(countDown == 3 || countUp == 3) return true;
+
+        return false;
+    }
+
+    //Method to make a winning play, or deny a win, where possible
     //input 'player', so i can use 'another player' to check if THEY can win, for purposes of blocking a win
     private static Pair<Integer, Integer> canWin(int player) {
         //Tally and final result
@@ -255,9 +320,8 @@ public class Game {
         if(count == 2 && move != null) {
             return true;
         } else if (count == 3) {
-            //TODO: winning line, e.g. small animation, or msg update! + pause all button pressing until restart, or option to auto-restart and tally wins
             System.out.println("You should win here somewhere!");
-            winCondition = currentPlayer == PLAYER1 ? PLAYER1WIN : PLAYER2WIN;
+            winCondition = currentPlayer == PLAYER1 ? WinState.PLAYER1 : WinState.PLAYER2;
         }
         return false;
     }
@@ -279,10 +343,10 @@ public class Game {
         BorderPane bp = (BorderPane) root;
         Label lb = (Label) bp.getBottom();
         if(badMove) {
-            //Should only trigger on player misclick
+            //On player illegalMove
             lb.setText("Bad move, " + currentSymbol() + ". Try again!");
-            //For troubleshooting
-            if(currentPlayer == PLAYER2 && gameMode != VS_PLAYER) {
+            //Troubleshooting
+            if(currentPlayer == PLAYER2 && gameMode != VersusMode.VS_PLAYER) {
                 lb.setText("Robot made a mistake! Call the dev!");
                 System.out.println("Robot made a mistake! Call the dev!");
             }
@@ -307,19 +371,20 @@ public class Game {
         gameBoard = new int[3][3];
         currentPlayer = PLAYER1;
         remaining = 9;
-        winCondition = PENDING;
+        winCondition = WinState.PENDING;
         //UI gameBoard
         BorderPane bp = (BorderPane) root;
         GridPane gridPane = (GridPane) bp.getCenter();
         gridPane.getChildren().forEach(x-> {
             if(x.getClass() == Button.class) {
                 Button btn = (Button) x;
-                btn.setText("=");
+                btn.setText("~");
             } else {
                 System.out.println("Issue encountered trying to reset the buttons! " + x.getClass());
             }
         });
         ((Label) bp.getBottom()).setText(currentSymbol() + "'s turn!");
+        System.out.println("~~Game restarted~~");
     }
 
     private static void winSequence() {
@@ -327,11 +392,11 @@ public class Game {
 
         //Update text
         Label lb = ((Label) ((BorderPane) root).getBottom());
-        if(winCondition == DRAW) {
+        if(winCondition == WinState.DRAW) {
             lb.setText("Draw! [Restart or Wait... W.I.P.]");
         } else {
             String victor;
-            if(winCondition == PLAYER1WIN) {
+            if(winCondition == WinState.PLAYER1) {
                 victor = "Player1";
             } else {
                 switch (gameMode) {
@@ -352,10 +417,10 @@ public class Game {
     //Troubleshooting
     @Override
     public String toString() {
-        String gm = gameMode == 0 ? "VS_ROBOT" :
-                (gameMode == 1 ? "VS_RANDOM" : "VS_PLAYER");
-        String sm = startMode == 0 ? "FIRST_START" :
-                (startMode == 1 ? "SECOND_START" : "RANDOM_START");
+        String gm = gameMode == VersusMode.VS_ROBOT ? "VS_ROBOT" :
+                (gameMode == VersusMode.VS_RANDOM ? "VS_RANDOM" : "VS_PLAYER");
+        String sm = startMode == StartMode.FIRST_START ? "FIRST_START" :
+                (startMode == StartMode.SECOND_START ? "SECOND_START" : "RANDOM_START");
         String p = currentPlayer == 1 ? "PLAYER1" : "PLAYER2";
         return """
                 GameMode: %s
