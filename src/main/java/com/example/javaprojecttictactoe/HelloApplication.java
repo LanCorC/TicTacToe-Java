@@ -1,11 +1,6 @@
 package com.example.javaprojecttictactoe;
 
 import javafx.application.Application;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.adapter.JavaBeanProperty;
-import javafx.beans.value.ObservableValue;
-import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -13,16 +8,16 @@ import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.util.Pair;
+import com.example.javaprojecttictactoe.Game;
+
 
 import java.io.IOException;
 
@@ -31,7 +26,7 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 //        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-//        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+//        Scene mainScene = new Scene(fxmlLoader.load(), 320, 240);
 
         //Set parent
         BorderPane root = new BorderPane();
@@ -154,23 +149,67 @@ public class HelloApplication extends Application {
 
 
         Game.getInstance().setRoot(root);
-        Scene scene = new Scene(root, 500, 550);
+        Scene mainScene = new Scene(root, 500, 550);
 
         //Create settings pane
-        GridPane settingsRoot = new GridPane();
+        VBox settingsRoot = new VBox();
         Scene settingsScene = new Scene(settingsRoot, 500, 550);
         settings.setOnAction(x->{
             stage.setScene(settingsScene);
-//            stage.setScene(scene);
+//            stage.setScene(mainScene);
         });
-        settingsRoot.setOnMouseClicked(x->stage.setScene(scene));
+//        settingsRoot.setOnMouseClicked(x->stage.setScene(mainScene));
+        //TODO:
 
+//        Settings UI:
+        Button returnButton = new Button("Return");
+        returnButton.setOnAction(x->{
+            stage.setScene(mainScene);
+            Game.resume();
+        });
+        VBox.setMargin(returnButton, new Insets(5,0,0,5));
+        settingsRoot.getChildren().add(returnButton);
+        HBox versusBox = new HBox();
+        HBox startBox = new HBox();
+        HBox toggleBoxes = new HBox(); //e.g. single button, reset, hide,... night mode / daymode?
+//        Versus: (dropdown or radio buttons)
+        Label versusText = new Label("Select Opponent:");
+        ComboBox<String> versusCBox= new ComboBox<>();
+        versusBox.setSpacing(10);
+        versusCBox.getItems().addAll("Robot", "Player", "Random");
 
+        String val;
+        switch (Game.getGameMode()) {
+            case VS_ROBOT -> val = "Robot";
+            case VS_PLAYER -> val = "Player";
+            default -> val = "Random";
+        }
+        versusCBox.setValue(val);
 
+        versusCBox.setOnAction(x->{
+            String tempVal = versusCBox.getValue();
+            switch(tempVal) {
+                case "Robot" -> Game.setGameMode(Game.VersusMode.VS_ROBOT);
+                case "Player" -> Game.setGameMode(Game.VersusMode.VS_PLAYER);
+                default -> Game.setGameMode(Game.VersusMode.VS_RANDOM);
+            }
+        });
+        //TODO: way to pre-select current live mode
+        versusBox.getChildren().addAll(versusText, versusCBox);
+        versusBox.setAlignment(Pos.CENTER);
+        //Additional: when switching to Robot/Random AND it is Player2's turn, immediately play turn... wait until dialog is closed?
+
+//        Start: (dropdown or radio buttons)
+//        Reset Scoreboard (single button)
+//        Hide Scoreboard (simple inverts .hidden() property of tally)
+//        fancy- button renames to “Hide Scoreboard” and “Show Scoreboard”
+        settingsRoot.getChildren().addAll(versusBox);
+        //for now, see if clicking correctly on the buttons/comboboxes do not trigger the setOnmouseClicked
+            //if it does trigger, remove that. include a "return" button
 
 
         stage.setTitle("XO Game");
-        stage.setScene(scene);
+        stage.setScene(mainScene);
         stage.show();
 
 //        //TODO: this is for debugging

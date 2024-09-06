@@ -15,13 +15,13 @@ public class Game {
 
     private static Game INSTANCE;
 
-    enum VersusMode {
+    public static enum VersusMode {
         VS_ROBOT,
         VS_RANDOM,
         VS_PLAYER
     }
 
-    enum StartMode {
+    public static enum StartMode {
         FIRST_START,
         SECOND_START,
         RANDOM_START
@@ -142,25 +142,37 @@ public class Game {
         return playerTwoSymbol;
     }
 
-    public static int getGameMode() {
-        return gameMode.ordinal();
+    public static VersusMode getGameMode() {
+        return gameMode;
     }
 
-    public static int getStartMode() {
-        return startMode.ordinal();
+    public static StartMode getStartMode() {
+        return startMode;
     }
 
+    public static void setStartMode(StartMode startMode) {
+        Game.startMode = startMode;
+    }
 
+    public static void setGameMode(VersusMode gameMode) {
+        Game.gameMode = gameMode;
+        System.out.println("Gamemode changed!");
+    }
 
     //note: Pair<row, column>; for automating the robot
     public static void playTurn() {
         if(winCondition != WinState.PENDING) {
             //do nothing
-            return;
         } else if(gameMode == VersusMode.VS_ROBOT) {
             playRobot();
         } else {
             playRandom();
+        }
+    }
+
+    public static void resume() {
+        if(currentPlayer != PLAYER1 && gameMode != VersusMode.VS_PLAYER) {
+            playTurn();
         }
     }
 
@@ -420,6 +432,7 @@ public class Game {
             switch(gameMode) {
                 case VS_RANDOM, VS_ROBOT:
                     if(currentPlayer == PLAYER2) {
+//                        updateText.setText(currentSymbol() + "'s turn!");
                         playTurn();
                     }
                     break;
