@@ -173,6 +173,7 @@ public class Game {
     public static void resume() {
         if(currentPlayer != PLAYER1 && gameMode != VersusMode.VS_PLAYER) {
             playTurn();
+            updateText.setText(currentSymbol() + "'s turn!");
         }
     }
 
