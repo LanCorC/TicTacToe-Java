@@ -37,13 +37,13 @@ public class Game {
     public static final int PLAYER2WIN = 3;
 
     private static int winCondition = PENDING;
-    private static String symbol = "X";
+    private static String playerOneSymbol = "X";
+    private static String playerTwoSymbol = "O";
     //the parent scene
     private static Node root = null;
 
     //Dev note: we will use Button.getColumn() and .getRow to find the appropriate cell
     private static int[][] gameBoard = new int[3][3]; //defaults 0 = empty, 1 = player1, -1 = player2
-    //TBD if required; notice there are only 9 tiles, i can use this to determine RNG modulo
     private static int remaining = 9;
     private static Random rand = new Random();
 
@@ -124,6 +124,10 @@ public class Game {
 //        return null;
     }
 
+    private static String currentSymbol() {
+        return currentPlayer == PLAYER1 ? playerOneSymbol : playerTwoSymbol;
+    }
+
 
     public static void play(Pair<Integer, Integer> turn) {
         if(winCondition != PENDING) {
@@ -146,7 +150,7 @@ public class Game {
         GridPane gp = (GridPane) ((BorderPane) root).getCenter();
         gp.getChildren().forEach((x)->{
             if(GridPane.getColumnIndex(x).equals(turn.getValue()) && GridPane.getRowIndex(x).equals(turn.getKey())) {
-                ((Button) x).setText(symbol);
+                ((Button) x).setText(currentSymbol());
                 //Todo: can be improved by turning into list, For each, break once found
             }
         });
@@ -276,7 +280,7 @@ public class Game {
         Label lb = (Label) bp.getBottom();
         if(badMove) {
             //Should only trigger on player misclick
-            lb.setText("Bad move, " + symbol + ". Try again!");
+            lb.setText("Bad move, " + currentSymbol() + ". Try again!");
             //For troubleshooting
             if(currentPlayer == PLAYER2 && gameMode != VS_PLAYER) {
                 lb.setText("Robot made a mistake! Call the dev!");
@@ -284,7 +288,6 @@ public class Game {
             }
         } else {
             currentPlayer *= -1;
-            symbol = symbol.equals("X") ? "O" : "X";
             switch(gameMode) {
                 case VS_RANDOM, VS_ROBOT:
                     if(currentPlayer == PLAYER2) {
@@ -292,7 +295,7 @@ public class Game {
                     }
                     break;
                 default:
-                    lb.setText(symbol + "'s turn!");
+                    lb.setText(currentSymbol() + "'s turn!");
             }
 
         }
@@ -303,7 +306,6 @@ public class Game {
         //Game class gameBoard
         gameBoard = new int[3][3];
         currentPlayer = PLAYER1;
-        symbol = "X";
         remaining = 9;
         winCondition = PENDING;
         //UI gameBoard
@@ -317,7 +319,7 @@ public class Game {
                 System.out.println("Issue encountered trying to reset the buttons! " + x.getClass());
             }
         });
-        ((Label) bp.getBottom()).setText(symbol + "'s turn!");
+        ((Label) bp.getBottom()).setText(currentSymbol() + "'s turn!");
     }
 
     private static void winSequence() {
