@@ -92,7 +92,14 @@ public class HelloApplication extends Application {
 
         //Set status messages
         //e.g. "Player's turn" or "X wins!"
-        Label updateText = new Label("X's turn!");
+//        Label updateText = new Label("'s turn!");
+        String val;
+        if(Game.getCurrentPlayer() == 1) {
+            val = Game.getPlayerOneSymbol();
+        } else {
+            val = Game.getPlayerTwoSymbol();
+        }
+        Label updateText = new Label(val + "'s turn!");
         updateText.setFont(Font.font(25));
         BorderPane.setAlignment(updateText, Pos.TOP_CENTER);
         root.setBottom(updateText);
@@ -178,7 +185,7 @@ public class HelloApplication extends Application {
         versusBox.setSpacing(10);
         versusCBox.getItems().addAll("Robot", "Player", "Random");
 
-        String val;
+        //'val' is a previously declared String for temporary values
         switch (Game.getGameMode()) {
             case VS_ROBOT -> val = "Robot";
             case VS_PLAYER -> val = "Player";
@@ -200,10 +207,31 @@ public class HelloApplication extends Application {
         //Additional: when switching to Robot/Random AND it is Player2's turn, immediately play turn... wait until dialog is closed?
 
 //        Start: (dropdown or radio buttons)
+        Label startText = new Label("Who goes first:");
+        ComboBox<String> startCBox = new ComboBox<>();
+        startBox.setSpacing(10);
+        startCBox.getItems().addAll("Player1", "Player2", "Random");
+        switch (Game.getStartMode()) {
+            case FIRST_START -> val = "Player1";
+            case SECOND_START -> val = "Player2";
+            default -> val = "Random";
+        }
+        startCBox.setValue(val);
+        startCBox.setOnAction(x->{
+            String tempVal = startCBox.getValue();
+            switch (tempVal) {
+                case "Player1" -> Game.setStartMode(Game.StartMode.FIRST_START);
+                case "Player2" -> Game.setStartMode(Game.StartMode.SECOND_START);
+                default -> Game.setStartMode(Game.StartMode.RANDOM_START);
+            }
+        });
+        //TODO: code the 'onStart'. imagine this affects "restartGame"
+        startBox.getChildren().addAll(startText, startCBox);
+        startBox.setAlignment(Pos.CENTER);
 //        Reset Scoreboard (single button)
 //        Hide Scoreboard (simple inverts .hidden() property of tally)
 //        fancy- button renames to “Hide Scoreboard” and “Show Scoreboard”
-        settingsRoot.getChildren().addAll(versusBox);
+        settingsRoot.getChildren().addAll(versusBox, startBox);
         //for now, see if clicking correctly on the buttons/comboboxes do not trigger the setOnmouseClicked
             //if it does trigger, remove that. include a "return" button
 

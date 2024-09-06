@@ -159,6 +159,10 @@ public class Game {
         System.out.println("Gamemode changed!");
     }
 
+    public static int getCurrentPlayer() {
+        return currentPlayer;
+    }
+
     //note: Pair<row, column>; for automating the robot
     public static void playTurn() {
         if(winCondition != WinState.PENDING) {
@@ -462,8 +466,22 @@ public class Game {
                 System.out.println("Issue encountered trying to reset the buttons! " + x.getClass());
             }
         });
+        switch (Game.startMode) {
+            case FIRST_START -> currentPlayer = PLAYER1;
+            case SECOND_START -> currentPlayer = PLAYER2;
+            //random
+            default -> {
+                if(rand.nextInt() % 2 == 1) {
+                    currentPlayer = PLAYER1;
+                } else {
+                    currentPlayer = PLAYER2;
+                }
+            }
+        }
         updateText.setText(currentSymbol() + "'s turn!");
+
         System.out.println("~~Game restarted~~");
+        resume();
     }
 
     private static void winSequence() {
