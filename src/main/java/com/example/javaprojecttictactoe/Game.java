@@ -28,7 +28,7 @@ public class Game {
     public static final int PLAYER2 = -1;
 
     private static final int startMode = FIRST_START;
-    private static final int gameMode = VS_RANDOM;
+    private static final int gameMode = VS_ROBOT;
     private static int currentPlayer = PLAYER1;
     public static String symbol = "X";
     //the parent scene
@@ -75,10 +75,12 @@ public class Game {
         Pair<Integer, Integer> move = canWin(currentPlayer);
         if(move != null) {
             play(move);
+            return;
         }
         move = canWin(opponent());
         if(move != null) {
             play(move);
+            return;
         }
 
         //if cannot win, or deny, play random
@@ -176,7 +178,7 @@ public class Game {
                 if(num == player) {
                     count++;
                 } else if (num == 0) {
-                    move = new Pair<>(i, j);
+                    move = new Pair<>(j, i);
                 } else {
                     count = 0;
                     break;
@@ -262,13 +264,13 @@ public class Game {
             currentPlayer *= -1;
             symbol = symbol.equals("X") ? "O" : "X";
             switch(gameMode) {
-                case VS_PLAYER: lb.setText(symbol + "'s turn!");
-                    break;
-                default:
+                case VS_RANDOM, VS_ROBOT:
                     if(currentPlayer == PLAYER2) {
                         playTurn();
                     }
-
+                    break;
+                default:
+                    lb.setText(symbol + "'s turn!");
             }
 
         }

@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="edb67b4a-933c-4dbc-af65-5928ba10f626" name="Changes" comment="Version: all methods are void (where return is not used)">
+    <list default="true" id="edb67b4a-933c-4dbc-af65-5928ba10f626" name="Changes" comment="VS_RANDOM, VS_ROBOT fixed. issue found in 'nextTurn() method'">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/Game.java" afterDir="false" />
     </list>
@@ -167,7 +167,15 @@
       <option name="project" value="LOCAL" />
       <updated>1725536530188</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="VS_RANDOM, VS_ROBOT fixed. issue found in 'nextTurn() method'">
+      <option name="closed" value="true" />
+      <created>1725537213777</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1725537213777</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -183,6 +191,7 @@
     <MESSAGE value="Full implementation of turn validation" />
     <MESSAGE value="Fixed bug where Symbol places does not correlate with Text updates" />
     <MESSAGE value="Version: all methods are void (where return is not used)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Version: all methods are void (where return is not used)" />
+    <MESSAGE value="VS_RANDOM, VS_ROBOT fixed. issue found in 'nextTurn() method'" />
+    <option name="LAST_COMMIT_MESSAGE" value="VS_RANDOM, VS_ROBOT fixed. issue found in 'nextTurn() method'" />
   </component>
 </project>
