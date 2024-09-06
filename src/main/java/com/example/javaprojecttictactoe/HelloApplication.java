@@ -49,7 +49,6 @@ public class HelloApplication extends Application {
 //        gameGridVisual.setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.FULL)));
 
 //        gameGridVisual.;
-        Game.getInstance().setRoot(root);
         Node[][] gameGrid = new Text[3][3];
 
         for(int i = 0; i < 3; i++) {
@@ -94,8 +93,14 @@ public class HelloApplication extends Application {
             gameGridVisual.getRowConstraints().add(rc);
         }
 
-        BorderPane.setMargin(gameGridVisual, new Insets(15, 15, 15, 15));
-        root.setCenter(gameGridVisual);
+
+
+        //Set status messages
+        //e.g. "Player's turn" or "X wins!"
+        Label updateText = new Label("X's turn!");
+        updateText.setFont(Font.font(25));
+        BorderPane.setAlignment(updateText, Pos.TOP_CENTER);
+        root.setBottom(updateText);
 
 
         HBox topBar = new HBox();
@@ -104,40 +109,66 @@ public class HelloApplication extends Application {
             //Mobile app version will have buttons and corresponding popup, not a menu drop-down
             //else, just create a single anchored button on the corner and have it call a popup menu to 'emulate' mobile in PC
         Button settings = new Button("Setting");
+        settings.setOnAction(x->stage.hide());
         Button restart = new Button("Restart");
         restart.setOnAction(x-> Game.restartGame());
-        Label textP1 = new Label(Game.getPlayerOneSymbol() + " wins: ");
+        Label textP1 = new Label(Game.getPlayerOneSymbol() + " wins:");
         Label pointsP1 = new Label();
         pointsP1.textProperty().bind(Game.scorePlayer1Property().asString());
-        Label textP2 = new Label(Game.getPlayerTwoSymbol() + " wins: ");
+        Label textP2 = new Label("  " + Game.getPlayerTwoSymbol() + " wins:");
         Label pointsP2 = new Label();
         pointsP2.textProperty().bind(Game.scorePlayer2Property().asString());
-        Label textDraw = new Label("Draws: ");
+        Label textDraw = new Label("  Draws:");
         Label pointsDraw = new Label();
         pointsDraw.textProperty().bind(Game.scoreTieProperty().asString());
 
+        HBox middleBar = new HBox();
+        middleBar.getChildren().addAll(textP1, pointsP1, textP2, pointsP2, textDraw, pointsDraw);
+        middleBar.getChildren().forEach(x-> ((Label) x).setFont(Font.font(25)));
+        middleBar.setSpacing(5);
+        middleBar.setAlignment(Pos.CENTER);
+        VBox vb = new VBox();
+        vb.getChildren().addAll(middleBar, gameGridVisual);
+
+        VBox.setVgrow(gameGridVisual, Priority.ALWAYS);
+        BorderPane.setMargin(gameGridVisual, new Insets(15, 15, 15, 15));
+        root.setCenter(vb);
 
 //        settings.setPadding(new Insets(50,50,50,50));
 //        HBox.setMargin(settings, new Insets(5, 0, 0, 5));
         topBar.setSpacing(5);
         HBox.setHgrow(settings, Priority.ALWAYS);
         topBar.setAlignment(Pos.CENTER_LEFT);
-        topBar.getChildren().addAll(settings, restart, textP1, pointsP1, textP2, pointsP2, textDraw, pointsDraw);
+        topBar.getChildren().addAll(settings, restart);
+//        topBar.getChildren().forEach(x->{
+//            if(x.getClass() == Label.class) {
+//                Label lb = (Label) x;
+//                lb.setFont(Font.font(15));
+//            }
+//        });
 //        settings.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         root.setTop(topBar);
 
 
-        gameGridVisual.setBackground(new Background(new BackgroundFill(Color.BLACK, new CornerRadii(4, false), new Insets(5, 5, 5, 5))));
-
-        //Set status messages
-            //e.g. "Player's turn" or "X wins!"
-        Label updateText = new Label("X's turn!");
-        updateText.setFont(Font.font(25));
-        BorderPane.setAlignment(updateText, Pos.TOP_CENTER);
-        root.setBottom(updateText);
+        gameGridVisual.setBackground(new Background(new BackgroundFill(Color.BLACK, new CornerRadii(4, false), new Insets(10, 10, 10, 10))));
 
 
-        Scene scene = new Scene(root, 500, 500);
+        Game.getInstance().setRoot(root);
+        Scene scene = new Scene(root, 500, 550);
+
+        //Create settings pane
+        GridPane settingsRoot = new GridPane();
+        Scene settingsScene = new Scene(settingsRoot, 500, 550);
+        settings.setOnAction(x->{
+            stage.setScene(settingsScene);
+//            stage.setScene(scene);
+        });
+        settingsRoot.setOnMouseClicked(x->stage.setScene(scene));
+
+
+
+
+
         stage.setTitle("XO Game");
         stage.setScene(scene);
         stage.show();
@@ -162,4 +193,6 @@ public class HelloApplication extends Application {
     public static void main(String[] args) {
         launch();
     }
+
+
 }

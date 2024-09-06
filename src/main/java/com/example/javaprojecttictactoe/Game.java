@@ -1,15 +1,12 @@
 package com.example.javaprojecttictactoe;
 
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.util.Pair;
 
 import java.util.Random;
@@ -106,6 +103,8 @@ public class Game {
 
     //the parent scene
     private static Node root = null;
+    private static GridPane visual = null;
+    private static Label updateText = null;
 
     //Dev note: we will use Button.getColumn() and .getRow to find the appropriate cell
     private static int[][] gameBoard = new int[3][3]; //defaults 0 = empty, 1 = player1, -1 = player2
@@ -125,6 +124,14 @@ public class Game {
 
     public void setRoot(Node root) {
         Game.root = root;
+        BorderPane temp = (BorderPane) Game.root;
+        updateText = (Label) temp.getBottom();
+        VBox vtemp = (VBox) temp.getCenter();
+        vtemp.getChildren().forEach(child->{
+            if(child.getClass() == GridPane.class) {
+                visual = (GridPane) child;
+            }
+        });
     }
 
     public static String getPlayerOneSymbol() {
@@ -222,8 +229,8 @@ public class Game {
         //Not efficient, but re-uses code
         if(winner()) winCondition = currentPlayer == PLAYER1 ? WinState.PLAYER1 : WinState.PLAYER2;
 
-        GridPane gp = (GridPane) ((BorderPane) root).getCenter();
-        gp.getChildren().forEach((x)->{
+//        GridPane gp = (GridPane) ((BorderPane) root).getCenter();
+        visual.getChildren().forEach((x)->{
             if(GridPane.getColumnIndex(x).equals(turn.getValue()) && GridPane.getRowIndex(x).equals(turn.getKey())) {
                 ((Button) x).setText(currentSymbol());
                 //Todo: can be improved by turning into list, For each, break once found
@@ -399,13 +406,13 @@ public class Game {
 
     private static void nextTurn(boolean badMove) {
         BorderPane bp = (BorderPane) root;
-        Label lb = (Label) bp.getBottom();
+//        Label lb = (Label) bp.getBottom();
         if(badMove) {
             //On player illegalMove
-            lb.setText("Bad move, " + currentSymbol() + ". Try again!");
+            updateText.setText("Bad move, " + currentSymbol() + ". Try again!");
             //Troubleshooting
             if(currentPlayer == PLAYER2 && gameMode != VersusMode.VS_PLAYER) {
-                lb.setText("Robot made a mistake! Call the dev!");
+                updateText.setText("Robot made a mistake! Call the dev!");
                 System.out.println("Robot made a mistake! Call the dev!");
             }
         } else {
@@ -417,7 +424,7 @@ public class Game {
                     }
                     break;
                 default:
-                    lb.setText(currentSymbol() + "'s turn!");
+                    updateText.setText(currentSymbol() + "'s turn!");
             }
 
         }
@@ -431,9 +438,9 @@ public class Game {
         remaining = 9;
         winCondition = WinState.PENDING;
         //UI gameBoard
-        BorderPane bp = (BorderPane) root;
-        GridPane gridPane = (GridPane) bp.getCenter();
-        gridPane.getChildren().forEach(x-> {
+//        BorderPane bp = (BorderPane) root;
+//        GridPane gridPane = (GridPane) bp.getCenter();
+        visual.getChildren().forEach(x-> {
             if(x.getClass() == Button.class) {
                 Button btn = (Button) x;
                 btn.setText("~");
@@ -441,7 +448,7 @@ public class Game {
                 System.out.println("Issue encountered trying to reset the buttons! " + x.getClass());
             }
         });
-        ((Label) bp.getBottom()).setText(currentSymbol() + "'s turn!");
+        updateText.setText(currentSymbol() + "'s turn!");
         System.out.println("~~Game restarted~~");
     }
 
@@ -449,9 +456,9 @@ public class Game {
         //TODO: regardless, game must restart or temporarily hold
 
         //Update text
-        Label lb = ((Label) ((BorderPane) root).getBottom());
+//        Label lb = ((Label) ((BorderPane) root).getBottom());
         if(winCondition == WinState.DRAW) {
-            lb.setText("Draw! [Restart or Wait... W.I.P.]");
+            updateText.setText("Draw! [Restart or Wait... W.I.P.]");
             scoreTie.set(scoreTie.get()+1);
         } else {
             String victor;
@@ -466,7 +473,7 @@ public class Game {
                     default -> victor = "Player2";
                 }
             }
-            lb.setText(victor + "'s win! [Restart or Wait... W.I.P.]");
+            updateText.setText(victor + "'s win! [Restart or Wait... W.I.P.]");
         }
 
         System.out.println(scorePlayer1.get());
