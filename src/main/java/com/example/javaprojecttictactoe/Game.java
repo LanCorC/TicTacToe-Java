@@ -1,13 +1,16 @@
 package com.example.javaprojecttictactoe;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Text;
 import javafx.util.Pair;
-import org.controlsfx.control.spreadsheet.Grid;
 
 import java.util.Random;
 
@@ -47,7 +50,7 @@ public class Game {
     public static final int PLAYER2 = -1;
 
     private static StartMode startMode = StartMode.FIRST_START;
-    private static  VersusMode gameMode = VersusMode.VS_ROBOT;
+    private static VersusMode gameMode = VersusMode.VS_ROBOT;
     private static int currentPlayer = PLAYER1;
 
 //    public static final int PENDING = 0;
@@ -58,15 +61,59 @@ public class Game {
     private static WinState winCondition = WinState.PENDING;
     private static String playerOneSymbol = "X";
     private static String playerTwoSymbol = "O";
+//    private static int scorePlayer1 = 0;
+//    private static int scorePlayer2 = 0;
+//    private static int scoreTie = 0;
+
+    private static SimpleIntegerProperty scorePlayer2 = new SimpleIntegerProperty(0);
+    private static SimpleIntegerProperty scorePlayer1 = new SimpleIntegerProperty(0);
+    private static SimpleIntegerProperty scoreTie = new SimpleIntegerProperty(0);
+
+    public static int getScorePlayer2() {
+        return scorePlayer2.get();
+    }
+
+    public static SimpleIntegerProperty scorePlayer2Property() {
+        return scorePlayer2;
+    }
+
+    public static int getScorePlayer1() {
+        return scorePlayer1.get();
+    }
+
+    public static SimpleIntegerProperty scorePlayer1Property() {
+        return scorePlayer1;
+    }
+
+    public static int getScoreTie() {
+        return scoreTie.get();
+    }
+
+    public static SimpleIntegerProperty scoreTieProperty() {
+        return scoreTie;
+    }
+//    public static int getScorePlayer1() {
+//        return scorePlayer1;
+//    }
+//
+//    public static int getScorePlayer2() {
+//        return scorePlayer2;
+//    }
+//
+//    public static int getScoreTie() {
+//        return scoreTie;
+//    }
+
     //the parent scene
     private static Node root = null;
 
     //Dev note: we will use Button.getColumn() and .getRow to find the appropriate cell
     private static int[][] gameBoard = new int[3][3]; //defaults 0 = empty, 1 = player1, -1 = player2
     private static int remaining = 9;
-    private static Random rand = new Random();
+    private static final Random rand = new Random();
 
     private Game() {
+
     }
 
     public static Game getInstance() {
@@ -80,6 +127,14 @@ public class Game {
         Game.root = root;
     }
 
+    public static String getPlayerOneSymbol() {
+        return playerOneSymbol;
+    }
+
+    public static String getPlayerTwoSymbol() {
+        return playerTwoSymbol;
+    }
+
     public static int getGameMode() {
         return gameMode.ordinal();
     }
@@ -88,10 +143,13 @@ public class Game {
         return startMode.ordinal();
     }
 
+
+
     //note: Pair<row, column>; for automating the robot
     public static void playTurn() {
         if(winCondition != WinState.PENDING) {
             //do nothing
+            return;
         } else if(gameMode == VersusMode.VS_ROBOT) {
             playRobot();
         } else {
@@ -394,11 +452,14 @@ public class Game {
         Label lb = ((Label) ((BorderPane) root).getBottom());
         if(winCondition == WinState.DRAW) {
             lb.setText("Draw! [Restart or Wait... W.I.P.]");
+            scoreTie.set(scoreTie.get()+1);
         } else {
             String victor;
             if(winCondition == WinState.PLAYER1) {
                 victor = "Player1";
+                scorePlayer1.set(scorePlayer1.get()+1);
             } else {
+                scorePlayer2.set(scorePlayer2.get()+1);
                 switch (gameMode) {
                     case VS_ROBOT -> victor = "Robot";
                     case VS_RANDOM -> victor = "Random";
@@ -407,6 +468,10 @@ public class Game {
             }
             lb.setText(victor + "'s win! [Restart or Wait... W.I.P.]");
         }
+
+        System.out.println(scorePlayer1.get());
+        System.out.println(scorePlayer2.get());
+        System.out.println(scoreTie.get());
 
         //TODO: animate winning line/s ?
 

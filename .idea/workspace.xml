@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="edb67b4a-933c-4dbc-af65-5928ba10f626" name="Changes" comment="Symbol is now correctly tied to CurrentPlayer, reducing hard-code">
+    <list default="true" id="edb67b4a-933c-4dbc-af65-5928ba10f626" name="Changes" comment="Implemented ENUM for easier readability of code">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/HelloApplication.java" afterDir="false" />
@@ -200,7 +200,15 @@
       <option name="project" value="LOCAL" />
       <updated>1725586409516</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Implemented ENUM for easier readability of code">
+      <option name="closed" value="true" />
+      <created>1725592728899</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1725592728899</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -220,6 +228,7 @@
     <MESSAGE value="Fixed issue where VS_ROBOT will make an incorrect move; there were wrong values being placed in coordinates." />
     <MESSAGE value="Implemented win and draw conditions, and game freeze" />
     <MESSAGE value="Symbol is now correctly tied to CurrentPlayer, reducing hard-code" />
-    <option name="LAST_COMMIT_MESSAGE" value="Symbol is now correctly tied to CurrentPlayer, reducing hard-code" />
+    <MESSAGE value="Implemented ENUM for easier readability of code" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented ENUM for easier readability of code" />
   </component>
 </project>

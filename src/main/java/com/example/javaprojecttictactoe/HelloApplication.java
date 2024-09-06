@@ -1,6 +1,8 @@
 package com.example.javaprojecttictactoe;
 
 import javafx.application.Application;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.adapter.JavaBeanProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -97,17 +99,32 @@ public class HelloApplication extends Application {
 
 
         HBox topBar = new HBox();
-        //Set buttons on top, e.g. Menu, restart, potentially a win counter
+        BorderPane.setMargin(topBar, new Insets(5, 0, 0, 5));
+                //Set buttons on top, e.g. Menu, restart, potentially a win counter
             //Mobile app version will have buttons and corresponding popup, not a menu drop-down
             //else, just create a single anchored button on the corner and have it call a popup menu to 'emulate' mobile in PC
-        Button settings = new Button("Settings-Restart");
-        settings.setOnAction(x-> Game.restartGame());
-//        settings.setPadding(new Insets(50,50,50,50));
-        HBox.setMargin(settings, new Insets(5, 0, 0, 5));
+        Button settings = new Button("Setting");
+        Button restart = new Button("Restart");
+        restart.setOnAction(x-> Game.restartGame());
+        Label textP1 = new Label(Game.getPlayerOneSymbol() + " wins: ");
+        Label pointsP1 = new Label();
+        pointsP1.textProperty().bind(Game.scorePlayer1Property().asString());
+        Label textP2 = new Label(Game.getPlayerTwoSymbol() + " wins: ");
+        Label pointsP2 = new Label();
+        pointsP2.textProperty().bind(Game.scorePlayer2Property().asString());
+        Label textDraw = new Label("Draws: ");
+        Label pointsDraw = new Label();
+        pointsDraw.textProperty().bind(Game.scoreTieProperty().asString());
 
+
+//        settings.setPadding(new Insets(50,50,50,50));
+//        HBox.setMargin(settings, new Insets(5, 0, 0, 5));
+        topBar.setSpacing(5);
         HBox.setHgrow(settings, Priority.ALWAYS);
+        topBar.setAlignment(Pos.CENTER_LEFT);
+        topBar.getChildren().addAll(settings, restart, textP1, pointsP1, textP2, pointsP2, textDraw, pointsDraw);
 //        settings.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        root.setTop(settings);
+        root.setTop(topBar);
 
 
         gameGridVisual.setBackground(new Background(new BackgroundFill(Color.BLACK, new CornerRadii(4, false), new Insets(5, 5, 5, 5))));
