@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="edb67b4a-933c-4dbc-af65-5928ba10f626" name="Changes" comment="VS_RANDOM, VS_ROBOT fixed. issue found in 'nextTurn() method'">
+    <list default="true" id="edb67b4a-933c-4dbc-af65-5928ba10f626" name="Changes" comment="Fixed issue where VS_ROBOT will make an incorrect move; there were wrong values being placed in coordinates.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/Game.java" afterDir="false" />
     </list>
@@ -39,17 +39,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.HelloApplication.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/lance/Documents/CodingJava/JavaProject-TicTacToe/src/main/resources/com/example/javaprojecttictactoe/hello-view.fxml",
-    "run.code.analysis.last.selected.profile": "pProject Default"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/lance/Documents/CodingJava/JavaProject-TicTacToe/src/main/resources/com/example/javaprojecttictactoe/hello-view.fxml&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.javaprojecttictactoe.HelloApplication" />
@@ -175,7 +175,15 @@
       <option name="project" value="LOCAL" />
       <updated>1725537213777</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Fixed issue where VS_ROBOT will make an incorrect move; there were wrong values being placed in coordinates.">
+      <option name="closed" value="true" />
+      <created>1725582058673</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1725582058673</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -192,6 +200,7 @@
     <MESSAGE value="Fixed bug where Symbol places does not correlate with Text updates" />
     <MESSAGE value="Version: all methods are void (where return is not used)" />
     <MESSAGE value="VS_RANDOM, VS_ROBOT fixed. issue found in 'nextTurn() method'" />
-    <option name="LAST_COMMIT_MESSAGE" value="VS_RANDOM, VS_ROBOT fixed. issue found in 'nextTurn() method'" />
+    <MESSAGE value="Fixed issue where VS_ROBOT will make an incorrect move; there were wrong values being placed in coordinates." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed issue where VS_ROBOT will make an incorrect move; there were wrong values being placed in coordinates." />
   </component>
 </project>

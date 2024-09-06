@@ -30,7 +30,14 @@ public class Game {
     private static final int startMode = FIRST_START;
     private static final int gameMode = VS_ROBOT;
     private static int currentPlayer = PLAYER1;
-    public static String symbol = "X";
+
+    public static final int PENDING = 0;
+    public static final int DRAW = 1;
+    public static final int PLAYER1WIN = 2;
+    public static final int PLAYER2WIN = 3;
+
+    private static int winCondition = PENDING;
+    private static String symbol = "X";
     //the parent scene
     private static Node root = null;
 
@@ -64,7 +71,9 @@ public class Game {
 
     //note: Pair<row, column>; for automating the robot
     public static void playTurn() {
-        if(gameMode == VS_ROBOT) {
+        if(winCondition != PENDING) {
+            //do nothing
+        } else if(gameMode == VS_ROBOT) {
             playRobot();
         } else {
             playRandom();
@@ -117,7 +126,11 @@ public class Game {
 
 
     public static void play(Pair<Integer, Integer> turn) {
-        //TODO:
+        if(winCondition != PENDING) {
+            //do nothing
+            return;
+        }
+
         if(!validTurn(turn)) {
             System.out.println(currentPlayer + " tried to play: " + turn);
             nextTurn(true);
@@ -127,6 +140,9 @@ public class Game {
         System.out.println(currentPlayer + " played Row: %d Col: %d".formatted(turn.getKey(), turn.getValue()));
         gameBoard[turn.getKey()][turn.getValue()] = currentPlayer;
 
+        //Not efficient, but re-uses code
+        canWin(currentPlayer);
+
         GridPane gp = (GridPane) ((BorderPane) root).getCenter();
         gp.getChildren().forEach((x)->{
             if(GridPane.getColumnIndex(x).equals(turn.getValue()) && GridPane.getRowIndex(x).equals(turn.getKey())) {
@@ -135,17 +151,22 @@ public class Game {
             }
         });
 
-        nextTurn();
+        if(winCondition == PENDING && remaining == 0) {
+            winCondition = DRAW;
+        } else if(winCondition == PENDING) {
+            nextTurn();
+            return;
+        }
+
+        winSequence();
+
 //        return turn;
     }
 
-    //input 'player', so i can use 'another player' to check if THEY can win
+    //input 'player', so i can use 'another player' to check if THEY can win, for purposes of blocking a win
     private static Pair<Integer, Integer> canWin(int player) {
-        //TODO:
-        //checks all rows, cols, diagonals, if "Current Player" can win
-
         //Tally and final result
-        int count = 0;
+        int count;
         Pair<Integer, Integer> move;
 
         //Check all rows
@@ -225,13 +246,14 @@ public class Game {
         return null;
     }
 
-
+    //Win condition applied
     private static boolean validate(int count, Pair<Integer, Integer> move) {
         if(count == 2 && move != null) {
             return true;
         } else if (count == 3) {
             //TODO: winning line, e.g. small animation, or msg update! + pause all button pressing until restart, or option to auto-restart and tally wins
             System.out.println("You should win here somewhere!");
+            winCondition = currentPlayer == PLAYER1 ? PLAYER1WIN : PLAYER2WIN;
         }
         return false;
     }
@@ -283,6 +305,7 @@ public class Game {
         currentPlayer = PLAYER1;
         symbol = "X";
         remaining = 9;
+        winCondition = PENDING;
         //UI gameBoard
         BorderPane bp = (BorderPane) root;
         GridPane gridPane = (GridPane) bp.getCenter();
@@ -291,10 +314,37 @@ public class Game {
                 Button btn = (Button) x;
                 btn.setText("=");
             } else {
-                System.out.println("hey! " + x.getClass());
+                System.out.println("Issue encountered trying to reset the buttons! " + x.getClass());
             }
         });
         ((Label) bp.getBottom()).setText(symbol + "'s turn!");
+    }
+
+    private static void winSequence() {
+        //TODO: regardless, game must restart or temporarily hold
+
+        //Update text
+        Label lb = ((Label) ((BorderPane) root).getBottom());
+        if(winCondition == DRAW) {
+            lb.setText("Draw! [Restart or Wait... W.I.P.]");
+        } else {
+            String victor;
+            if(winCondition == PLAYER1WIN) {
+                victor = "Player1";
+            } else {
+                switch (gameMode) {
+                    case VS_ROBOT -> victor = "Robot";
+                    case VS_RANDOM -> victor = "Random";
+                    default -> victor = "Player2";
+                }
+            }
+            lb.setText(victor + "'s win! [Restart or Wait... W.I.P.]");
+        }
+
+        //TODO: animate winning line/s ?
+
+        //TODO: prepare game restart after a few seconds (settings dependent?), prepare tally?
+
     }
 
     //Troubleshooting
