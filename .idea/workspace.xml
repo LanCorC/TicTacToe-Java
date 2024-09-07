@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="edb67b4a-933c-4dbc-af65-5928ba10f626" name="Changes" comment="Fixed bug: UpdateText would decouple if changed during P2's turn to Random/Robot">
+    <list default="true" id="edb67b4a-933c-4dbc-af65-5928ba10f626" name="Changes" comment="Added way to change StartMode on Settings, and the backend connection&#10;&#10;Rare bug: changing the StartMode mid-game may freeze the game. Fixed by [Restart] button.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/HelloApplication.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -232,7 +231,15 @@
       <option name="project" value="LOCAL" />
       <updated>1725613349891</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Added way to change StartMode on Settings, and the backend connection&#10;&#10;Rare bug: changing the StartMode mid-game may freeze the game. Fixed by [Restart] button.">
+      <option name="closed" value="true" />
+      <created>1725623365097</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1725623365097</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -256,6 +263,7 @@
     <MESSAGE value="Refactored a lot of code for readability and to reduce complexity, in particular Node references in Game.class&#10;&#10;Centered the score board on top of the gameGridVisual&#10;&#10;Started to implement replacement scene for Settings menu" />
     <MESSAGE value="Allowed changing the gamemode via Settings mid-game&#10;&#10;Bug: UpdateText would decouple if changed during P2's turn to Random/Robot" />
     <MESSAGE value="Fixed bug: UpdateText would decouple if changed during P2's turn to Random/Robot" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed bug: UpdateText would decouple if changed during P2's turn to Random/Robot" />
+    <MESSAGE value="Added way to change StartMode on Settings, and the backend connection&#10;&#10;Rare bug: changing the StartMode mid-game may freeze the game. Fixed by [Restart] button." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added way to change StartMode on Settings, and the backend connection&#10;&#10;Rare bug: changing the StartMode mid-game may freeze the game. Fixed by [Restart] button." />
   </component>
 </project>

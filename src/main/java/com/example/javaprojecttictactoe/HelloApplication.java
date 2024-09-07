@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.Separator;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -23,6 +24,9 @@ import java.io.IOException;
 
 
 public class HelloApplication extends Application {
+
+    private static final String programName = "XO Game";
+
     @Override
     public void start(Stage stage) throws IOException {
 //        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
@@ -111,7 +115,7 @@ public class HelloApplication extends Application {
             //Mobile app version will have buttons and corresponding popup, not a menu drop-down
             //else, just create a single anchored button on the corner and have it call a popup menu to 'emulate' mobile in PC
         Button settings = new Button("Setting");
-        settings.setOnAction(x->stage.hide());
+//        settings.setOnAction(x->stage.hide());
         Button restart = new Button("Restart");
         restart.setOnAction(x-> Game.restartGame());
         Label textP1 = new Label(Game.getPlayerOneSymbol() + " wins:");
@@ -163,6 +167,7 @@ public class HelloApplication extends Application {
         Scene settingsScene = new Scene(settingsRoot, 500, 550);
         settings.setOnAction(x->{
             stage.setScene(settingsScene);
+            stage.setTitle(programName + " - Settings");
 //            stage.setScene(mainScene);
         });
 //        settingsRoot.setOnMouseClicked(x->stage.setScene(mainScene));
@@ -172,6 +177,7 @@ public class HelloApplication extends Application {
         Button returnButton = new Button("Return");
         returnButton.setOnAction(x->{
             stage.setScene(mainScene);
+            stage.setTitle(programName);
             Game.resume();
         });
         VBox.setMargin(returnButton, new Insets(5,0,0,5));
@@ -228,10 +234,26 @@ public class HelloApplication extends Application {
         //TODO: code the 'onStart'. imagine this affects "restartGame"
         startBox.getChildren().addAll(startText, startCBox);
         startBox.setAlignment(Pos.CENTER);
-//        Reset Scoreboard (single button)
-//        Hide Scoreboard (simple inverts .hidden() property of tally)
-//        fancy- button renames to “Hide Scoreboard” and “Show Scoreboard”
-        settingsRoot.getChildren().addAll(versusBox, startBox);
+
+        //TODO: make a 'factory' for these headers here, too repetitive
+        Label settingsHeader = new Label("Game Settings");
+        settingsHeader.setFont(Font.font(15));
+        VBox.setMargin(settingsHeader, new Insets(0, 25, 0, 25));
+        Separator line = new Separator();
+        VBox.setMargin(line, new Insets(0, 15, 0, 15));
+
+        //TODO: make a 'factory' for these headers here, too repetitive
+        Label scoreboardHeader = new Label("Scoreboard Settings");
+        scoreboardHeader.setFont(Font.font(15));
+        VBox.setMargin(scoreboardHeader, new Insets(0, 25, 0, 25));
+        Separator line1 = new Separator();
+        VBox.setMargin(line1, new Insets(0, 15, 0, 15));
+        //
+
+
+
+        settingsRoot.getChildren().addAll(settingsHeader, line, versusBox, startBox, scoreboardHeader, line1);
+        settingsRoot.setSpacing(5);
         //for now, see if clicking correctly on the buttons/comboboxes do not trigger the setOnmouseClicked
             //if it does trigger, remove that. include a "return" button
 
