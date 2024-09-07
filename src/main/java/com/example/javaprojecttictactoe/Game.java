@@ -9,19 +9,22 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Pair;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 public class Game {
 
     private static Game INSTANCE;
 
-    public static enum VersusMode {
+    public enum VersusMode {
         VS_ROBOT,
         VS_RANDOM,
         VS_PLAYER
     }
 
-    public static enum StartMode {
+    public enum StartMode {
         FIRST_START,
         SECOND_START,
         RANDOM_START
@@ -58,32 +61,22 @@ public class Game {
     private static WinState winCondition = WinState.PENDING;
     private static String playerOneSymbol = "X";
     private static String playerTwoSymbol = "O";
-//    private static int scorePlayer1 = 0;
-//    private static int scorePlayer2 = 0;
-//    private static int scoreTie = 0;
+    private static String emptySymbol = "~";
+    private static final String DEFAULT_SYMBOL_1 = "X";
+    private static final String DEFAULT_SYMBOL_2 = "O";
+    private static final String DEFAULT_SYMBOL_EMPTY = "~";
 
-    private static SimpleIntegerProperty scorePlayer2 = new SimpleIntegerProperty(0);
-    private static SimpleIntegerProperty scorePlayer1 = new SimpleIntegerProperty(0);
-    private static SimpleIntegerProperty scoreTie = new SimpleIntegerProperty(0);
-
-    public static int getScorePlayer2() {
-        return scorePlayer2.get();
-    }
+    private static final SimpleIntegerProperty scorePlayer2 = new SimpleIntegerProperty(0);
+    private static final SimpleIntegerProperty scorePlayer1 = new SimpleIntegerProperty(0);
+    private static final SimpleIntegerProperty scoreTie = new SimpleIntegerProperty(0);
 
     public static SimpleIntegerProperty scorePlayer2Property() {
         return scorePlayer2;
     }
 
-    public static int getScorePlayer1() {
-        return scorePlayer1.get();
-    }
 
     public static SimpleIntegerProperty scorePlayer1Property() {
         return scorePlayer1;
-    }
-
-    public static int getScoreTie() {
-        return scoreTie.get();
     }
 
     public static SimpleIntegerProperty scoreTieProperty() {
@@ -422,7 +415,6 @@ public class Game {
     }
 
     private static void nextTurn(boolean badMove) {
-        BorderPane bp = (BorderPane) root;
 //        Label lb = (Label) bp.getBottom();
         if(badMove) {
             //On player illegalMove
@@ -524,6 +516,39 @@ public class Game {
         scoreTie.set(0);
     }
 
+    public static void resetSymbols() {
+        setSymbols(DEFAULT_SYMBOL_1, DEFAULT_SYMBOL_2, DEFAULT_SYMBOL_EMPTY);
+    }
+
+    public static void setSymbols(String p1, String p2, String empty) {
+        Set<String> set = new HashSet<>(Arrays.asList(p1, p2, empty));
+        if(set.size() != 3) {
+            System.out.println("New symbols denied! Duplicate found.");
+        }
+
+        playerOneSymbol = p1;
+        playerTwoSymbol = p2;
+        emptySymbol = empty;
+
+        reloadGridSymbols();
+    }
+
+    private static void reloadGridSymbols() {
+
+        visual.getChildren().forEach(child->{
+            int x = GridPane.getRowIndex(child);
+            int y = GridPane.getColumnIndex(child);
+            String val;
+            switch (gameBoard[x][y]) {
+                case -1 -> val = playerTwoSymbol;
+                case 0 -> val = emptySymbol;
+                default -> val = playerOneSymbol;
+            }
+            ((Button) child).setText(val);
+        });
+
+    }
+
     //Troubleshooting
     @Override
     public String toString() {
@@ -539,11 +564,4 @@ public class Game {
                 """.formatted(gm, sm, p);
     }
 
-    //singleton? private constructor?
-
-    //will include methods for: win validation, (return bool)
-    //will include methods for: Bot behavior? random() or robot() and this will return what node to turn;
-    //this will house the Settings, for any setting changes + determining if allowing player2, or immediately performing 'AI's turn
-
-    //clicking 'settings' will query this class for its current settings, e.g. "currently [vs Random], [RandomStart], [etc]"
 }
