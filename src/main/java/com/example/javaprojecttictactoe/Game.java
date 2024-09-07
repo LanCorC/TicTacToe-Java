@@ -518,7 +518,7 @@ public class Game {
 
     }
 
-    private static void resetScores() {
+    public static void resetScores() {
         scorePlayer1.set(0);
         scorePlayer2.set(0);
         scoreTie.set(0);

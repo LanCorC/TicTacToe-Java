@@ -128,13 +128,13 @@ public class HelloApplication extends Application {
         Label pointsDraw = new Label();
         pointsDraw.textProperty().bind(Game.scoreTieProperty().asString());
 
-        HBox middleBar = new HBox();
-        middleBar.getChildren().addAll(textP1, pointsP1, textP2, pointsP2, textDraw, pointsDraw);
-        middleBar.getChildren().forEach(x-> ((Label) x).setFont(Font.font(25)));
-        middleBar.setSpacing(5);
-        middleBar.setAlignment(Pos.CENTER);
+        HBox scoreBar = new HBox();
+        scoreBar.getChildren().addAll(textP1, pointsP1, textP2, pointsP2, textDraw, pointsDraw);
+        scoreBar.getChildren().forEach(x-> ((Label) x).setFont(Font.font(25)));
+        scoreBar.setSpacing(5);
+        scoreBar.setAlignment(Pos.CENTER);
         VBox vb = new VBox();
-        vb.getChildren().addAll(middleBar, gameGridVisual);
+        vb.getChildren().addAll(scoreBar, gameGridVisual);
 
         VBox.setVgrow(gameGridVisual, Priority.ALWAYS);
         BorderPane.setMargin(gameGridVisual, new Insets(15, 15, 15, 15));
@@ -162,13 +162,19 @@ public class HelloApplication extends Application {
         Game.getInstance().setRoot(root);
         Scene mainScene = new Scene(root, 500, 550);
 
+        Label settingsUpdateText = new Label();
+        VBox.setVgrow(settingsUpdateText, Priority.ALWAYS);
+        settingsUpdateText.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        settingsUpdateText.setFont(Font.font(15));
+        settingsUpdateText.setAlignment(Pos.CENTER);
+
         //Create settings pane
         VBox settingsRoot = new VBox();
         Scene settingsScene = new Scene(settingsRoot, 500, 550);
         settings.setOnAction(x->{
             stage.setScene(settingsScene);
             stage.setTitle(programName + " - Settings");
-//            stage.setScene(mainScene);
+            settingsUpdateText.setText("Welcome to the Settings menu");
         });
 //        settingsRoot.setOnMouseClicked(x->stage.setScene(mainScene));
         //TODO:
@@ -180,11 +186,13 @@ public class HelloApplication extends Application {
             stage.setTitle(programName);
             Game.resume();
         });
+
+
+
         VBox.setMargin(returnButton, new Insets(5,0,0,5));
         settingsRoot.getChildren().add(returnButton);
         HBox versusBox = new HBox();
         HBox startBox = new HBox();
-        HBox toggleBoxes = new HBox(); //e.g. single button, reset, hide,... night mode / daymode?
 //        Versus: (dropdown or radio buttons)
         Label versusText = new Label("Select Opponent:");
         ComboBox<String> versusCBox= new ComboBox<>();
@@ -206,6 +214,7 @@ public class HelloApplication extends Application {
                 case "Player" -> Game.setGameMode(Game.VersusMode.VS_PLAYER);
                 default -> Game.setGameMode(Game.VersusMode.VS_RANDOM);
             }
+            settingsUpdateText.setText("GameMode set to '%s'".formatted(tempVal));
         });
         //TODO: way to pre-select current live mode
         versusBox.getChildren().addAll(versusText, versusCBox);
@@ -230,6 +239,7 @@ public class HelloApplication extends Application {
                 case "Player2" -> Game.setStartMode(Game.StartMode.SECOND_START);
                 default -> Game.setStartMode(Game.StartMode.RANDOM_START);
             }
+            settingsUpdateText.setText("Starting player set to '%s'".formatted(tempVal));
         });
         //TODO: code the 'onStart'. imagine this affects "restartGame"
         startBox.getChildren().addAll(startText, startCBox);
@@ -249,10 +259,31 @@ public class HelloApplication extends Application {
         Separator line1 = new Separator();
         VBox.setMargin(line1, new Insets(0, 15, 0, 15));
         //
+        Button resetScore = new Button("Reset Score");
+        resetScore.setOnAction(x->{
+            Game.resetScores();
+            settingsUpdateText.setText("Scoreboard cleared!");
+        });
+        Button toggleShowScore = new Button("Hide Score");
+        toggleShowScore.setOnAction(x->{
+            scoreBar.getChildren().forEach(child-> child.setVisible(!child.isVisible()));
+            if(toggleShowScore.textProperty().get().equals("Hide Score")) {
+                toggleShowScore.setText("Show Score");
+                settingsUpdateText.setText("Scoreboard hidden!");
+            } else {
+                toggleShowScore.setText("Hide Score");
+                settingsUpdateText.setText("Scoreboard revealed!");
+            }
+        });
+        HBox scoreHBox = new HBox();
+        scoreHBox.getChildren().addAll(resetScore, toggleShowScore);
+        scoreHBox.setAlignment(Pos.CENTER);
+        scoreHBox.setSpacing(15);
+        VBox.setMargin(scoreHBox, new Insets(0, 25, 0, 25));
 
 
 
-        settingsRoot.getChildren().addAll(settingsHeader, line, versusBox, startBox, scoreboardHeader, line1);
+        settingsRoot.getChildren().addAll(settingsHeader, line, versusBox, startBox, scoreboardHeader, line1, scoreHBox, settingsUpdateText);
         settingsRoot.setSpacing(5);
         //for now, see if clicking correctly on the buttons/comboboxes do not trigger the setOnmouseClicked
             //if it does trigger, remove that. include a "return" button
