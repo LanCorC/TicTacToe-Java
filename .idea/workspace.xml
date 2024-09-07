@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="edb67b4a-933c-4dbc-af65-5928ba10f626" name="Changes" comment="Completed the backend for symbol defaults, symbol resets, symbol setters">
+    <list default="true" id="edb67b4a-933c-4dbc-af65-5928ba10f626" name="Changes" comment="Completed all frontend connections to Symbol changes&#10;&#10;Streamlined some valueProperty bound visual texts.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/HelloApplication.java" afterDir="false" />
@@ -264,7 +264,15 @@
       <option name="project" value="LOCAL" />
       <updated>1725682353852</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Completed all frontend connections to Symbol changes&#10;&#10;Streamlined some valueProperty bound visual texts.">
+      <option name="closed" value="true" />
+      <created>1725688016415</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1725688016415</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -292,6 +300,7 @@
     <MESSAGE value="Added styling to Settings" />
     <MESSAGE value="Completed all desired features!&#10;in this commit, toggleScoreboardView, resetScores, SettingsUpdateText for responsiveness," />
     <MESSAGE value="Completed the backend for symbol defaults, symbol resets, symbol setters" />
-    <option name="LAST_COMMIT_MESSAGE" value="Completed the backend for symbol defaults, symbol resets, symbol setters" />
+    <MESSAGE value="Completed all frontend connections to Symbol changes&#10;&#10;Streamlined some valueProperty bound visual texts." />
+    <option name="LAST_COMMIT_MESSAGE" value="Completed all frontend connections to Symbol changes&#10;&#10;Streamlined some valueProperty bound visual texts." />
   </component>
 </project>

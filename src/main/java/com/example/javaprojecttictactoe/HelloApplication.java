@@ -303,7 +303,7 @@ public class HelloApplication extends Application {
         play2text.promptTextProperty().bind(Game.playerTwoSymbolProperty());
         play2text.setMaxWidth(35);
         play2text.setAlignment(Pos.CENTER);
-        Label play3label = new Label("Player 3:");
+        Label play3label = new Label("Empty:");
         TextField play3text = new TextField();
         play3text.promptTextProperty().bind(Game.emptySymbolProperty());
         play3text.setMaxWidth(35);

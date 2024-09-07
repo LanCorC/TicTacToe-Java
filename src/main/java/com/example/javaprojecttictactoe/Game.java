@@ -186,11 +186,17 @@ public class Game {
     }
 
     public static void resume() {
+        if(winCondition != WinState.PENDING) {
+            //the game has already ended
+            return;
+        }
         if(currentPlayer == PLAYER2 && gameMode != VersusMode.VS_PLAYER) {
             playTurn();
+        } else if (currentPlayer == PLAYER1) {
+            updateText.setText(currentSymbol() + "'s turn!");
+            System.out.println("Player1's go!");
         }
-        updateText.setText(currentSymbol() + "'s turn!");
-        System.out.println("Player1's go!");
+
     }
 
     public static void playRobot() {
@@ -506,15 +512,16 @@ public class Game {
         } else {
             String victor;
             if(winCondition == WinState.PLAYER1) {
-                victor = "Player1";
+                victor = "%s (Player1)".formatted(getPlayerOneSymbol());
                 scorePlayer1.set(scorePlayer1.get()+1);
             } else {
                 scorePlayer2.set(scorePlayer2.get()+1);
                 switch (gameMode) {
-                    case VS_ROBOT -> victor = "Robot";
-                    case VS_RANDOM -> victor = "Random";
-                    default -> victor = "Player2";
+                    case VS_ROBOT -> victor = "%s (Robot)";
+                    case VS_RANDOM -> victor = "%s (Random)";
+                    default -> victor = "%s (Player2)";
                 }
+                victor = victor.formatted(getPlayerTwoSymbol());
             }
             updateText.setText(victor + "'s win! Click 'Restart'");
         }
