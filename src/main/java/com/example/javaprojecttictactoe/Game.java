@@ -1,6 +1,7 @@
 package com.example.javaprojecttictactoe;
 
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -59,12 +60,13 @@ public class Game {
 //    public static final int PLAYER2WIN = 3;
 
     private static WinState winCondition = WinState.PENDING;
-    private static String playerOneSymbol = "X";
-    private static String playerTwoSymbol = "O";
-    private static String emptySymbol = "~";
     private static final String DEFAULT_SYMBOL_1 = "X";
     private static final String DEFAULT_SYMBOL_2 = "O";
     private static final String DEFAULT_SYMBOL_EMPTY = "~";
+    private static SimpleStringProperty playerOneSymbol = new SimpleStringProperty(DEFAULT_SYMBOL_1);
+    private static SimpleStringProperty playerTwoSymbol = new SimpleStringProperty(DEFAULT_SYMBOL_2);
+    private static SimpleStringProperty emptySymbol = new SimpleStringProperty(DEFAULT_SYMBOL_EMPTY);
+
 
     private static final SimpleIntegerProperty scorePlayer2 = new SimpleIntegerProperty(0);
     private static final SimpleIntegerProperty scorePlayer1 = new SimpleIntegerProperty(0);
@@ -128,11 +130,27 @@ public class Game {
     }
 
     public static String getPlayerOneSymbol() {
-        return playerOneSymbol;
+        return playerOneSymbol.getValue();
     }
 
     public static String getPlayerTwoSymbol() {
+        return playerTwoSymbol.getValue();
+    }
+
+    public static String getEmptySymbol() {
+        return emptySymbol.getValue();
+    }
+
+    public static SimpleStringProperty playerOneSymbolProperty() {
+        return playerOneSymbol;
+    }
+
+    public static SimpleStringProperty playerTwoSymbolProperty() {
         return playerTwoSymbol;
+    }
+
+    public static SimpleStringProperty emptySymbolProperty() {
+        return emptySymbol;
     }
 
     public static VersusMode getGameMode() {
@@ -168,10 +186,11 @@ public class Game {
     }
 
     public static void resume() {
-        if(currentPlayer != PLAYER1 && gameMode != VersusMode.VS_PLAYER) {
+        if(currentPlayer == PLAYER2 && gameMode != VersusMode.VS_PLAYER) {
             playTurn();
-            updateText.setText(currentSymbol() + "'s turn!");
         }
+        updateText.setText(currentSymbol() + "'s turn!");
+        System.out.println("Player1's go!");
     }
 
     public static void playRobot() {
@@ -217,7 +236,7 @@ public class Game {
     }
 
     private static String currentSymbol() {
-        return currentPlayer == PLAYER1 ? playerOneSymbol : playerTwoSymbol;
+        return currentPlayer == PLAYER1 ? playerOneSymbol.getValue() : playerTwoSymbol.getValue();
     }
 
 
@@ -453,7 +472,7 @@ public class Game {
         visual.getChildren().forEach(x-> {
             if(x.getClass() == Button.class) {
                 Button btn = (Button) x;
-                btn.setText("~");
+                btn.setText(emptySymbol.getValue());
             } else {
                 System.out.println("Issue encountered trying to reset the buttons! " + x.getClass());
             }
@@ -482,7 +501,7 @@ public class Game {
         //Update text
 //        Label lb = ((Label) ((BorderPane) root).getBottom());
         if(winCondition == WinState.DRAW) {
-            updateText.setText("Draw! [Restart or Wait... W.I.P.]");
+            updateText.setText("Draw! Click 'Restart'");
             scoreTie.set(scoreTie.get()+1);
         } else {
             String victor;
@@ -497,7 +516,7 @@ public class Game {
                     default -> victor = "Player2";
                 }
             }
-            updateText.setText(victor + "'s win! [Restart or Wait... W.I.P.]");
+            updateText.setText(victor + "'s win! Click 'Restart'");
         }
 
         System.out.println(scorePlayer1.get());
@@ -526,11 +545,12 @@ public class Game {
             System.out.println("New symbols denied! Duplicate found.");
         }
 
-        playerOneSymbol = p1;
-        playerTwoSymbol = p2;
-        emptySymbol = empty;
+        playerOneSymbol.set(p1);
+        playerTwoSymbol.set(p2);
+        emptySymbol.set(empty);
 
         reloadGridSymbols();
+        resume();
     }
 
     private static void reloadGridSymbols() {
@@ -540,9 +560,9 @@ public class Game {
             int y = GridPane.getColumnIndex(child);
             String val;
             switch (gameBoard[x][y]) {
-                case -1 -> val = playerTwoSymbol;
-                case 0 -> val = emptySymbol;
-                default -> val = playerOneSymbol;
+                case -1 -> val = playerTwoSymbol.getValue();
+                case 0 -> val = emptySymbol.getValue();
+                default -> val = playerOneSymbol.getValue();
             }
             ((Button) child).setText(val);
         });

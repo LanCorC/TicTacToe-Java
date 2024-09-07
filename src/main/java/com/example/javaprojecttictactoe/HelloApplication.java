@@ -1,26 +1,27 @@
 package com.example.javaprojecttictactoe;
 
 import javafx.application.Application;
+import javafx.beans.binding.Bindings;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.Separator;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Pair;
-import com.example.javaprojecttictactoe.Game;
 
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 
 public class HelloApplication extends Application {
@@ -59,7 +60,7 @@ public class HelloApplication extends Application {
 //                gameGridVisual.add(text, i, j);
 //                text.setFont(new Font(15));
 
-                Button button = new Button("~");
+                Button button = new Button(Game.getEmptySymbol());
 //                button.setText((i + j)% 2 == 0 ? "X" : "O");
 //                button.fontProperty().bind();
 //                button.setAlignment(Pos.CENTER);
@@ -118,18 +119,16 @@ public class HelloApplication extends Application {
 //        settings.setOnAction(x->stage.hide());
         Button restart = new Button("Restart");
         restart.setOnAction(x-> Game.restartGame());
-        Label textP1 = new Label(Game.getPlayerOneSymbol() + " wins:");
-        Label pointsP1 = new Label();
-        pointsP1.textProperty().bind(Game.scorePlayer1Property().asString());
-        Label textP2 = new Label("  " + Game.getPlayerTwoSymbol() + " wins:");
-        Label pointsP2 = new Label();
-        pointsP2.textProperty().bind(Game.scorePlayer2Property().asString());
-        Label textDraw = new Label("  Draws:");
-        Label pointsDraw = new Label();
-        pointsDraw.textProperty().bind(Game.scoreTieProperty().asString());
+        //TODO: experimental format binding
+        Label textP1 = new Label();
+        textP1.textProperty().bind(Bindings.format("%s wins: %d", Game.playerOneSymbolProperty(), Game.scorePlayer1Property()));
+        Label textP2 = new Label();
+        textP2.textProperty().bind(Bindings.format("  %s wins: %d", Game.playerTwoSymbolProperty(), Game.scorePlayer2Property()));
+        Label textDraw = new Label();
+        textDraw.textProperty().bind(Bindings.format("  Draws: %d", Game.scoreTieProperty()));
 
         HBox scoreBar = new HBox();
-        scoreBar.getChildren().addAll(textP1, pointsP1, textP2, pointsP2, textDraw, pointsDraw);
+        scoreBar.getChildren().addAll(textP1, textP2, textDraw);
         scoreBar.getChildren().forEach(x-> ((Label) x).setFont(Font.font(25)));
         scoreBar.setSpacing(5);
         scoreBar.setAlignment(Pos.CENTER);
@@ -281,9 +280,51 @@ public class HelloApplication extends Application {
         scoreHBox.setSpacing(15);
         VBox.setMargin(scoreHBox, new Insets(0, 25, 0, 25));
 
+        //TODO: make a 'factory' for these headers here, too repetitive
+        Label symbolsHeader = new Label("Symbol Settings");
+        symbolsHeader.setFont(Font.font(15));
+        VBox.setMargin(symbolsHeader, new Insets(0, 25, 0, 25));
+        Separator line2 = new Separator();
+        VBox.setMargin(line2, new Insets(0, 15, 0, 15));
+
+        //TODO symbol interface
+        // [Player1: " "] [Player 2: " "] [Empty: " "] (Apply) (Reset)
+        HBox symbolHBox = new HBox();
+        symbolHBox.setSpacing(5);
+        VBox.setMargin(symbolHBox, new Insets(0, 25, 0, 25));
+        symbolHBox.setAlignment(Pos.CENTER);
+        Label play1label = new Label("Player 1:");
+        TextField play1text = new TextField();
+        play1text.promptTextProperty().bind(Game.playerOneSymbolProperty());
+        play1text.setMaxWidth(35);
+        play1text.setAlignment(Pos.CENTER);
+        Label play2label = new Label("Player 2:");
+        TextField play2text = new TextField();
+        play2text.promptTextProperty().bind(Game.playerTwoSymbolProperty());
+        play2text.setMaxWidth(35);
+        play2text.setAlignment(Pos.CENTER);
+        Label play3label = new Label("Player 3:");
+        TextField play3text = new TextField();
+        play3text.promptTextProperty().bind(Game.emptySymbolProperty());
+        play3text.setMaxWidth(35);
+        play3text.setAlignment(Pos.CENTER);
+        Button applySymbol = new Button("Apply");
+        applySymbol.setOnAction(x->processSymbols(play1text, play2text, play3text, settingsUpdateText));
+        Button resetSymbol = new Button("Reset");
+        resetSymbol.setOnAction(x->{
+            Game.resetSymbols();
+            settingsUpdateText.setText("Play symbols reset");
+        });
+        symbolHBox.getChildren().addAll(play1label,play1text,play2label,play2text,play3label,play3text);
+
+        HBox symbolButtonHBox = new HBox();
+        symbolButtonHBox.setSpacing(15);
+        symbolButtonHBox.setAlignment(Pos.CENTER);
+        symbolButtonHBox.getChildren().addAll(applySymbol,resetSymbol);
 
 
-        settingsRoot.getChildren().addAll(settingsHeader, line, versusBox, startBox, scoreboardHeader, line1, scoreHBox, settingsUpdateText);
+        settingsRoot.getChildren().addAll(settingsHeader, line, versusBox, startBox, scoreboardHeader, line1,
+                scoreHBox, symbolsHeader, line2, symbolHBox, symbolButtonHBox, settingsUpdateText);
         settingsRoot.setSpacing(5);
         //for now, see if clicking correctly on the buttons/comboboxes do not trigger the setOnmouseClicked
             //if it does trigger, remove that. include a "return" button
@@ -308,6 +349,27 @@ public class HelloApplication extends Application {
 //
 //        });
 
+    }
+
+    public void processSymbols(TextField p1, TextField p2, TextField p3, Label updateText) {
+        List<TextField> fields = Arrays.asList(p1, p2, p3);
+        Set<String> count = new HashSet<>();
+        for(TextField tf : fields) {
+            if(tf.getText().isEmpty()) {
+                updateText.setText("Invalid symbols: missing value");
+                return;
+            }
+            count.add(tf.getText().strip());
+        }
+
+        if(count.size() != 3) {
+            updateText.setText("Invalid symbols: duplicate values");
+            return;
+        }
+
+        //else, all valid
+        Game.setSymbols(p1.getText(), p2.getText(), p3.getText());
+        updateText.setText("Symbols updated!");
     }
 
     public static void main(String[] args) {

@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="edb67b4a-933c-4dbc-af65-5928ba10f626" name="Changes" comment="Completed all desired features!&#10;in this commit, toggleScoreboardView, resetScores, SettingsUpdateText for responsiveness,">
+    <list default="true" id="edb67b4a-933c-4dbc-af65-5928ba10f626" name="Changes" comment="Completed the backend for symbol defaults, symbol resets, symbol setters">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/HelloApplication.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -255,7 +256,15 @@
       <option name="project" value="LOCAL" />
       <updated>1725680637283</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Completed the backend for symbol defaults, symbol resets, symbol setters">
+      <option name="closed" value="true" />
+      <created>1725682353852</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1725682353852</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -282,6 +291,7 @@
     <MESSAGE value="Added way to change StartMode on Settings, and the backend connection&#10;&#10;Rare bug: changing the StartMode mid-game may freeze the game. Fixed by [Restart] button." />
     <MESSAGE value="Added styling to Settings" />
     <MESSAGE value="Completed all desired features!&#10;in this commit, toggleScoreboardView, resetScores, SettingsUpdateText for responsiveness," />
-    <option name="LAST_COMMIT_MESSAGE" value="Completed all desired features!&#10;in this commit, toggleScoreboardView, resetScores, SettingsUpdateText for responsiveness," />
+    <MESSAGE value="Completed the backend for symbol defaults, symbol resets, symbol setters" />
+    <option name="LAST_COMMIT_MESSAGE" value="Completed the backend for symbol defaults, symbol resets, symbol setters" />
   </component>
 </project>
