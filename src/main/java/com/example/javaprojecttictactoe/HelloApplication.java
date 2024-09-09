@@ -22,6 +22,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.UnaryOperator;
 
 
 public class HelloApplication extends Application {
@@ -289,6 +290,8 @@ public class HelloApplication extends Application {
 
         //TODO symbol interface
         // [Player1: " "] [Player 2: " "] [Empty: " "] (Apply) (Reset)
+        //TODO: textFormatter and textFormatter.Change
+
         HBox symbolHBox = new HBox();
         symbolHBox.setSpacing(5);
         VBox.setMargin(symbolHBox, new Insets(0, 25, 0, 25));
@@ -315,6 +318,16 @@ public class HelloApplication extends Application {
             Game.resetSymbols();
             settingsUpdateText.setText("Play symbols reset");
         });
+//        TextFormatter.Change = new TextFormatter.Change();
+        UnaryOperator<TextFormatter.Change> filter = change -> {
+            if(change.getControlNewText().length() > 2) {
+                return null;
+            }
+            return change;
+        };
+        play1text.setTextFormatter(new TextFormatter<>(filter));
+        play2text.setTextFormatter(new TextFormatter<>(filter));
+        play3text.setTextFormatter(new TextFormatter<>(filter));
         symbolHBox.getChildren().addAll(play1label,play1text,play2label,play2text,play3label,play3text);
 
         HBox symbolButtonHBox = new HBox();
