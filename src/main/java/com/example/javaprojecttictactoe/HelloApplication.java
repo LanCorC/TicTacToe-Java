@@ -318,7 +318,7 @@ public class HelloApplication extends Application {
             Game.resetSymbols();
             settingsUpdateText.setText("Play symbols reset");
         });
-//        TextFormatter.Change = new TextFormatter.Change();
+//        Filter: max string length for textField
         UnaryOperator<TextFormatter.Change> filter = change -> {
             if(change.getControlNewText().length() > 2) {
                 return null;
