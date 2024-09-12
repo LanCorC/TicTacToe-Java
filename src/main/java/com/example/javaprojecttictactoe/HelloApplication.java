@@ -6,18 +6,13 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Pair;
-
-
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -35,71 +30,55 @@ public class HelloApplication extends Application {
         //Set parent
         BorderPane root = new BorderPane();
 
-        //Set center
-        GridPane gameGridVisual = configureGrid();
-
-        //Set main screen status messages; see Game.resume() further down sets this value
+        //Set bottom - main screen status messages; see Game.resume() further down sets this value
         Label updateText = new Label();
         updateText.setFont(Font.font(25));
         BorderPane.setAlignment(updateText, Pos.TOP_CENTER);
         root.setBottom(updateText);
 
-        HBox topBar = new HBox();
-        BorderPane.setMargin(topBar, new Insets(5, 0, 0, 5));
-                //Set buttons on top, e.g. Menu, restart, potentially a win counter
-            //Mobile app version will have buttons and corresponding popup, not a menu drop-down
-            //else, just create a single anchored button on the corner and have it call a popup menu to 'emulate' mobile in PC
-        Button settings = new Button("Setting");
-//        settings.setOnAction(x->stage.hide());
-        Button restart = new Button("Restart");
-        restart.setOnAction(x-> Game.restartGame());
-
+        //Set center
         HBox scoreBar = configureScoreBoard();
-        VBox vb = new VBox();
-        vb.getChildren().addAll(scoreBar, gameGridVisual);
+        root.setCenter(new VBox(scoreBar, configureGrid()));
 
-        VBox.setVgrow(gameGridVisual, Priority.ALWAYS);
-        BorderPane.setMargin(gameGridVisual, new Insets(15, 15, 15, 15));
-        root.setCenter(vb);
+        //Set top
+        Button settings = new Button("Settings");
+        root.setTop(configureTopBar(settings));
 
-
-        topBar.setSpacing(5);
-        HBox.setHgrow(settings, Priority.ALWAYS);
-        topBar.setAlignment(Pos.CENTER_LEFT);
-        topBar.getChildren().addAll(settings, restart);
-        root.setTop(topBar);
-
-        //because or .setRoot(), command must exist after VB is finished, Grid is finished, updateText is finished,
+        //Because of Game.setRoot(), command must exist after VB is finished, Grid is finished, updateText is finished,
         Game.getInstance().setRoot(root);
         Scene mainScene = new Scene(root, 500, 550);
         //Initializes first updateText values
         Game.resume();
 
+        //TODO (note): too short to export to a method?
         Label settingsUpdateText = new Label();
         VBox.setVgrow(settingsUpdateText, Priority.ALWAYS);
         settingsUpdateText.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         settingsUpdateText.setFont(Font.font(15));
         settingsUpdateText.setAlignment(Pos.CENTER);
 
+        //TODO (note): too short to export to a method?
         //Create settings pane
         VBox settingsRoot = new VBox();
         Scene settingsScene = new Scene(settingsRoot, 500, 550);
-        settings.setOnAction(x->{
+        settings.setOnAction(actionEvent ->{
             stage.setScene(settingsScene);
             stage.setTitle(programName + " - Settings");
             settingsUpdateText.setText("Welcome to the Settings menu");
         });
 
+        //TODO (note): too short to export to a method?
 //        Settings UI:
         Button returnButton = new Button("Return");
-        returnButton.setOnAction(x->{
+        VBox.setMargin(returnButton, new Insets(5,0,0,5));
+        returnButton.setOnAction(actionEvent ->{
             stage.setScene(mainScene);
             stage.setTitle(programName);
             Game.resume();
         });
-
-        VBox.setMargin(returnButton, new Insets(5,0,0,5));
         settingsRoot.getChildren().add(returnButton);
+
+        //TODO (note): export these to methods, separately.
         HBox versusBox = new HBox();
         HBox startBox = new HBox();
 //        Versus: (dropdown or radio buttons)
@@ -109,7 +88,6 @@ public class HelloApplication extends Application {
         versusCBox.getItems().addAll("Robot", "Player", "Random");
 
         String val;
-        //'val' is a previously declared String for temporary values
         switch (Game.getGameMode()) {
             case VS_ROBOT -> val = "Robot";
             case VS_PLAYER -> val = "Player";
@@ -129,7 +107,6 @@ public class HelloApplication extends Application {
         //TODO: way to pre-select current live mode
         versusBox.getChildren().addAll(versusText, versusCBox);
         versusBox.setAlignment(Pos.CENTER);
-        //Additional: when switching to Robot/Random AND it is Player2's turn, immediately play turn... wait until dialog is closed?
 
 //        Start: (dropdown or radio buttons)
         Label startText = new Label("Who goes first:");
@@ -175,7 +152,7 @@ public class HelloApplication extends Application {
             settingsUpdateText.setText("Scoreboard cleared!");
         });
         Button toggleShowScore = new Button("Hide Score");
-        toggleShowScore.setOnAction(x->{
+        toggleShowScore.setOnAction(actionEvent ->{
             scoreBar.getChildren().forEach(child-> child.setVisible(!child.isVisible()));
             if(toggleShowScore.textProperty().get().equals("Hide Score")) {
                 toggleShowScore.setText("Show Score");
@@ -222,7 +199,7 @@ public class HelloApplication extends Application {
         play3text.setMaxWidth(35);
         play3text.setAlignment(Pos.CENTER);
         Button applySymbol = new Button("Apply");
-        applySymbol.setOnAction(x->processSymbols(play1text, play2text, play3text, settingsUpdateText));
+        applySymbol.setOnAction(actionEvent->processSymbols(play1text, play2text, play3text, settingsUpdateText));
         Button resetSymbol = new Button("Reset");
         resetSymbol.setOnAction(x->{
             Game.resetSymbols();
@@ -253,7 +230,7 @@ public class HelloApplication extends Application {
             //if it does trigger, remove that. include a "return" button
 
 
-        stage.setTitle("XO Game");
+        stage.setTitle(programName);
         stage.setScene(mainScene);
         stage.show();
     }
@@ -264,10 +241,11 @@ public class HelloApplication extends Application {
         gp.setHgap(5);
         gp.setVgap(5);
         gp.setAlignment(Pos.CENTER);
+        VBox.setVgrow(gp, Priority.ALWAYS);
         //Configure grid styling
         gp.setBackground(new Background(new BackgroundFill(
                 Color.BLACK, new CornerRadii(4, false), new Insets(10, 10, 10, 10))));
-
+        //Set column rules
         ColumnConstraints cc = new ColumnConstraints();
         cc.setPercentWidth(33);
         RowConstraints rc = new RowConstraints();
@@ -309,7 +287,7 @@ public class HelloApplication extends Application {
         textDraw.textProperty().bind(Bindings.format("  Draws: %d", Game.scoreTieProperty()));
 
         scoreBox.getChildren().addAll(textP1, textP2, textDraw);
-        scoreBox.getChildren().forEach(x-> ((Label) x).setFont(Font.font(25)));
+        scoreBox.getChildren().forEach(node-> ((Label) node).setFont(Font.font(25)));
         scoreBox.setSpacing(5);
         scoreBox.setAlignment(Pos.CENTER);
 
@@ -335,6 +313,18 @@ public class HelloApplication extends Application {
         //else, all valid
         Game.setSymbols(p1.getText(), p2.getText(), p3.getText());
         updateText.setText("Symbols updated!");
+    }
+
+    public HBox configureTopBar(Button settings) {
+        Button restart = new Button("Restart");
+        restart.setOnAction(x-> Game.restartGame());
+        HBox.setHgrow(settings, Priority.ALWAYS);
+        HBox topBar = new HBox(settings, restart);
+        BorderPane.setMargin(topBar, new Insets(5, 0, 0, 5));
+        topBar.setSpacing(5);
+        topBar.setAlignment(Pos.CENTER_LEFT);
+
+        return topBar;
     }
 
     public static void main(String[] args) {
