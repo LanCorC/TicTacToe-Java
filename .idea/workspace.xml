@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="edb67b4a-933c-4dbc-af65-5928ba10f626" name="Changes" comment="Small explanatory comment for previous change">
+    <list default="true" id="edb67b4a-933c-4dbc-af65-5928ba10f626" name="Changes" comment="An attempt to encapsulate gameGridVisual, or the GridPane for the BorderPane's Center.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/HelloApplication.java" afterDir="false" />
     </list>
@@ -295,11 +295,18 @@
       <option name="project" value="LOCAL" />
       <updated>1725876493858</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="An attempt to encapsulate gameGridVisual, or the GridPane for the BorderPane's Center.">
+      <option name="closed" value="true" />
+      <created>1726123226216</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1726123226216</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Replaced Menu with Settings button (Mobile-app-esque)" />
     <MESSAGE value="Added a cell-separator by completely filling in the node, and adding a background color with inset" />
     <MESSAGE value="Adjusted 'Button' background to create classic TicTacToe look.&#10;Started Game.java class variables." />
     <MESSAGE value="Adjusted 'Button' background to create classic TicTacToe look.&#10;Started Game.java class implementation." />
@@ -324,6 +331,7 @@
     <MESSAGE value="Updated to make Game.resume more robust&#10;&#10;Updated Game.winSequence be more descriptive&#10;&#10;Fixed a label incorrectly suggesting a Player3" />
     <MESSAGE value="Added a txt length limiter on the player Symbol textfields, using TextFormatter.Change filter" />
     <MESSAGE value="Small explanatory comment for previous change" />
-    <option name="LAST_COMMIT_MESSAGE" value="Small explanatory comment for previous change" />
+    <MESSAGE value="An attempt to encapsulate gameGridVisual, or the GridPane for the BorderPane's Center." />
+    <option name="LAST_COMMIT_MESSAGE" value="An attempt to encapsulate gameGridVisual, or the GridPane for the BorderPane's Center." />
   </component>
 </project>

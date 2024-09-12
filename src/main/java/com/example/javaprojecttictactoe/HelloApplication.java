@@ -30,7 +30,7 @@ public class HelloApplication extends Application {
     private static final String programName = "XO Game";
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage)  {
 
         //Set parent
         BorderPane root = new BorderPane();
@@ -38,20 +38,11 @@ public class HelloApplication extends Application {
         //Set center
         GridPane gameGridVisual = configureGrid();
 
-        //Set status messages
-        //e.g. "Player's turn" or "X wins!"
-//        Label updateText = new Label("'s turn!");
-        String val;
-        if(Game.getCurrentPlayer() == 1) {
-            val = Game.getPlayerOneSymbol();
-        } else {
-            val = Game.getPlayerTwoSymbol();
-        }
-        Label updateText = new Label(val + "'s turn!");
+        //Set main screen status messages; see Game.resume() further down sets this value
+        Label updateText = new Label();
         updateText.setFont(Font.font(25));
         BorderPane.setAlignment(updateText, Pos.TOP_CENTER);
         root.setBottom(updateText);
-
 
         HBox topBar = new HBox();
         BorderPane.setMargin(topBar, new Insets(5, 0, 0, 5));
@@ -62,19 +53,8 @@ public class HelloApplication extends Application {
 //        settings.setOnAction(x->stage.hide());
         Button restart = new Button("Restart");
         restart.setOnAction(x-> Game.restartGame());
-        //TODO: experimental format binding
-        Label textP1 = new Label();
-        textP1.textProperty().bind(Bindings.format("%s wins: %d", Game.playerOneSymbolProperty(), Game.scorePlayer1Property()));
-        Label textP2 = new Label();
-        textP2.textProperty().bind(Bindings.format("  %s wins: %d", Game.playerTwoSymbolProperty(), Game.scorePlayer2Property()));
-        Label textDraw = new Label();
-        textDraw.textProperty().bind(Bindings.format("  Draws: %d", Game.scoreTieProperty()));
 
-        HBox scoreBar = new HBox();
-        scoreBar.getChildren().addAll(textP1, textP2, textDraw);
-        scoreBar.getChildren().forEach(x-> ((Label) x).setFont(Font.font(25)));
-        scoreBar.setSpacing(5);
-        scoreBar.setAlignment(Pos.CENTER);
+        HBox scoreBar = configureScoreBoard();
         VBox vb = new VBox();
         vb.getChildren().addAll(scoreBar, gameGridVisual);
 
@@ -82,18 +62,18 @@ public class HelloApplication extends Application {
         BorderPane.setMargin(gameGridVisual, new Insets(15, 15, 15, 15));
         root.setCenter(vb);
 
+
         topBar.setSpacing(5);
         HBox.setHgrow(settings, Priority.ALWAYS);
         topBar.setAlignment(Pos.CENTER_LEFT);
         topBar.getChildren().addAll(settings, restart);
         root.setTop(topBar);
 
-        //Grid 'checker' visual
-        gameGridVisual.setBackground(new Background(new BackgroundFill(Color.BLACK, new CornerRadii(4, false), new Insets(10, 10, 10, 10))));
-
-
+        //because or .setRoot(), command must exist after VB is finished, Grid is finished, updateText is finished,
         Game.getInstance().setRoot(root);
         Scene mainScene = new Scene(root, 500, 550);
+        //Initializes first updateText values
+        Game.resume();
 
         Label settingsUpdateText = new Label();
         VBox.setVgrow(settingsUpdateText, Priority.ALWAYS);
@@ -109,8 +89,6 @@ public class HelloApplication extends Application {
             stage.setTitle(programName + " - Settings");
             settingsUpdateText.setText("Welcome to the Settings menu");
         });
-//        settingsRoot.setOnMouseClicked(x->stage.setScene(mainScene));
-        //TODO:
 
 //        Settings UI:
         Button returnButton = new Button("Return");
@@ -119,8 +97,6 @@ public class HelloApplication extends Application {
             stage.setTitle(programName);
             Game.resume();
         });
-
-
 
         VBox.setMargin(returnButton, new Insets(5,0,0,5));
         settingsRoot.getChildren().add(returnButton);
@@ -132,6 +108,7 @@ public class HelloApplication extends Application {
         versusBox.setSpacing(10);
         versusCBox.getItems().addAll("Robot", "Player", "Random");
 
+        String val;
         //'val' is a previously declared String for temporary values
         switch (Game.getGameMode()) {
             case VS_ROBOT -> val = "Robot";
@@ -283,10 +260,13 @@ public class HelloApplication extends Application {
 
     public GridPane configureGrid() {
         GridPane gp = new GridPane();
+        //Configure grid item, rows, column gaps
         gp.setHgap(5);
         gp.setVgap(5);
-
         gp.setAlignment(Pos.CENTER);
+        //Configure grid styling
+        gp.setBackground(new Background(new BackgroundFill(
+                Color.BLACK, new CornerRadii(4, false), new Insets(10, 10, 10, 10))));
 
         ColumnConstraints cc = new ColumnConstraints();
         cc.setPercentWidth(33);
@@ -301,18 +281,39 @@ public class HelloApplication extends Application {
             //Construct buttons
             for(int j = 0; j < 3; j++) {
                 Button button = new Button(Game.getEmptySymbol());
-                button.widthProperty().addListener((observableValue, oldValue, newValue) -> button.setFont(new Font(newValue.doubleValue()/3.0)));
+                button.widthProperty().addListener((observableValue, oldValue, newValue) ->
+                        button.setFont(new Font(newValue.doubleValue()/3.0)));
                 button.setStyle("-fx-background-color: %s; -fx-background-radius: 0".formatted("WHITESMOKE"));
 
-                GridPane.setConstraints(button, i, j, 1, 1, HPos.CENTER, VPos.CENTER, Priority.ALWAYS, Priority.ALWAYS);
+                GridPane.setConstraints(
+                        button, i, j, 1, 1, HPos.CENTER, VPos.CENTER, Priority.ALWAYS, Priority.ALWAYS);
                 button.maxWidthProperty().bind(gp.widthProperty());
                 button.maxHeightProperty().bind(gp.heightProperty());
-                button.setOnAction((x)-> Game.play(new Pair<>(GridPane.getRowIndex(button), GridPane.getColumnIndex(button))));
+                button.setOnAction(
+                        (x)-> Game.play(new Pair<>(GridPane.getRowIndex(button), GridPane.getColumnIndex(button))));
                 gp.add(button, i, j);
             }
         }
-
         return gp;
+    }
+
+    public HBox configureScoreBoard() {
+        HBox scoreBox = new HBox();
+
+        //Create children
+        Label textP1 = new Label();
+        textP1.textProperty().bind(Bindings.format("%s wins: %d", Game.playerOneSymbolProperty(), Game.scorePlayer1Property()));
+        Label textP2 = new Label();
+        textP2.textProperty().bind(Bindings.format("  %s wins: %d", Game.playerTwoSymbolProperty(), Game.scorePlayer2Property()));
+        Label textDraw = new Label();
+        textDraw.textProperty().bind(Bindings.format("  Draws: %d", Game.scoreTieProperty()));
+
+        scoreBox.getChildren().addAll(textP1, textP2, textDraw);
+        scoreBox.getChildren().forEach(x-> ((Label) x).setFont(Font.font(25)));
+        scoreBox.setSpacing(5);
+        scoreBox.setAlignment(Pos.CENTER);
+
+        return scoreBox;
     }
 
     public void processSymbols(TextField p1, TextField p2, TextField p3, Label updateText) {
