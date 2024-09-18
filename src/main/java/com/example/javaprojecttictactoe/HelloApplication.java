@@ -30,35 +30,34 @@ public class HelloApplication extends Application {
         //Set parent
         BorderPane root = new BorderPane();
 
-        //Set bottom - main screen status messages; see Game.resume() further down sets this value
+        //Set bottom - main screen status messages; Game.resume() sets this value
         Label updateText = new Label();
         updateText.setFont(Font.font(25));
         BorderPane.setAlignment(updateText, Pos.TOP_CENTER);
         root.setBottom(updateText);
 
         //Set center
-        HBox scoreBar = configureScoreBoard();
-        root.setCenter(new VBox(scoreBar, configureGrid()));
+        HBox scoreBar = getScoreBoard();
+        root.setCenter(new VBox(scoreBar, getGameGrid()));
 
         //Set top
         Button settings = new Button("Settings");
-        root.setTop(configureTopBar(settings));
+        root.setTop(getTopBar(settings));
 
-        //Because of Game.setRoot(), command must exist after VB is finished, Grid is finished, updateText is finished,
+        //Because of Game.setRoot(), .setRoot() must exist after Center, gameGrid, Bottom fulfilled
         Game.getInstance().setRoot(root);
         Scene mainScene = new Scene(root, 500, 550);
         //Initializes first updateText values
         Game.resume();
 
-        //TODO (note): too short to export to a method?
+        //Configure settings update text
         Label settingsUpdateText = new Label();
         VBox.setVgrow(settingsUpdateText, Priority.ALWAYS);
         settingsUpdateText.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         settingsUpdateText.setFont(Font.font(15));
         settingsUpdateText.setAlignment(Pos.CENTER);
 
-        //TODO (note): too short to export to a method?
-        //Create settings pane
+        //Create settings pane, settings button
         VBox settingsRoot = new VBox();
         Scene settingsScene = new Scene(settingsRoot, 500, 550);
         settings.setOnAction(actionEvent ->{
@@ -67,8 +66,7 @@ public class HelloApplication extends Application {
             settingsUpdateText.setText("Welcome to the Settings menu");
         });
 
-        //TODO (note): too short to export to a method?
-//        Settings UI:
+        //Create returning button
         Button returnButton = new Button("Return");
         VBox.setMargin(returnButton, new Insets(5,0,0,5));
         returnButton.setOnAction(actionEvent ->{
@@ -78,164 +76,59 @@ public class HelloApplication extends Application {
         });
         settingsRoot.getChildren().add(returnButton);
 
-        //TODO (note): export these to methods, separately.
-        HBox versusBox = new HBox();
-        HBox startBox = new HBox();
-//        Versus: (dropdown or radio buttons)
-        Label versusText = new Label("Select Opponent:");
-        ComboBox<String> versusCBox= new ComboBox<>();
-        versusBox.setSpacing(10);
-        versusCBox.getItems().addAll("Robot", "Player", "Random");
+        //Create HBox to house 'versus' and 'start' settings
+        HBox versusBox = getVersusBox(settingsUpdateText);
+        HBox startBox = getStartBox(settingsUpdateText);
 
-        String val;
-        switch (Game.getGameMode()) {
-            case VS_ROBOT -> val = "Robot";
-            case VS_PLAYER -> val = "Player";
-            default -> val = "Random";
-        }
-        versusCBox.setValue(val);
-
-        versusCBox.setOnAction(x->{
-            String tempVal = versusCBox.getValue();
-            switch(tempVal) {
-                case "Robot" -> Game.setGameMode(Game.VersusMode.VS_ROBOT);
-                case "Player" -> Game.setGameMode(Game.VersusMode.VS_PLAYER);
-                default -> Game.setGameMode(Game.VersusMode.VS_RANDOM);
-            }
-            settingsUpdateText.setText("GameMode set to '%s'".formatted(tempVal));
-        });
-        //TODO: way to pre-select current live mode
-        versusBox.getChildren().addAll(versusText, versusCBox);
-        versusBox.setAlignment(Pos.CENTER);
-
-//        Start: (dropdown or radio buttons)
-        Label startText = new Label("Who goes first:");
-        ComboBox<String> startCBox = new ComboBox<>();
-        startBox.setSpacing(10);
-        startCBox.getItems().addAll("Player1", "Player2", "Random");
-        switch (Game.getStartMode()) {
-            case FIRST_START -> val = "Player1";
-            case SECOND_START -> val = "Player2";
-            default -> val = "Random";
-        }
-        startCBox.setValue(val);
-        startCBox.setOnAction(x->{
-            String tempVal = startCBox.getValue();
-            switch (tempVal) {
-                case "Player1" -> Game.setStartMode(Game.StartMode.FIRST_START);
-                case "Player2" -> Game.setStartMode(Game.StartMode.SECOND_START);
-                default -> Game.setStartMode(Game.StartMode.RANDOM_START);
-            }
-            settingsUpdateText.setText("Starting player set to '%s'".formatted(tempVal));
-        });
-        //TODO: code the 'onStart'. imagine this affects "restartGame"
-        startBox.getChildren().addAll(startText, startCBox);
-        startBox.setAlignment(Pos.CENTER);
-
-        //TODO: make a 'factory' for these headers here, too repetitive
-        Label settingsHeader = new Label("Game Settings");
-        settingsHeader.setFont(Font.font(15));
-        VBox.setMargin(settingsHeader, new Insets(0, 25, 0, 25));
-        Separator line = new Separator();
-        VBox.setMargin(line, new Insets(0, 15, 0, 15));
-
-        //TODO: make a 'factory' for these headers here, too repetitive
-        Label scoreboardHeader = new Label("Scoreboard Settings");
-        scoreboardHeader.setFont(Font.font(15));
-        VBox.setMargin(scoreboardHeader, new Insets(0, 25, 0, 25));
-        Separator line1 = new Separator();
-        VBox.setMargin(line1, new Insets(0, 15, 0, 15));
-        //
+        //Scoreboard setting buttons
+        Button toggleShowScore = getToggleShowScore(scoreBar, settingsUpdateText);
         Button resetScore = new Button("Reset Score");
-        resetScore.setOnAction(x->{
+        resetScore.setOnAction(actionEvent->{
             Game.resetScores();
             settingsUpdateText.setText("Scoreboard cleared!");
         });
-        Button toggleShowScore = new Button("Hide Score");
-        toggleShowScore.setOnAction(actionEvent ->{
-            scoreBar.getChildren().forEach(child-> child.setVisible(!child.isVisible()));
-            if(toggleShowScore.textProperty().get().equals("Hide Score")) {
-                toggleShowScore.setText("Show Score");
-                settingsUpdateText.setText("Scoreboard hidden!");
-            } else {
-                toggleShowScore.setText("Hide Score");
-                settingsUpdateText.setText("Scoreboard revealed!");
-            }
-        });
-        HBox scoreHBox = new HBox();
-        scoreHBox.getChildren().addAll(resetScore, toggleShowScore);
+
+        HBox scoreHBox = new HBox(toggleShowScore, resetScore);
         scoreHBox.setAlignment(Pos.CENTER);
         scoreHBox.setSpacing(15);
         VBox.setMargin(scoreHBox, new Insets(0, 25, 0, 25));
 
-        //TODO: make a 'factory' for these headers here, too repetitive
-        Label symbolsHeader = new Label("Symbol Settings");
-        symbolsHeader.setFont(Font.font(15));
-        VBox.setMargin(symbolsHeader, new Insets(0, 25, 0, 25));
-        Separator line2 = new Separator();
-        VBox.setMargin(line2, new Insets(0, 15, 0, 15));
+        //Configure user input fields into symbolTextHBox
+        HBox symbolTextHBox = new HBox();
+        TextField[] symbolFields = configureSymbolTextHBox(symbolTextHBox);
 
-        //TODO symbol interface
-        // [Player1: " "] [Player 2: " "] [Empty: " "] (Apply) (Reset)
-        //TODO: textFormatter and textFormatter.Change
+        //Get HBox containing "Apply" and "Return" buttons
+        HBox symbolButtonHBox = getSymbolButtonHBox(symbolFields, settingsUpdateText);
 
-        HBox symbolHBox = new HBox();
-        symbolHBox.setSpacing(5);
-        VBox.setMargin(symbolHBox, new Insets(0, 25, 0, 25));
-        symbolHBox.setAlignment(Pos.CENTER);
-        Label play1label = new Label("Player 1:");
-        TextField play1text = new TextField();
-        play1text.promptTextProperty().bind(Game.playerOneSymbolProperty());
-        play1text.setMaxWidth(35);
-        play1text.setAlignment(Pos.CENTER);
-        Label play2label = new Label("Player 2:");
-        TextField play2text = new TextField();
-        play2text.promptTextProperty().bind(Game.playerTwoSymbolProperty());
-        play2text.setMaxWidth(35);
-        play2text.setAlignment(Pos.CENTER);
-        Label play3label = new Label("Empty:");
-        TextField play3text = new TextField();
-        play3text.promptTextProperty().bind(Game.emptySymbolProperty());
-        play3text.setMaxWidth(35);
-        play3text.setAlignment(Pos.CENTER);
-        Button applySymbol = new Button("Apply");
-        applySymbol.setOnAction(actionEvent->processSymbols(play1text, play2text, play3text, settingsUpdateText));
-        Button resetSymbol = new Button("Reset");
-        resetSymbol.setOnAction(x->{
-            Game.resetSymbols();
-            settingsUpdateText.setText("Play symbols reset");
-        });
-//        Filter: max string length for textField
-        UnaryOperator<TextFormatter.Change> filter = change -> {
-            if(change.getControlNewText().length() > 2) {
-                return null;
-            }
-            return change;
-        };
-        play1text.setTextFormatter(new TextFormatter<>(filter));
-        play2text.setTextFormatter(new TextFormatter<>(filter));
-        play3text.setTextFormatter(new TextFormatter<>(filter));
-        symbolHBox.getChildren().addAll(play1label,play1text,play2label,play2text,play3label,play3text);
-
-        HBox symbolButtonHBox = new HBox();
-        symbolButtonHBox.setSpacing(15);
-        symbolButtonHBox.setAlignment(Pos.CENTER);
-        symbolButtonHBox.getChildren().addAll(applySymbol,resetSymbol);
-
-
-        settingsRoot.getChildren().addAll(settingsHeader, line, versusBox, startBox, scoreboardHeader, line1,
-                scoreHBox, symbolsHeader, line2, symbolHBox, symbolButtonHBox, settingsUpdateText);
+        settingsRoot.getChildren().addAll(
+                getLabel("Game Settings"), getSeparator(), versusBox, startBox,
+                getLabel("Scoreboard Settings"), getSeparator(), scoreHBox,
+                getLabel("Symbol Settings"), getSeparator(), symbolTextHBox, symbolButtonHBox, settingsUpdateText);
         settingsRoot.setSpacing(5);
-        //for now, see if clicking correctly on the buttons/comboboxes do not trigger the setOnmouseClicked
-            //if it does trigger, remove that. include a "return" button
-
 
         stage.setTitle(programName);
         stage.setScene(mainScene);
         stage.show();
     }
 
-    public GridPane configureGrid() {
+    //Program buttons for Symbol Settings
+    private HBox getSymbolButtonHBox(TextField[] symbolFields, Label settingsUpdateText) {
+        Button applySymbol = new Button("Apply");
+        applySymbol.setOnAction(actionEvent->processSymbols(symbolFields[0], symbolFields[1], symbolFields[2], settingsUpdateText));
+        Button resetSymbol = new Button("Reset");
+        resetSymbol.setOnAction(actionEvent ->{
+            Game.resetSymbols();
+            settingsUpdateText.setText("Play symbols reset");
+        });
+
+        HBox symbolButtonHBox = new HBox(applySymbol, resetSymbol);
+        symbolButtonHBox.setSpacing(15);
+        symbolButtonHBox.setAlignment(Pos.CENTER);
+        return symbolButtonHBox;
+    }
+
+
+    private GridPane getGameGrid() {
         GridPane gp = new GridPane();
         //Configure grid item, rows, column gaps
         gp.setHgap(5);
@@ -256,7 +149,7 @@ public class HelloApplication extends Application {
             gp.getColumnConstraints().add(cc);
             gp.getRowConstraints().add(rc);
 
-            //Construct buttons
+            //Construct play buttons
             for(int j = 0; j < 3; j++) {
                 Button button = new Button(Game.getEmptySymbol());
                 button.widthProperty().addListener((observableValue, oldValue, newValue) ->
@@ -268,14 +161,14 @@ public class HelloApplication extends Application {
                 button.maxWidthProperty().bind(gp.widthProperty());
                 button.maxHeightProperty().bind(gp.heightProperty());
                 button.setOnAction(
-                        (x)-> Game.play(new Pair<>(GridPane.getRowIndex(button), GridPane.getColumnIndex(button))));
+                        (actionEvent)-> Game.play(new Pair<>(GridPane.getRowIndex(button), GridPane.getColumnIndex(button))));
                 gp.add(button, i, j);
             }
         }
         return gp;
     }
 
-    public HBox configureScoreBoard() {
+    private HBox getScoreBoard() {
         HBox scoreBox = new HBox();
 
         //Create children
@@ -294,7 +187,7 @@ public class HelloApplication extends Application {
         return scoreBox;
     }
 
-    public void processSymbols(TextField p1, TextField p2, TextField p3, Label updateText) {
+    private void processSymbols(TextField p1, TextField p2, TextField p3, Label updateText) {
         List<TextField> fields = Arrays.asList(p1, p2, p3);
         Set<String> count = new HashSet<>();
         for(TextField tf : fields) {
@@ -315,9 +208,10 @@ public class HelloApplication extends Application {
         updateText.setText("Symbols updated!");
     }
 
-    public HBox configureTopBar(Button settings) {
+    //Create main menu bar
+    private HBox getTopBar(Button settings) {
         Button restart = new Button("Restart");
-        restart.setOnAction(x-> Game.restartGame());
+        restart.setOnAction(actionEvent -> Game.restartGame());
         HBox.setHgrow(settings, Priority.ALWAYS);
         HBox topBar = new HBox(settings, restart);
         BorderPane.setMargin(topBar, new Insets(5, 0, 0, 5));
@@ -325,6 +219,153 @@ public class HelloApplication extends Application {
         topBar.setAlignment(Pos.CENTER_LEFT);
 
         return topBar;
+    }
+
+    //TODO: clean up, add comments
+    private HBox getVersusBox(Label updateText) {
+        Label versusText = new Label("Select Opponent:");
+        ComboBox<String> versusCBox= new ComboBox<>();
+        versusCBox.getItems().addAll("Robot", "Player", "Random");
+
+        //Fetch initial value
+        String val;
+        switch (Game.getGameMode()) {
+            case VS_ROBOT -> val = "Robot";
+            case VS_PLAYER -> val = "Player";
+            default -> val = "Random";
+        }
+        versusCBox.setValue(val);
+
+        versusCBox.setOnAction(actionEvent ->{
+            String tempVal = versusCBox.getValue();
+            switch(versusCBox.getValue()) {
+                case "Robot" -> Game.setGameMode(Game.VersusMode.VS_ROBOT);
+                case "Player" -> Game.setGameMode(Game.VersusMode.VS_PLAYER);
+                default -> Game.setGameMode(Game.VersusMode.VS_RANDOM);
+            }
+            updateText.setText("GameMode set to '%s'".formatted(tempVal));
+        });
+
+        HBox versusBox = new HBox(versusText,versusCBox);
+        versusBox.setSpacing(10);
+        versusBox.setAlignment(Pos.CENTER);
+
+        return versusBox;
+    }
+
+    //TODO: clean up, add comments
+    private HBox getStartBox(Label updateText) {
+        Label startText = new Label("Who goes first:");
+        ComboBox<String> startCBox = new ComboBox<>();
+        startCBox.getItems().addAll("Player1", "Player2", "Random");
+        String val;
+        switch (Game.getStartMode()) {
+            case FIRST_START -> val = "Player1";
+            case SECOND_START -> val = "Player2";
+            default -> val = "Random";
+        }
+        startCBox.setValue(val);
+        startCBox.setOnAction(actionEvent ->{
+            String tempVal = startCBox.getValue();
+            switch (tempVal) {
+                case "Player1" -> Game.setStartMode(Game.StartMode.FIRST_START);
+                case "Player2" -> Game.setStartMode(Game.StartMode.SECOND_START);
+                default -> Game.setStartMode(Game.StartMode.RANDOM_START);
+            }
+            updateText.setText("Starting player set to '%s'".formatted(tempVal));
+        });
+
+        HBox startBox = new HBox(startText, startCBox);
+        startBox.setSpacing(10);
+        startBox.setAlignment(Pos.CENTER);
+
+        return startBox;
+    }
+
+
+    private Separator getSeparator() {
+        Separator line = new Separator();
+        VBox.setMargin(line, new Insets(0, 15, 0, 15));
+        return line;
+    }
+
+    private Label getLabel(String text) {
+        Label label = new Label(text);
+        label.setFont(Font.font(15));
+        VBox.setMargin(label, new Insets(0, 25, 0, 25));
+        return label;
+    }
+
+    private Button getToggleShowScore(HBox scoreBar, Label settingsUpdateText) {
+        Button toggleShowScore = new Button("Hide Score");
+        //Make button interactive
+        toggleShowScore.setOnAction(actionEvent ->{
+            scoreBar.getChildren().forEach(child-> child.setVisible(!child.isVisible()));
+            if(toggleShowScore.textProperty().get().equals("Hide Score")) {
+                toggleShowScore.setText("Show Score");
+                settingsUpdateText.setText("Scoreboard hidden!");
+            } else {
+                toggleShowScore.setText("Hide Score");
+                settingsUpdateText.setText("Scoreboard revealed!");
+            }
+        });
+        return toggleShowScore;
+    }
+
+    //Returns textFields for new symbol assignment
+    private TextField[] configureSymbolTextHBox(HBox hBox) {
+        //Configure styling
+        hBox.setAlignment(Pos.CENTER);
+        hBox.setSpacing(5);
+        VBox.setMargin(hBox, new Insets(0, 25, 0, 25));
+
+        TextField[] textFields = new TextField[3];
+
+        //Populate hBox with label and corresponding textField
+        for(int i = 0; i < 3; i++) {
+
+            Label label = new Label();
+            TextField textField = getTextField();
+
+            switch(i) {
+                case 0-> {
+                    label.setText("Player 1:");
+                    textField.promptTextProperty().bind(Game.playerOneSymbolProperty());
+                }
+                case 1-> {
+                    label.setText("Player 2:");
+                    textField.promptTextProperty().bind(Game.playerTwoSymbolProperty());
+                }
+                default-> {
+                    label.setText("Empty:");
+                    textField.promptTextProperty().bind(Game.emptySymbolProperty());
+                }
+            }
+            textFields[i] = textField;
+
+            hBox.getChildren().addAll(label, textField);
+        }
+
+        //Filter: max string length for textField
+        UnaryOperator<TextFormatter.Change> filter = change -> {
+            if(change.getControlNewText().length() > 2) {
+                return null;
+            }
+            return change;
+        };
+
+        for(TextField textField : textFields) {
+            textField.setTextFormatter(new TextFormatter<>(filter));
+        }
+
+        return textFields;
+    }
+
+    private TextField getTextField() {
+        TextField textField = new TextField();
+        textField.setMaxWidth(35);
+        textField.setAlignment(Pos.CENTER);
+        return textField;
     }
 
     public static void main(String[] args) {
