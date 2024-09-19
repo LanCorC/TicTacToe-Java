@@ -9,7 +9,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="edb67b4a-933c-4dbc-af65-5928ba10f626" name="Changes" comment="Added executable .jar file for the project" />
+    <list default="true" id="edb67b4a-933c-4dbc-af65-5928ba10f626" name="Changes" comment="Added executable .jar file for the project">
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/JavaProject_TicTacToe_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/JavaProject_TicTacToe_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaProject-TicTacToe.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/META-INF/MANIFEST.MF" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -44,6 +49,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.HelloApplication.executor": "Run",
+    "Application.Main.executor": "Run",
     "JAR Application.JavaProject-TicTacToe.jar (1).executor": "Run",
     "JAR Application.JavaProject-TicTacToe.jar.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -57,7 +63,12 @@
     "run.code.analysis.last.selected.profile": "pProject Default"
   }
 }]]></component>
-  <component name="RunManager" selected="JAR Application.JavaProject-TicTacToe.jar (1)">
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\lance\Documents\CodingJava\JavaProject-TicTacToe" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JAR Application.JavaProject-TicTacToe.jar">
     <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.javaprojecttictactoe.HelloApplication" />
       <module name="JavaProject-TicTacToe" />
@@ -71,26 +82,18 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="JavaProject-TicTacToe.jar (1)" type="JarApplication" temporary="true">
-      <option name="JAR_PATH" value="$PROJECT_DIR$/JavaProject-TicTacToe.jar" />
-      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\lance\Documents\lib\javafx-sdk-17.0.6\lib&quot; --add-modules javafx.controls,javafx.fxml " />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method v="2" />
-    </configuration>
     <configuration name="JavaProject-TicTacToe.jar" type="JarApplication" temporary="true">
-      <option name="JAR_PATH" value="$PROJECT_DIR$/out/artifacts/JavaProject_TicTacToe_jar/JavaProject-TicTacToe.jar" />
+      <option name="JAR_PATH" value="$PROJECT_DIR$/JavaProject-TicTacToe.jar" />
       <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\lance\Documents\lib\javafx-sdk-17.0.6\lib&quot; --add-modules javafx.controls,javafx.fxml " />
       <option name="ALTERNATIVE_JRE_PATH" />
       <method v="2" />
     </configuration>
     <list>
       <item itemvalue="Application.HelloApplication" />
-      <item itemvalue="JAR Application.JavaProject-TicTacToe.jar (1)" />
       <item itemvalue="JAR Application.JavaProject-TicTacToe.jar" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JAR Application.JavaProject-TicTacToe.jar (1)" />
         <item itemvalue="JAR Application.JavaProject-TicTacToe.jar" />
         <item itemvalue="Application.HelloApplication" />
       </list>
