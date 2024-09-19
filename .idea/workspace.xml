@@ -9,11 +9,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="edb67b4a-933c-4dbc-af65-5928ba10f626" name="Changes" comment="Added executable .jar file for the project">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/JavaProject_TicTacToe_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/JavaProject_TicTacToe_jar.xml" afterDir="false" />
+    <list default="true" id="edb67b4a-933c-4dbc-af65-5928ba10f626" name="Changes" comment="Forgot to add .jar">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaProject-TicTacToe.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/META-INF/MANIFEST.MF" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,23 +43,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.HelloApplication.executor": "Run",
-    "Application.Main.executor": "Run",
-    "JAR Application.JavaProject-TicTacToe.jar (1).executor": "Run",
-    "JAR Application.JavaProject-TicTacToe.jar.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/lance/Documents/CodingJava/JavaProject-TicTacToe/src/main/resources/com/example/javaprojecttictactoe/hello-view.fxml",
-    "project.structure.last.edited": "Artifacts",
-    "project.structure.proportion": "0.17",
-    "project.structure.side.proportion": "0.2",
-    "run.code.analysis.last.selected.profile": "pProject Default"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;JAR Application.JavaProject-TicTacToe.jar (1).executor&quot;: &quot;Run&quot;,
+    &quot;JAR Application.JavaProject-TicTacToe.jar.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/lance/Documents/CodingJava/JavaProject-TicTacToe/src/main/resources/com/example/javaprojecttictactoe/hello-view.fxml&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\lance\Documents\CodingJava\JavaProject-TicTacToe" />
@@ -86,7 +83,11 @@
       <option name="JAR_PATH" value="$PROJECT_DIR$/JavaProject-TicTacToe.jar" />
       <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\lance\Documents\lib\javafx-sdk-17.0.6\lib&quot; --add-modules javafx.controls,javafx.fxml " />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <method v="2" />
+      <method v="2">
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="JavaProject-TicTacToe:jar" />
+        </option>
+      </method>
     </configuration>
     <list>
       <item itemvalue="Application.HelloApplication" />
@@ -364,12 +365,26 @@
       <option name="project" value="LOCAL" />
       <updated>1726723980628</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="Reloading the same .jar executable with Run configuration&#10;&#10;Works off IntelliJ IDE">
+      <option name="closed" value="true" />
+      <created>1726725804746</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1726725804746</updated>
+    </task>
+    <task id="LOCAL-00034" summary="Forgot to add .jar">
+      <option name="closed" value="true" />
+      <created>1726725942583</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1726725942583</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Implemented a way to reset game-state and validate moves&#10;Current changes demonstrate -&gt; when invalid, restart game" />
-    <MESSAGE value="Full implementation of turn validation" />
     <MESSAGE value="Fixed bug where Symbol places does not correlate with Text updates" />
     <MESSAGE value="Version: all methods are void (where return is not used)" />
     <MESSAGE value="VS_RANDOM, VS_ROBOT fixed. issue found in 'nextTurn() method'" />
@@ -393,6 +408,8 @@
     <MESSAGE value="Cleaned up some notes, made configureTopBar() method, reworded some variables, added some notes for what to clean up next" />
     <MESSAGE value="Major 'HelloApplication' refactor" />
     <MESSAGE value="Added executable .jar file for the project" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added executable .jar file for the project" />
+    <MESSAGE value="Reloading the same .jar executable with Run configuration&#10;&#10;Works off IntelliJ IDE" />
+    <MESSAGE value="Forgot to add .jar" />
+    <option name="LAST_COMMIT_MESSAGE" value="Forgot to add .jar" />
   </component>
 </project>
