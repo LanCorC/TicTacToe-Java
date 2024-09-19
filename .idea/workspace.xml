@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="edb67b4a-933c-4dbc-af65-5928ba10f626" name="Changes" comment="Cleaned up some notes, made configureTopBar() method, reworded some variables, added some notes for what to clean up next">
+    <list default="true" id="edb67b4a-933c-4dbc-af65-5928ba10f626" name="Changes" comment="Major 'HelloApplication' refactor">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/HelloApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/Game.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -319,11 +319,18 @@
       <option name="project" value="LOCAL" />
       <updated>1726141003724</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Major 'HelloApplication' refactor">
+      <option name="closed" value="true" />
+      <created>1726633873561</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1726633873561</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Adjusted 'Button' background to create classic TicTacToe look.&#10;Started Game.java class implementation." />
     <MESSAGE value="Implemented a lot of Game code&#10;Implemented simple on-click, change button symbol, then change turn" />
     <MESSAGE value="Implemented a way to reset game-state and validate moves&#10;Current changes demonstrate -&gt; when invalid, restart game" />
     <MESSAGE value="Full implementation of turn validation" />
@@ -348,6 +355,7 @@
     <MESSAGE value="An attempt to encapsulate gameGridVisual, or the GridPane for the BorderPane's Center." />
     <MESSAGE value="An attempt to encapsulate scoreBoard e.g. HBox" />
     <MESSAGE value="Cleaned up some notes, made configureTopBar() method, reworded some variables, added some notes for what to clean up next" />
-    <option name="LAST_COMMIT_MESSAGE" value="Cleaned up some notes, made configureTopBar() method, reworded some variables, added some notes for what to clean up next" />
+    <MESSAGE value="Major 'HelloApplication' refactor" />
+    <option name="LAST_COMMIT_MESSAGE" value="Major 'HelloApplication' refactor" />
   </component>
 </project>

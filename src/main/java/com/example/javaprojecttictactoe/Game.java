@@ -8,12 +8,11 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.util.Pair;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 public class Game {
 
@@ -38,26 +37,12 @@ public class Game {
         PLAYER2
     }
 
-    //Dev note: under Controller.class, for text and state changes, use if output == Game.VS_ROBOT, etc
-//    public static final int VS_ROBOT = 0;
-//    public static final int VS_RANDOM = 1;
-//    public static final int VS_PLAYER = 2;
-//
-//    public static final int FIRST_START = 0;
-//    public static final int SECOND_START = 1;
-//    public static final int RANDOM_START = 2;
-
     public static final int PLAYER1 = 1;
     public static final int PLAYER2 = -1;
 
     private static StartMode startMode = StartMode.FIRST_START;
     private static VersusMode gameMode = VersusMode.VS_ROBOT;
     private static int currentPlayer = PLAYER1;
-
-//    public static final int PENDING = 0;
-//    public static final int DRAW = 1;
-//    public static final int PLAYER1WIN = 2;
-//    public static final int PLAYER2WIN = 3;
 
     private static WinState winCondition = WinState.PENDING;
     private static final String DEFAULT_SYMBOL_1 = "X";
@@ -72,6 +57,13 @@ public class Game {
     private static final SimpleIntegerProperty scorePlayer1 = new SimpleIntegerProperty(0);
     private static final SimpleIntegerProperty scoreTie = new SimpleIntegerProperty(0);
 
+    //Store last played move
+    private static Button lastPlayed = new Button();
+    private static final Color PLAYER1_COLOR = Color.DARKTURQUOISE;
+    private static final Color PLAYER2_COLOR = Color.TOMATO;
+    private static final Color LAST_COLOR = Color.GOLD;
+    public static final Color EMPTY_COLOR = Color.BLACK;
+
     public static SimpleIntegerProperty scorePlayer2Property() {
         return scorePlayer2;
     }
@@ -84,17 +76,6 @@ public class Game {
     public static SimpleIntegerProperty scoreTieProperty() {
         return scoreTie;
     }
-//    public static int getScorePlayer1() {
-//        return scorePlayer1;
-//    }
-//
-//    public static int getScorePlayer2() {
-//        return scorePlayer2;
-//    }
-//
-//    public static int getScoreTie() {
-//        return scoreTie;
-//    }
 
     //the parent scene
     private static Node root = null;
@@ -249,6 +230,7 @@ public class Game {
     public static void play(Pair<Integer, Integer> turn) {
         if(winCondition != WinState.PENDING) {
             //do nothing
+            System.out.println("Game has already terminated, press 'Restart' to start a new match!");
             return;
         }
 
@@ -257,20 +239,27 @@ public class Game {
             nextTurn(true);
             return; //skips all processing
         }
-        remaining--;
-        System.out.println(currentSymbol() + " played Row: %d Col: %d".formatted(turn.getKey(), turn.getValue()));
-        gameBoard[turn.getKey()][turn.getValue()] = currentPlayer;
 
-        //Not efficient, but re-uses code
+        //Update game trackers
+//        lastPlayed = turn;
+        remaining--;
+        gameBoard[turn.getKey()][turn.getValue()] = currentPlayer;
         if(winner()) winCondition = currentPlayer == PLAYER1 ? WinState.PLAYER1 : WinState.PLAYER2;
 
-//        GridPane gp = (GridPane) ((BorderPane) root).getCenter();
-        visual.getChildren().forEach((x)->{
-            if(GridPane.getColumnIndex(x).equals(turn.getValue()) && GridPane.getRowIndex(x).equals(turn.getKey())) {
-                ((Button) x).setText(currentSymbol());
-                //Todo: can be improved by turning into list, For each, break once found
+        System.out.println(currentSymbol() + " played Row: %d Col: %d".formatted(turn.getKey(), turn.getValue()));
+
+        Node[] buttons = visual.getChildren().toArray(new Node[0]);
+        for(Node button : buttons) {
+            if(GridPane.getColumnIndex(button).equals(turn.getValue()) && GridPane.getRowIndex(button).equals(turn.getKey())) {
+                ((Button) button).setText(currentSymbol());
+
+                //Update visual
+                lastPlayed.setTextFill(EMPTY_COLOR);
+                lastPlayed = (Button) button;
+                lastPlayed.setTextFill(currentPlayer == PLAYER1 ? PLAYER1_COLOR : PLAYER2_COLOR);
+                break;
             }
-        });
+        }
 
         if(winCondition == WinState.PENDING && remaining == 0) {
             winCondition = WinState.DRAW;
@@ -479,6 +468,7 @@ public class Game {
             if(x.getClass() == Button.class) {
                 Button btn = (Button) x;
                 btn.setText(emptySymbol.getValue());
+                btn.setTextFill(EMPTY_COLOR);
             } else {
                 System.out.println("Issue encountered trying to reset the buttons! " + x.getClass());
             }
@@ -510,6 +500,7 @@ public class Game {
             updateText.setText("Draw! Click 'Restart'");
             scoreTie.set(scoreTie.get()+1);
         } else {
+            animateWin();
             String victor;
             if(winCondition == WinState.PLAYER1) {
                 victor = "%s (Player1)".formatted(getPlayerOneSymbol());
@@ -534,6 +525,92 @@ public class Game {
 
         //TODO: prepare game restart after a few seconds (settings dependent?), prepare tally?
 
+    }
+
+    //TODO: WIP
+    private static void animateWin() {
+
+        int lastRow = GridPane.getRowIndex(lastPlayed);
+        int lastCol = GridPane.getColumnIndex(lastPlayed);
+        String lastSymbol = lastPlayed.getText();
+
+        //insert "if" checks- if Diagonal is available.
+        List<Button> horiz = new ArrayList<>();
+        List<Button> verti = new ArrayList<>();
+        List<Button> diag1 = new ArrayList<>(); //from top left to bottom right
+        List<Button> diag2 = new ArrayList<>(); //from bottom left to top right
+
+        boolean horCheck = true; //always true
+        boolean verCheck = true; //always true
+        boolean diag1Check = false; //default
+        boolean diag2Check = false; //default
+
+        //diagCheck
+        if(lastRow==lastCol && lastRow == 1) {
+            diag1Check = true;
+            diag2Check = true;
+        } else if(lastRow==lastCol) {
+            diag1Check = true;
+        } else if(Math.min(lastRow, lastCol) == 0 && Math.max(lastRow, lastCol) == 2) {
+            diag2Check = true;
+        }
+
+        Node[] nodes = visual.getChildren().toArray(new Node[0]);
+        for(Node node : nodes) {
+            Button btn = (Button) node;
+            int btnCol = GridPane.getColumnIndex(node);
+            int btnRow = GridPane.getRowIndex(node);
+
+            //Column
+            if(verCheck && btnCol == lastCol) {
+                if(btn.getText().equals(lastSymbol)) {
+                    verti.add(btn);
+                } else {
+                    verCheck = false;
+                }
+            }
+            //Row
+            if(horCheck && btnRow == lastRow) {
+                if(btn.getText().equals(lastSymbol)) {
+                    horiz.add(btn);
+                } else {
+                    horCheck = false;
+                }
+            }
+            //Diag1
+            if(diag1Check && btnRow == btnCol) { //symmetrical
+                if(btn.getText().equals(lastSymbol)) {
+                    diag1.add(btn);
+                } else {
+                    diag1Check = false;
+                }
+            }
+            //Diag2
+            if(diag2Check && ((btnRow == btnCol && btnRow == 1) //'center' node, or
+                    || Math.min(btnCol, btnRow) == 0 && Math.max(btnCol, btnRow) == 2)) { //'corner' nodes of diag2
+                if(btn.getText().equals(lastSymbol)) {
+                    diag2.add(btn);
+                } else {
+                    diag2Check = false;
+                }
+            }
+        }
+
+        List<Pair<Boolean, List<Button>>> checks = new ArrayList<>();
+        checks.add(new Pair<>(horCheck, horiz));
+        checks.add(new Pair<>(verCheck, verti));
+        checks.add(new Pair<>(diag1Check, diag1));
+        checks.add(new Pair<>(diag2Check, diag2));
+
+        //if passed, change the color fill each corresponding buttonText
+        for(Pair<Boolean, List<Button>> pair : checks) {
+            if(pair.getKey()) {
+                for(Button btn : pair.getValue()) {
+                    btn.setTextFill(winCondition == WinState.PLAYER1 ? PLAYER1_COLOR : PLAYER2_COLOR);
+                }
+            } //else, check did not pass. next.
+        }
+        lastPlayed.setTextFill(LAST_COLOR);
     }
 
     public static void resetScores() {
@@ -561,7 +638,6 @@ public class Game {
     }
 
     private static void reloadGridSymbols() {
-
         visual.getChildren().forEach(child->{
             int x = GridPane.getRowIndex(child);
             int y = GridPane.getColumnIndex(child);
