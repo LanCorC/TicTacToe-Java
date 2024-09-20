@@ -9,24 +9,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="edb67b4a-933c-4dbc-af65-5928ba10f626" name="Changes" comment="Added &quot;before launch&quot; to configuration">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" afterDir="false" />
+    <list default="true" id="53c17163-cb5a-430e-832b-13bb0ad331c5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/artifacts/JavaProject_TicTacToe_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/JavaProject_TicTacToe_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaProject-TicTacToe.jar" beforeDir="false" afterPath="$PROJECT_DIR$/JavaProject-TicTacToe.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaProject-TicTacToe.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Class" />
-      </list>
-    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -39,39 +35,41 @@
     </option>
   </component>
   <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 1
 }</component>
-  <component name="ProjectId" id="2laZCCq9fidL5zOm38QRBjUjs1f" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
+  <component name="ProjectId" id="2mKc7baVIuRGShioqyQMTbsr6mU" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.HelloApplication.executor": "Run",
-    "Application.Main.executor": "Run",
-    "JAR Application.JavaProject-TicTacToe.jar (1).executor": "Run",
-    "JAR Application.JavaProject-TicTacToe.jar.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/lance/Documents/CodingJava/JavaProject-TicTacToe/src/main/resources/com/example/javaprojecttictactoe/hello-view.fxml",
-    "project.structure.last.edited": "Artifacts",
-    "project.structure.proportion": "0.17",
-    "project.structure.side.proportion": "0.2",
-    "run.code.analysis.last.selected.profile": "pProject Default"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Launcher.executor&quot;: &quot;Run&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;JAR Application.JavaProject-TicTacToe.jar.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.JavaProject-TicTacToe [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.JavaProject-TicTacToe [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.runner&quot;
   }
-}]]></component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\lance\Documents\CodingJava\JavaProject-TicTacToe" />
-    </key>
+}</component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn clean" />
+      <command value="mvn compile" />
+    </option>
   </component>
-  <component name="RunManager" selected="JAR Application.JavaProject-TicTacToe.jar">
+  <component name="RunManager" selected="Application.Launcher">
     <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.javaprojecttictactoe.HelloApplication" />
       <module name="JavaProject-TicTacToe" />
@@ -100,337 +98,25 @@
     </configuration>
     <configuration name="JavaProject-TicTacToe.jar" type="JarApplication" temporary="true">
       <option name="JAR_PATH" value="$PROJECT_DIR$/JavaProject-TicTacToe.jar" />
-      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\lance\Documents\lib\javafx-sdk-17.0.6\lib&quot; --add-modules javafx.controls,javafx.fxml " />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method v="2">
-        <option name="BuildArtifacts" enabled="true">
-          <artifact name="JavaProject-TicTacToe:jar" />
-        </option>
-      </method>
+      <method v="2" />
     </configuration>
-    <list>
-      <item itemvalue="Application.Launcher" />
-      <item itemvalue="Application.HelloApplication" />
-      <item itemvalue="JAR Application.JavaProject-TicTacToe.jar" />
-    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JAR Application.JavaProject-TicTacToe.jar" />
         <item itemvalue="Application.Launcher" />
         <item itemvalue="Application.HelloApplication" />
+        <item itemvalue="JAR Application.JavaProject-TicTacToe.jar" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="edb67b4a-933c-4dbc-af65-5928ba10f626" name="Changes" comment="" />
-      <created>1725420020448</created>
+      <changelist id="53c17163-cb5a-430e-832b-13bb0ad331c5" name="Changes" comment="" />
+      <created>1726828542627</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1725420020448</updated>
+      <updated>1726828542627</updated>
     </task>
-    <task id="LOCAL-00001" summary="Demo for Gridpane">
-      <option name="closed" value="true" />
-      <created>1725421976878</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1725421976878</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Switched to BorderPane&#10;Added MenuBar on BorderPane's .setTop()&#10;Demonstration of GridPane column and row constraints">
-      <option name="closed" value="true" />
-      <created>1725428105404</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1725428105404</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Allowed GridPane node to resize with gridSize.&#10;Added placeholder for update text on the bottom">
-      <option name="closed" value="true" />
-      <created>1725498333683</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1725498333683</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Replaced Menu with Settings button (Mobile-app-esque)">
-      <option name="closed" value="true" />
-      <created>1725498854987</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1725498854987</updated>
-    </task>
-    <task id="LOCAL-00005" summary="Added a cell-separator by completely filling in the node, and adding a background color with inset">
-      <option name="closed" value="true" />
-      <created>1725508357154</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1725508357154</updated>
-    </task>
-    <task id="LOCAL-00006" summary="Adjusted 'Button' background to create classic TicTacToe look.&#10;Started Game.java class implementation.">
-      <option name="closed" value="true" />
-      <created>1725510856261</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1725510856261</updated>
-    </task>
-    <task id="LOCAL-00007" summary="Implemented a lot of Game code&#10;Implemented simple on-click, change button symbol, then change turn">
-      <option name="closed" value="true" />
-      <created>1725519595032</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1725519595032</updated>
-    </task>
-    <task id="LOCAL-00008" summary="Implemented a way to reset game-state and validate moves&#10;Current changes demonstrate -&gt; when invalid, restart game">
-      <option name="closed" value="true" />
-      <created>1725520981557</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1725520981557</updated>
-    </task>
-    <task id="LOCAL-00009" summary="Full implementation of turn validation">
-      <option name="closed" value="true" />
-      <created>1725521700886</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1725521700886</updated>
-    </task>
-    <task id="LOCAL-00010" summary="Fixed bug where Symbol places does not correlate with Text updates">
-      <option name="closed" value="true" />
-      <created>1725523258285</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1725523258285</updated>
-    </task>
-    <task id="LOCAL-00011" summary="Version: all methods are void (where return is not used)">
-      <option name="closed" value="true" />
-      <created>1725536530188</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1725536530188</updated>
-    </task>
-    <task id="LOCAL-00012" summary="VS_RANDOM, VS_ROBOT fixed. issue found in 'nextTurn() method'">
-      <option name="closed" value="true" />
-      <created>1725537213777</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1725537213777</updated>
-    </task>
-    <task id="LOCAL-00013" summary="Fixed issue where VS_ROBOT will make an incorrect move; there were wrong values being placed in coordinates.">
-      <option name="closed" value="true" />
-      <created>1725582058673</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1725582058673</updated>
-    </task>
-    <task id="LOCAL-00014" summary="Implemented win and draw conditions, and game freeze">
-      <option name="closed" value="true" />
-      <created>1725586036809</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1725586036809</updated>
-    </task>
-    <task id="LOCAL-00015" summary="Symbol is now correctly tied to CurrentPlayer, reducing hard-code">
-      <option name="closed" value="true" />
-      <created>1725586409516</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1725586409516</updated>
-    </task>
-    <task id="LOCAL-00016" summary="Implemented ENUM for easier readability of code">
-      <option name="closed" value="true" />
-      <created>1725592728899</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1725592728899</updated>
-    </task>
-    <task id="LOCAL-00017" summary="Refactored a lot of code for readability and to reduce complexity, in particular Node references in Game.class&#10;&#10;Centered the score board on top of the gameGridVisual&#10;&#10;Started to implement replacement scene for Settings menu">
-      <option name="closed" value="true" />
-      <created>1725607682243</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1725607682243</updated>
-    </task>
-    <task id="LOCAL-00018" summary="Allowed changing the gamemode via Settings mid-game&#10;&#10;Bug: UpdateText would decouple if changed during P2's turn to Random/Robot">
-      <option name="closed" value="true" />
-      <created>1725612882980</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1725612882980</updated>
-    </task>
-    <task id="LOCAL-00019" summary="Fixed bug: UpdateText would decouple if changed during P2's turn to Random/Robot">
-      <option name="closed" value="true" />
-      <created>1725613349891</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1725613349891</updated>
-    </task>
-    <task id="LOCAL-00020" summary="Added way to change StartMode on Settings, and the backend connection&#10;&#10;Rare bug: changing the StartMode mid-game may freeze the game. Fixed by [Restart] button.">
-      <option name="closed" value="true" />
-      <created>1725623365097</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1725623365097</updated>
-    </task>
-    <task id="LOCAL-00021" summary="Added styling to Settings">
-      <option name="closed" value="true" />
-      <created>1725678564911</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1725678564911</updated>
-    </task>
-    <task id="LOCAL-00022" summary="Completed all desired features!&#10;in this commit, toggleScoreboardView, resetScores, SettingsUpdateText for responsiveness,">
-      <option name="closed" value="true" />
-      <created>1725680637283</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1725680637283</updated>
-    </task>
-    <task id="LOCAL-00023" summary="Completed the backend for symbol defaults, symbol resets, symbol setters">
-      <option name="closed" value="true" />
-      <created>1725682353852</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1725682353852</updated>
-    </task>
-    <task id="LOCAL-00024" summary="Completed all frontend connections to Symbol changes&#10;&#10;Streamlined some valueProperty bound visual texts.">
-      <option name="closed" value="true" />
-      <created>1725688016415</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1725688016415</updated>
-    </task>
-    <task id="LOCAL-00025" summary="Updated to make Game.resume more robust&#10;&#10;Updated Game.winSequence be more descriptive&#10;&#10;Fixed a label incorrectly suggesting a Player3">
-      <option name="closed" value="true" />
-      <created>1725715906940</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1725715906940</updated>
-    </task>
-    <task id="LOCAL-00026" summary="Added a txt length limiter on the player Symbol textfields, using TextFormatter.Change filter">
-      <option name="closed" value="true" />
-      <created>1725876382942</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1725876382942</updated>
-    </task>
-    <task id="LOCAL-00027" summary="Small explanatory comment for previous change">
-      <option name="closed" value="true" />
-      <created>1725876493858</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1725876493858</updated>
-    </task>
-    <task id="LOCAL-00028" summary="An attempt to encapsulate gameGridVisual, or the GridPane for the BorderPane's Center.">
-      <option name="closed" value="true" />
-      <created>1726123226216</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1726123226216</updated>
-    </task>
-    <task id="LOCAL-00029" summary="An attempt to encapsulate scoreBoard e.g. HBox">
-      <option name="closed" value="true" />
-      <created>1726124933923</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1726124933923</updated>
-    </task>
-    <task id="LOCAL-00030" summary="Cleaned up some notes, made configureTopBar() method, reworded some variables, added some notes for what to clean up next">
-      <option name="closed" value="true" />
-      <created>1726141003724</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1726141003724</updated>
-    </task>
-    <task id="LOCAL-00031" summary="Major 'HelloApplication' refactor">
-      <option name="closed" value="true" />
-      <created>1726633873561</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1726633873561</updated>
-    </task>
-    <task id="LOCAL-00032" summary="Added executable .jar file for the project">
-      <option name="closed" value="true" />
-      <created>1726723980628</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1726723980628</updated>
-    </task>
-    <task id="LOCAL-00033" summary="Reloading the same .jar executable with Run configuration&#10;&#10;Works off IntelliJ IDE">
-      <option name="closed" value="true" />
-      <created>1726725804746</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1726725804746</updated>
-    </task>
-    <task id="LOCAL-00034" summary="Forgot to add .jar">
-      <option name="closed" value="true" />
-      <created>1726725942583</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1726725942583</updated>
-    </task>
-    <option name="localTasksCounter" value="35" />
     <servers />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fixed bug where Symbol places does not correlate with Text updates" />
-    <MESSAGE value="Version: all methods are void (where return is not used)" />
-    <MESSAGE value="VS_RANDOM, VS_ROBOT fixed. issue found in 'nextTurn() method'" />
-    <MESSAGE value="Fixed issue where VS_ROBOT will make an incorrect move; there were wrong values being placed in coordinates." />
-    <MESSAGE value="Implemented win and draw conditions, and game freeze" />
-    <MESSAGE value="Symbol is now correctly tied to CurrentPlayer, reducing hard-code" />
-    <MESSAGE value="Implemented ENUM for easier readability of code" />
-    <MESSAGE value="Refactored a lot of code for readability and to reduce complexity, in particular Node references in Game.class&#10;&#10;Centered the score board on top of the gameGridVisual&#10;&#10;Started to implement replacement scene for Settings menu" />
-    <MESSAGE value="Allowed changing the gamemode via Settings mid-game&#10;&#10;Bug: UpdateText would decouple if changed during P2's turn to Random/Robot" />
-    <MESSAGE value="Fixed bug: UpdateText would decouple if changed during P2's turn to Random/Robot" />
-    <MESSAGE value="Added way to change StartMode on Settings, and the backend connection&#10;&#10;Rare bug: changing the StartMode mid-game may freeze the game. Fixed by [Restart] button." />
-    <MESSAGE value="Added styling to Settings" />
-    <MESSAGE value="Completed all desired features!&#10;in this commit, toggleScoreboardView, resetScores, SettingsUpdateText for responsiveness," />
-    <MESSAGE value="Completed the backend for symbol defaults, symbol resets, symbol setters" />
-    <MESSAGE value="Completed all frontend connections to Symbol changes&#10;&#10;Streamlined some valueProperty bound visual texts." />
-    <MESSAGE value="Updated to make Game.resume more robust&#10;&#10;Updated Game.winSequence be more descriptive&#10;&#10;Fixed a label incorrectly suggesting a Player3" />
-    <MESSAGE value="Added a txt length limiter on the player Symbol textfields, using TextFormatter.Change filter" />
-    <MESSAGE value="Small explanatory comment for previous change" />
-    <MESSAGE value="An attempt to encapsulate gameGridVisual, or the GridPane for the BorderPane's Center." />
-    <MESSAGE value="An attempt to encapsulate scoreBoard e.g. HBox" />
-    <MESSAGE value="Cleaned up some notes, made configureTopBar() method, reworded some variables, added some notes for what to clean up next" />
-    <MESSAGE value="Major 'HelloApplication' refactor" />
-    <MESSAGE value="Added executable .jar file for the project" />
-    <MESSAGE value="Reloading the same .jar executable with Run configuration&#10;&#10;Works off IntelliJ IDE" />
-    <MESSAGE value="Forgot to add .jar" />
-    <option name="LAST_COMMIT_MESSAGE" value="Forgot to add .jar" />
   </component>
 </project>
