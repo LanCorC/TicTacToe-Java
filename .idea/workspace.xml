@@ -9,15 +9,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53c17163-cb5a-430e-832b-13bb0ad331c5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/JavaProject_TicTacToe_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/JavaProject_TicTacToe_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="53c17163-cb5a-430e-832b-13bb0ad331c5" name="Changes" comment="Not sure what I did, but I fixed it?&#10;&#10;Launcher class is now strictly required to load project from IDE, jar file still works perfectly.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaProject-TicTacToe.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/HelloApplication.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,6 +112,19 @@
       <option name="presentableId" value="Default" />
       <updated>1726828542627</updated>
     </task>
+    <task id="LOCAL-00001" summary="Not sure what I did, but I fixed it?&#10;&#10;Launcher class is now strictly required to load project from IDE, jar file still works perfectly.">
+      <option name="closed" value="true" />
+      <created>1726830026194</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1726830026194</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Not sure what I did, but I fixed it?&#10;&#10;Launcher class is now strictly required to load project from IDE, jar file still works perfectly." />
+    <option name="LAST_COMMIT_MESSAGE" value="Not sure what I did, but I fixed it?&#10;&#10;Launcher class is now strictly required to load project from IDE, jar file still works perfectly." />
   </component>
 </project>

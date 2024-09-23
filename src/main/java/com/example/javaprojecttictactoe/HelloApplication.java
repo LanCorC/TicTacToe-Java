@@ -36,7 +36,7 @@ public class HelloApplication extends Application {
         BorderPane.setAlignment(updateText, Pos.TOP_CENTER);
         root.setBottom(updateText);
 
-        //Set center
+        //Set center, make the GameGrid
         HBox scoreBar = getScoreBoard();
         root.setCenter(new VBox(scoreBar, getGameGrid()));
 
@@ -221,7 +221,6 @@ public class HelloApplication extends Application {
         return topBar;
     }
 
-    //TODO: clean up, add comments
     private HBox getVersusBox(Label updateText) {
         Label versusText = new Label("Select Opponent:");
         ComboBox<String> versusCBox= new ComboBox<>();
@@ -253,11 +252,12 @@ public class HelloApplication extends Application {
         return versusBox;
     }
 
-    //TODO: clean up, add comments
     private HBox getStartBox(Label updateText) {
         Label startText = new Label("Who goes first:");
         ComboBox<String> startCBox = new ComboBox<>();
         startCBox.getItems().addAll("Player1", "Player2", "Random");
+
+        //Fetch initial value
         String val;
         switch (Game.getStartMode()) {
             case FIRST_START -> val = "Player1";
@@ -265,6 +265,7 @@ public class HelloApplication extends Application {
             default -> val = "Random";
         }
         startCBox.setValue(val);
+
         startCBox.setOnAction(actionEvent ->{
             String tempVal = startCBox.getValue();
             switch (tempVal) {
@@ -371,6 +372,4 @@ public class HelloApplication extends Application {
     public static void main(String[] args) {
         launch();
     }
-
-
 }

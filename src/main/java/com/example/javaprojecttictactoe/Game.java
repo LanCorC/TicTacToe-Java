@@ -9,7 +9,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import javafx.util.Pair;
 
 import java.util.*;
@@ -39,56 +38,42 @@ public class Game {
 
     public static final int PLAYER1 = 1;
     public static final int PLAYER2 = -1;
+    private static int currentPlayer = PLAYER1;
 
     private static StartMode startMode = StartMode.FIRST_START;
     private static VersusMode gameMode = VersusMode.VS_ROBOT;
-    private static int currentPlayer = PLAYER1;
 
-    private static WinState winCondition = WinState.PENDING;
+    //Game symbols
     private static final String DEFAULT_SYMBOL_1 = "X";
     private static final String DEFAULT_SYMBOL_2 = "O";
     private static final String DEFAULT_SYMBOL_EMPTY = "~";
-    private static SimpleStringProperty playerOneSymbol = new SimpleStringProperty(DEFAULT_SYMBOL_1);
-    private static SimpleStringProperty playerTwoSymbol = new SimpleStringProperty(DEFAULT_SYMBOL_2);
-    private static SimpleStringProperty emptySymbol = new SimpleStringProperty(DEFAULT_SYMBOL_EMPTY);
+    private static final SimpleStringProperty playerOneSymbol = new SimpleStringProperty(DEFAULT_SYMBOL_1);
+    private static final SimpleStringProperty playerTwoSymbol = new SimpleStringProperty(DEFAULT_SYMBOL_2);
+    private static final SimpleStringProperty emptySymbol = new SimpleStringProperty(DEFAULT_SYMBOL_EMPTY);
 
-
+    //Score trackers
     private static final SimpleIntegerProperty scorePlayer2 = new SimpleIntegerProperty(0);
     private static final SimpleIntegerProperty scorePlayer1 = new SimpleIntegerProperty(0);
     private static final SimpleIntegerProperty scoreTie = new SimpleIntegerProperty(0);
+    private static WinState winCondition = WinState.PENDING;
 
     //Store last played move
     private static Button lastPlayed = new Button();
+    private static final Color LAST_COLOR = Color.GOLD;
     private static final Color PLAYER1_COLOR = Color.DARKTURQUOISE;
     private static final Color PLAYER2_COLOR = Color.TOMATO;
-    private static final Color LAST_COLOR = Color.GOLD;
-    public static final Color EMPTY_COLOR = Color.BLACK;
+    private static final Color EMPTY_COLOR = Color.BLACK;
 
-    public static SimpleIntegerProperty scorePlayer2Property() {
-        return scorePlayer2;
-    }
-
-
-    public static SimpleIntegerProperty scorePlayer1Property() {
-        return scorePlayer1;
-    }
-
-    public static SimpleIntegerProperty scoreTieProperty() {
-        return scoreTie;
-    }
-
-    //the parent scene
-    private static Node root = null;
+    //Nodes from parent scene
     private static GridPane visual = null;
     private static Label updateText = null;
 
-    //Dev note: we will use Button.getColumn() and .getRow to find the appropriate cell
+    //Note: we will use GridPane.getColumn(btn) and GridPane.getRow(btn) to find the appropriate cell
     private static int[][] gameBoard = new int[3][3]; //defaults 0 = empty, 1 = player1, -1 = player2
     private static int remaining = 9;
     private static final Random rand = new Random();
 
     private Game() {
-
     }
 
     public static Game getInstance() {
@@ -99,8 +84,7 @@ public class Game {
     }
 
     public void setRoot(Node root) {
-        Game.root = root;
-        BorderPane temp = (BorderPane) Game.root;
+        BorderPane temp = (BorderPane) root;
         updateText = (Label) temp.getBottom();
         VBox vtemp = (VBox) temp.getCenter();
         vtemp.getChildren().forEach(child->{
@@ -108,6 +92,18 @@ public class Game {
                 visual = (GridPane) child;
             }
         });
+    }
+
+    public static SimpleIntegerProperty scorePlayer2Property() {
+        return scorePlayer2;
+    }
+
+    public static SimpleIntegerProperty scorePlayer1Property() {
+        return scorePlayer1;
+    }
+
+    public static SimpleIntegerProperty scoreTieProperty() {
+        return scoreTie;
     }
 
     public static String getPlayerOneSymbol() {
@@ -151,14 +147,9 @@ public class Game {
         System.out.println("Gamemode changed!");
     }
 
-    public static int getCurrentPlayer() {
-        return currentPlayer;
-    }
-
-    //note: Pair<row, column>; for automating the robot
     public static void playTurn() {
         if(winCondition != WinState.PENDING) {
-            //do nothing
+            //Do nothing
         } else if(gameMode == VersusMode.VS_ROBOT) {
             playRobot();
         } else {
@@ -168,7 +159,7 @@ public class Game {
 
     public static void resume() {
         if(winCondition != WinState.PENDING) {
-            //the game has already ended
+            //The game has already ended
             return;
         }
         if(currentPlayer == PLAYER2 && gameMode != VersusMode.VS_PLAYER) {
@@ -181,29 +172,31 @@ public class Game {
     }
 
     public static void playRobot() {
+        //Move to win
         Pair<Integer, Integer> move = canWin(currentPlayer);
         if(move != null) {
             play(move);
             return;
         }
+
+        //Move to block
         move = canWin(opponent());
         if(move != null) {
             play(move);
             return;
         }
 
-        //if cannot win, or deny, play random
+        //Any move
         playRandom();
     }
 
     public static void playRandom() {
-        //TODO:
         if(remaining == 0) {
             System.out.println("No more turns available(?)!");
             return;
         }
 
-        //rng counts 0, but i need non-zero
+        //Rand includes 0, but logic requires non-zero
         int candidate = 0;
         while(candidate == 0) {
             candidate = (rand.nextInt(remaining+1));
@@ -211,7 +204,7 @@ public class Game {
 
         for(int i = 0; i < 3; i++) {
             for(int j = 0; j < 3; j++) {
-                //If not taken,
+                //If not taken, decrement
                 if(gameBoard[i][j] == 0 && --candidate == 0) {
                     play(new Pair<>(i, j));
                     return;
@@ -241,7 +234,6 @@ public class Game {
         }
 
         //Update game trackers
-//        lastPlayed = turn;
         remaining--;
         gameBoard[turn.getKey()][turn.getValue()] = currentPlayer;
         if(winner()) winCondition = currentPlayer == PLAYER1 ? WinState.PLAYER1 : WinState.PLAYER2;
@@ -271,11 +263,11 @@ public class Game {
         winSequence();
     }
 
-    //Checks the board for winning line/s
-    //Space available to animate (recolor) winning lines
+    //Checks the board for winner
     private static boolean winner() {
         int countRow;
         int countCol;
+
         //check rows
         for(int i = 0; i < 3; i++) {
             countRow = 0;
@@ -299,9 +291,8 @@ public class Game {
             }
         }
 
-        //downslant
-        int countDown = 0; //down slant, left right
-        int countUp = 0; //up slant, left to right
+        int countDown = 0; //down slant, NorthWest to SouthEast
+        int countUp = 0; //up slant, SouthWest to NorthEast
         for(int i = 0; i < 3; i++) {
             if(gameBoard[i][i] == currentPlayer) {
                 countDown++;
@@ -315,13 +306,11 @@ public class Game {
                 countUp = -3;
             }
         }
-        if(countDown == 3 || countUp == 3) return true;
 
-        return false;
+        return countDown == 3 || countUp == 3;
     }
 
-    //Method to make a winning play, or deny a win, where possible
-    //input 'player', so i can use 'another player' to check if THEY can win, for purposes of blocking a win
+    //Input current, or opponent player, to check for a winning or blocking move (Robot)
     private static Pair<Integer, Integer> canWin(int player) {
         //Tally and final result
         int count;
@@ -344,7 +333,6 @@ public class Game {
                 }
             }
 
-            //Validate
             if(validate(count, move)) return move;
         }
 
@@ -364,11 +352,10 @@ public class Game {
                 }
             }
 
-            //Validate
             if(validate(count, move)) return move;
         }
 
-        //Check diagonal 1:
+        //Check diagonal1 (NorthWest to SouthEast):
         count = 0;
         move = null;
         for(int i = 0; i < 3; i++) {
@@ -382,12 +369,12 @@ public class Game {
                 break;
             }
         }
-        //validate
+
         if(validate(count, move)) return move;
 
         count = 0;
         move = null;
-        //Check diagonal 2:
+        //Check diagonal2 (SouthWest to NorthEast):
         for(int i = 0; i < 3; i++) {
             int num = gameBoard[2-i][i];
             if(num == player) {
@@ -399,22 +386,25 @@ public class Game {
                 break;
             }
         }
+
         if(validate(count, move)) return move;
 
         return null;
     }
 
-    //Win condition applied
+    //Win-making or win-blocking confirmed
     private static boolean validate(int count, Pair<Integer, Integer> move) {
         if(count == 2 && move != null) {
             return true;
         } else if (count == 3) {
+            //'Redundant' branch, troubleshooting
             System.out.println("You should win here somewhere!");
             winCondition = currentPlayer == PLAYER1 ? WinState.PLAYER1 : WinState.PLAYER2;
         }
         return false;
     }
 
+    //Note: small, but improves readability
     private static int opponent() {
         return currentPlayer*-1;
     }
@@ -429,11 +419,10 @@ public class Game {
     }
 
     private static void nextTurn(boolean badMove) {
-//        Label lb = (Label) bp.getBottom();
         if(badMove) {
             //On player illegalMove
             updateText.setText("Bad move, " + currentSymbol() + ". Try again!");
-            //Troubleshooting
+            //Troubleshooting - should never show!
             if(currentPlayer == PLAYER2 && gameMode != VersusMode.VS_PLAYER) {
                 updateText.setText("Robot made a mistake! Call the dev!");
                 System.out.println("Robot made a mistake! Call the dev!");
@@ -443,27 +432,22 @@ public class Game {
             switch(gameMode) {
                 case VS_RANDOM, VS_ROBOT:
                     if(currentPlayer == PLAYER2) {
-//                        updateText.setText(currentSymbol() + "'s turn!");
                         playTurn();
                     }
                     break;
                 default:
                     updateText.setText(currentSymbol() + "'s turn!");
             }
-
         }
     }
 
     public static void restartGame() {
-        //reset all text of grid, reset gameBoard, reset turn order
-        //Game class gameBoard
+        //Default game settings
         gameBoard = new int[3][3];
-        currentPlayer = PLAYER1;
         remaining = 9;
         winCondition = WinState.PENDING;
-        //UI gameBoard
-//        BorderPane bp = (BorderPane) root;
-//        GridPane gridPane = (GridPane) bp.getCenter();
+
+        //Default all grid buttons
         visual.getChildren().forEach(x-> {
             if(x.getClass() == Button.class) {
                 Button btn = (Button) x;
@@ -473,6 +457,8 @@ public class Game {
                 System.out.println("Issue encountered trying to reset the buttons! " + x.getClass());
             }
         });
+
+        //Load starting player
         switch (Game.startMode) {
             case FIRST_START -> currentPlayer = PLAYER1;
             case SECOND_START -> currentPlayer = PLAYER2;
@@ -492,10 +478,7 @@ public class Game {
     }
 
     private static void winSequence() {
-        //TODO: regardless, game must restart or temporarily hold
 
-        //Update text
-//        Label lb = ((Label) ((BorderPane) root).getBottom());
         if(winCondition == WinState.DRAW) {
             updateText.setText("Draw! Click 'Restart'");
             scoreTie.set(scoreTie.get()+1);
@@ -520,32 +503,28 @@ public class Game {
         System.out.println(scorePlayer1.get());
         System.out.println(scorePlayer2.get());
         System.out.println(scoreTie.get());
-
-        //TODO: animate winning line/s ?
-
-        //TODO: prepare game restart after a few seconds (settings dependent?), prepare tally?
-
     }
 
-    //TODO: WIP
+    //Update gameGrid visuals to signal winning line(s), winning move
     private static void animateWin() {
 
         int lastRow = GridPane.getRowIndex(lastPlayed);
         int lastCol = GridPane.getColumnIndex(lastPlayed);
         String lastSymbol = lastPlayed.getText();
 
-        //insert "if" checks- if Diagonal is available.
+        //Store valid buttons
         List<Button> horiz = new ArrayList<>();
         List<Button> verti = new ArrayList<>();
         List<Button> diag1 = new ArrayList<>(); //from top left to bottom right
         List<Button> diag2 = new ArrayList<>(); //from bottom left to top right
 
+        //Whether 'line' is still valid
         boolean horCheck = true; //always true
         boolean verCheck = true; //always true
         boolean diag1Check = false; //default
         boolean diag2Check = false; //default
 
-        //diagCheck
+        //Preliminary check on diagonals
         if(lastRow==lastCol && lastRow == 1) {
             diag1Check = true;
             diag2Check = true;
@@ -555,6 +534,7 @@ public class Game {
             diag2Check = true;
         }
 
+        //Check all lines
         Node[] nodes = visual.getChildren().toArray(new Node[0]);
         for(Node node : nodes) {
             Button btn = (Button) node;
@@ -602,8 +582,8 @@ public class Game {
         checks.add(new Pair<>(diag1Check, diag1));
         checks.add(new Pair<>(diag2Check, diag2));
 
-        //if passed, change the color fill each corresponding buttonText
         for(Pair<Boolean, List<Button>> pair : checks) {
+            //if passed, change the color fill each corresponding buttonText
             if(pair.getKey()) {
                 for(Button btn : pair.getValue()) {
                     btn.setTextFill(winCondition == WinState.PLAYER1 ? PLAYER1_COLOR : PLAYER2_COLOR);
@@ -649,7 +629,6 @@ public class Game {
             }
             ((Button) child).setText(val);
         });
-
     }
 
     //Troubleshooting
