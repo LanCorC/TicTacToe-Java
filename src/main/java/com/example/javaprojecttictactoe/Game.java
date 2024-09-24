@@ -77,7 +77,7 @@ public class Game {
     }
 
     public static Game getInstance() {
-        if(INSTANCE == null) {
+        if (INSTANCE == null) {
             INSTANCE = new Game();
         }
         return INSTANCE;
@@ -87,8 +87,8 @@ public class Game {
         BorderPane temp = (BorderPane) root;
         updateText = (Label) temp.getBottom();
         VBox vtemp = (VBox) temp.getCenter();
-        vtemp.getChildren().forEach(child->{
-            if(child.getClass() == GridPane.class) {
+        vtemp.getChildren().forEach(child -> {
+            if (child.getClass() == GridPane.class) {
                 visual = (GridPane) child;
             }
         });
@@ -148,9 +148,9 @@ public class Game {
     }
 
     public static void playTurn() {
-        if(winCondition != WinState.PENDING) {
+        if (winCondition != WinState.PENDING) {
             //Do nothing
-        } else if(gameMode == VersusMode.VS_ROBOT) {
+        } else if (gameMode == VersusMode.VS_ROBOT) {
             playRobot();
         } else {
             playRandom();
@@ -158,11 +158,11 @@ public class Game {
     }
 
     public static void resume() {
-        if(winCondition != WinState.PENDING) {
+        if (winCondition != WinState.PENDING) {
             //The game has already ended
             return;
         }
-        if(currentPlayer == PLAYER2 && gameMode != VersusMode.VS_PLAYER) {
+        if (currentPlayer == PLAYER2 && gameMode != VersusMode.VS_PLAYER) {
             playTurn();
         } else if (currentPlayer == PLAYER1) {
             updateText.setText(currentSymbol() + "'s turn!");
@@ -174,14 +174,14 @@ public class Game {
     public static void playRobot() {
         //Move to win
         Pair<Integer, Integer> move = canWin(currentPlayer);
-        if(move != null) {
+        if (move != null) {
             play(move);
             return;
         }
 
         //Move to block
         move = canWin(opponent());
-        if(move != null) {
+        if (move != null) {
             play(move);
             return;
         }
@@ -191,21 +191,21 @@ public class Game {
     }
 
     public static void playRandom() {
-        if(remaining == 0) {
+        if (remaining == 0) {
             System.out.println("No more turns available(?)!");
             return;
         }
 
         //Rand includes 0, but logic requires non-zero
         int candidate = 0;
-        while(candidate == 0) {
-            candidate = (rand.nextInt(remaining+1));
+        while (candidate == 0) {
+            candidate = (rand.nextInt(remaining + 1));
         }
 
-        for(int i = 0; i < 3; i++) {
-            for(int j = 0; j < 3; j++) {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
                 //If not taken, decrement
-                if(gameBoard[i][j] == 0 && --candidate == 0) {
+                if (gameBoard[i][j] == 0 && --candidate == 0) {
                     play(new Pair<>(i, j));
                     return;
                 }
@@ -221,13 +221,13 @@ public class Game {
 
 
     public static void play(Pair<Integer, Integer> turn) {
-        if(winCondition != WinState.PENDING) {
+        if (winCondition != WinState.PENDING) {
             //do nothing
             System.out.println("Game has already terminated, press 'Restart' to start a new match!");
             return;
         }
 
-        if(!validTurn(turn)) {
+        if (!validTurn(turn)) {
             System.out.println(currentPlayer + " tried to play: " + turn);
             nextTurn(true);
             return; //skips all processing
@@ -236,13 +236,13 @@ public class Game {
         //Update game trackers
         remaining--;
         gameBoard[turn.getKey()][turn.getValue()] = currentPlayer;
-        if(winner()) winCondition = currentPlayer == PLAYER1 ? WinState.PLAYER1 : WinState.PLAYER2;
+        if (winner()) winCondition = currentPlayer == PLAYER1 ? WinState.PLAYER1 : WinState.PLAYER2;
 
         System.out.println(currentSymbol() + " played Row: %d Col: %d".formatted(turn.getKey(), turn.getValue()));
 
         Node[] buttons = visual.getChildren().toArray(new Node[0]);
-        for(Node button : buttons) {
-            if(GridPane.getColumnIndex(button).equals(turn.getValue()) && GridPane.getRowIndex(button).equals(turn.getKey())) {
+        for (Node button : buttons) {
+            if (GridPane.getColumnIndex(button).equals(turn.getValue()) && GridPane.getRowIndex(button).equals(turn.getKey())) {
                 ((Button) button).setText(currentSymbol());
 
                 //Update visual
@@ -253,9 +253,9 @@ public class Game {
             }
         }
 
-        if(winCondition == WinState.PENDING && remaining == 0) {
+        if (winCondition == WinState.PENDING && remaining == 0) {
             winCondition = WinState.DRAW;
-        } else if(winCondition == WinState.PENDING) {
+        } else if (winCondition == WinState.PENDING) {
             nextTurn();
             return;
         }
@@ -269,38 +269,38 @@ public class Game {
         int countCol;
 
         //check rows
-        for(int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) {
             countRow = 0;
             countCol = 0;
-            for(int j = 0; j < 3; j++) {
+            for (int j = 0; j < 3; j++) {
                 //row
-                if(gameBoard[i][j] == currentPlayer) {
+                if (gameBoard[i][j] == currentPlayer) {
                     countRow++;
                 } else {
                     countRow = -3;
                 }
                 //column
-                if(gameBoard[j][i] == currentPlayer) {
+                if (gameBoard[j][i] == currentPlayer) {
                     countCol++;
                 } else {
                     countCol = -3;
                 }
             }
-            if(countRow == 3 || countCol == 3){
+            if (countRow == 3 || countCol == 3) {
                 return true;
             }
         }
 
         int countDown = 0; //down slant, NorthWest to SouthEast
         int countUp = 0; //up slant, SouthWest to NorthEast
-        for(int i = 0; i < 3; i++) {
-            if(gameBoard[i][i] == currentPlayer) {
+        for (int i = 0; i < 3; i++) {
+            if (gameBoard[i][i] == currentPlayer) {
                 countDown++;
             } else {
                 countDown = -3;
             }
 
-            if(gameBoard[2-i][i] == currentPlayer) {
+            if (gameBoard[2 - i][i] == currentPlayer) {
                 countUp++;
             } else {
                 countUp = -3;
@@ -317,14 +317,14 @@ public class Game {
         Pair<Integer, Integer> move;
 
         //Check all rows
-        for(int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) {
             //Reset tally
             count = 0;
             move = null;
-            for(int j = 0; j < 3; j++) {
-                if(gameBoard[i][j]==player) {
+            for (int j = 0; j < 3; j++) {
+                if (gameBoard[i][j] == player) {
                     count++;
-                } else if(gameBoard[i][j] == 0) {
+                } else if (gameBoard[i][j] == 0) {
                     move = new Pair<>(i, j);
                 } else {
                     //Disqualify
@@ -333,16 +333,16 @@ public class Game {
                 }
             }
 
-            if(validate(count, move)) return move;
+            if (validate(count, move)) return move;
         }
 
         //Check columns
-        for(int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) {
             count = 0;
             move = null;
-            for(int j = 0; j < 3; j++) {
+            for (int j = 0; j < 3; j++) {
                 int num = gameBoard[j][i];
-                if(num == player) {
+                if (num == player) {
                     count++;
                 } else if (num == 0) {
                     move = new Pair<>(j, i);
@@ -352,17 +352,17 @@ public class Game {
                 }
             }
 
-            if(validate(count, move)) return move;
+            if (validate(count, move)) return move;
         }
 
         //Check diagonal1 (NorthWest to SouthEast):
         count = 0;
         move = null;
-        for(int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) {
             int num = gameBoard[i][i];
-            if(num == player) {
+            if (num == player) {
                 count++;
-            } else if(num == 0) {
+            } else if (num == 0) {
                 move = new Pair<>(i, i);
             } else {
                 count = 0;
@@ -370,31 +370,31 @@ public class Game {
             }
         }
 
-        if(validate(count, move)) return move;
+        if (validate(count, move)) return move;
 
         count = 0;
         move = null;
         //Check diagonal2 (SouthWest to NorthEast):
-        for(int i = 0; i < 3; i++) {
-            int num = gameBoard[2-i][i];
-            if(num == player) {
+        for (int i = 0; i < 3; i++) {
+            int num = gameBoard[2 - i][i];
+            if (num == player) {
                 count++;
             } else if (num == 0) {
-                move = new Pair<>(2-i, i);
+                move = new Pair<>(2 - i, i);
             } else {
                 count = 0;
                 break;
             }
         }
 
-        if(validate(count, move)) return move;
+        if (validate(count, move)) return move;
 
         return null;
     }
 
     //Win-making or win-blocking confirmed
     private static boolean validate(int count, Pair<Integer, Integer> move) {
-        if(count == 2 && move != null) {
+        if (count == 2 && move != null) {
             return true;
         } else if (count == 3) {
             //'Redundant' branch, troubleshooting
@@ -406,7 +406,7 @@ public class Game {
 
     //Note: small, but improves readability
     private static int opponent() {
-        return currentPlayer*-1;
+        return currentPlayer * -1;
     }
 
     //Note: Row,Column
@@ -419,19 +419,19 @@ public class Game {
     }
 
     private static void nextTurn(boolean badMove) {
-        if(badMove) {
+        if (badMove) {
             //On player illegalMove
             updateText.setText("Bad move, " + currentSymbol() + ". Try again!");
             //Troubleshooting - should never show!
-            if(currentPlayer == PLAYER2 && gameMode != VersusMode.VS_PLAYER) {
+            if (currentPlayer == PLAYER2 && gameMode != VersusMode.VS_PLAYER) {
                 updateText.setText("Robot made a mistake! Call the dev!");
                 System.out.println("Robot made a mistake! Call the dev!");
             }
         } else {
             currentPlayer *= -1;
-            switch(gameMode) {
+            switch (gameMode) {
                 case VS_RANDOM, VS_ROBOT:
-                    if(currentPlayer == PLAYER2) {
+                    if (currentPlayer == PLAYER2) {
                         playTurn();
                     }
                     break;
@@ -448,8 +448,8 @@ public class Game {
         winCondition = WinState.PENDING;
 
         //Default all grid buttons
-        visual.getChildren().forEach(x-> {
-            if(x.getClass() == Button.class) {
+        visual.getChildren().forEach(x -> {
+            if (x.getClass() == Button.class) {
                 Button btn = (Button) x;
                 btn.setText(emptySymbol.getValue());
                 btn.setTextFill(EMPTY_COLOR);
@@ -464,7 +464,7 @@ public class Game {
             case SECOND_START -> currentPlayer = PLAYER2;
             //random
             default -> {
-                if(rand.nextInt() % 2 == 1) {
+                if (rand.nextInt() % 2 == 1) {
                     currentPlayer = PLAYER1;
                 } else {
                     currentPlayer = PLAYER2;
@@ -479,17 +479,17 @@ public class Game {
 
     private static void winSequence() {
 
-        if(winCondition == WinState.DRAW) {
+        if (winCondition == WinState.DRAW) {
             updateText.setText("Draw! Click 'Restart'");
-            scoreTie.set(scoreTie.get()+1);
+            scoreTie.set(scoreTie.get() + 1);
         } else {
             animateWin();
             String victor;
-            if(winCondition == WinState.PLAYER1) {
+            if (winCondition == WinState.PLAYER1) {
                 victor = "%s (Player1)".formatted(getPlayerOneSymbol());
-                scorePlayer1.set(scorePlayer1.get()+1);
+                scorePlayer1.set(scorePlayer1.get() + 1);
             } else {
-                scorePlayer2.set(scorePlayer2.get()+1);
+                scorePlayer2.set(scorePlayer2.get() + 1);
                 switch (gameMode) {
                     case VS_ROBOT -> victor = "%s (Robot)";
                     case VS_RANDOM -> victor = "%s (Random)";
@@ -525,50 +525,50 @@ public class Game {
         boolean diag2Check = false; //default
 
         //Preliminary check on diagonals
-        if(lastRow==lastCol && lastRow == 1) {
+        if (lastRow == lastCol && lastRow == 1) {
             diag1Check = true;
             diag2Check = true;
-        } else if(lastRow==lastCol) {
+        } else if (lastRow == lastCol) {
             diag1Check = true;
-        } else if(Math.min(lastRow, lastCol) == 0 && Math.max(lastRow, lastCol) == 2) {
+        } else if (Math.min(lastRow, lastCol) == 0 && Math.max(lastRow, lastCol) == 2) {
             diag2Check = true;
         }
 
         //Check all lines
         Node[] nodes = visual.getChildren().toArray(new Node[0]);
-        for(Node node : nodes) {
+        for (Node node : nodes) {
             Button btn = (Button) node;
             int btnCol = GridPane.getColumnIndex(node);
             int btnRow = GridPane.getRowIndex(node);
 
             //Column
-            if(verCheck && btnCol == lastCol) {
-                if(btn.getText().equals(lastSymbol)) {
+            if (verCheck && btnCol == lastCol) {
+                if (btn.getText().equals(lastSymbol)) {
                     verti.add(btn);
                 } else {
                     verCheck = false;
                 }
             }
             //Row
-            if(horCheck && btnRow == lastRow) {
-                if(btn.getText().equals(lastSymbol)) {
+            if (horCheck && btnRow == lastRow) {
+                if (btn.getText().equals(lastSymbol)) {
                     horiz.add(btn);
                 } else {
                     horCheck = false;
                 }
             }
             //Diag1
-            if(diag1Check && btnRow == btnCol) { //symmetrical
-                if(btn.getText().equals(lastSymbol)) {
+            if (diag1Check && btnRow == btnCol) { //symmetrical
+                if (btn.getText().equals(lastSymbol)) {
                     diag1.add(btn);
                 } else {
                     diag1Check = false;
                 }
             }
             //Diag2
-            if(diag2Check && ((btnRow == btnCol && btnRow == 1) //'center' node, or
+            if (diag2Check && ((btnRow == btnCol && btnRow == 1) //'center' node, or
                     || Math.min(btnCol, btnRow) == 0 && Math.max(btnCol, btnRow) == 2)) { //'corner' nodes of diag2
-                if(btn.getText().equals(lastSymbol)) {
+                if (btn.getText().equals(lastSymbol)) {
                     diag2.add(btn);
                 } else {
                     diag2Check = false;
@@ -582,10 +582,10 @@ public class Game {
         checks.add(new Pair<>(diag1Check, diag1));
         checks.add(new Pair<>(diag2Check, diag2));
 
-        for(Pair<Boolean, List<Button>> pair : checks) {
+        for (Pair<Boolean, List<Button>> pair : checks) {
             //if passed, change the color fill each corresponding buttonText
-            if(pair.getKey()) {
-                for(Button btn : pair.getValue()) {
+            if (pair.getKey()) {
+                for (Button btn : pair.getValue()) {
                     btn.setTextFill(winCondition == WinState.PLAYER1 ? PLAYER1_COLOR : PLAYER2_COLOR);
                 }
             } //else, check did not pass. next.
@@ -605,7 +605,7 @@ public class Game {
 
     public static void setSymbols(String p1, String p2, String empty) {
         Set<String> set = new HashSet<>(Arrays.asList(p1, p2, empty));
-        if(set.size() != 3) {
+        if (set.size() != 3) {
             System.out.println("New symbols denied! Duplicate found.");
         }
 
@@ -618,7 +618,7 @@ public class Game {
     }
 
     private static void reloadGridSymbols() {
-        visual.getChildren().forEach(child->{
+        visual.getChildren().forEach(child -> {
             int x = GridPane.getRowIndex(child);
             int y = GridPane.getColumnIndex(child);
             String val;

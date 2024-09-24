@@ -13,6 +13,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Pair;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -25,7 +26,7 @@ public class HelloApplication extends Application {
     private static final String programName = "XO Game";
 
     @Override
-    public void start(Stage stage)  {
+    public void start(Stage stage) {
 
         //Set parent
         BorderPane root = new BorderPane();
@@ -60,7 +61,7 @@ public class HelloApplication extends Application {
         //Create settings pane, settings button
         VBox settingsRoot = new VBox();
         Scene settingsScene = new Scene(settingsRoot, 500, 550);
-        settings.setOnAction(actionEvent ->{
+        settings.setOnAction(actionEvent -> {
             stage.setScene(settingsScene);
             stage.setTitle(programName + " - Settings");
             settingsUpdateText.setText("Welcome to the Settings menu");
@@ -68,8 +69,8 @@ public class HelloApplication extends Application {
 
         //Create returning button
         Button returnButton = new Button("Return");
-        VBox.setMargin(returnButton, new Insets(5,0,0,5));
-        returnButton.setOnAction(actionEvent ->{
+        VBox.setMargin(returnButton, new Insets(5, 0, 0, 5));
+        returnButton.setOnAction(actionEvent -> {
             stage.setScene(mainScene);
             stage.setTitle(programName);
             Game.resume();
@@ -83,7 +84,7 @@ public class HelloApplication extends Application {
         //Scoreboard setting buttons
         Button toggleShowScore = getToggleShowScore(scoreBar, settingsUpdateText);
         Button resetScore = new Button("Reset Score");
-        resetScore.setOnAction(actionEvent->{
+        resetScore.setOnAction(actionEvent -> {
             Game.resetScores();
             settingsUpdateText.setText("Scoreboard cleared!");
         });
@@ -114,9 +115,9 @@ public class HelloApplication extends Application {
     //Program buttons for Symbol Settings
     private HBox getSymbolButtonHBox(TextField[] symbolFields, Label settingsUpdateText) {
         Button applySymbol = new Button("Apply");
-        applySymbol.setOnAction(actionEvent->processSymbols(symbolFields[0], symbolFields[1], symbolFields[2], settingsUpdateText));
+        applySymbol.setOnAction(actionEvent -> processSymbols(symbolFields[0], symbolFields[1], symbolFields[2], settingsUpdateText));
         Button resetSymbol = new Button("Reset");
-        resetSymbol.setOnAction(actionEvent ->{
+        resetSymbol.setOnAction(actionEvent -> {
             Game.resetSymbols();
             settingsUpdateText.setText("Play symbols reset");
         });
@@ -143,17 +144,17 @@ public class HelloApplication extends Application {
         cc.setPercentWidth(33);
         RowConstraints rc = new RowConstraints();
         rc.setPercentHeight(33);
-        for(int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) {
 
             //Apply column and row constraints * 3
             gp.getColumnConstraints().add(cc);
             gp.getRowConstraints().add(rc);
 
             //Construct play buttons
-            for(int j = 0; j < 3; j++) {
+            for (int j = 0; j < 3; j++) {
                 Button button = new Button(Game.getEmptySymbol());
                 button.widthProperty().addListener((observableValue, oldValue, newValue) ->
-                        button.setFont(new Font(newValue.doubleValue()/3.0)));
+                        button.setFont(new Font(newValue.doubleValue() / 3.0)));
                 button.setStyle("-fx-background-color: %s; -fx-background-radius: 0".formatted("WHITESMOKE"));
 
                 GridPane.setConstraints(
@@ -161,7 +162,7 @@ public class HelloApplication extends Application {
                 button.maxWidthProperty().bind(gp.widthProperty());
                 button.maxHeightProperty().bind(gp.heightProperty());
                 button.setOnAction(
-                        (actionEvent)-> Game.play(new Pair<>(GridPane.getRowIndex(button), GridPane.getColumnIndex(button))));
+                        (actionEvent) -> Game.play(new Pair<>(GridPane.getRowIndex(button), GridPane.getColumnIndex(button))));
                 gp.add(button, i, j);
             }
         }
@@ -180,7 +181,7 @@ public class HelloApplication extends Application {
         textDraw.textProperty().bind(Bindings.format("  Draws: %d", Game.scoreTieProperty()));
 
         scoreBox.getChildren().addAll(textP1, textP2, textDraw);
-        scoreBox.getChildren().forEach(node-> ((Label) node).setFont(Font.font(25)));
+        scoreBox.getChildren().forEach(node -> ((Label) node).setFont(Font.font(25)));
         scoreBox.setSpacing(5);
         scoreBox.setAlignment(Pos.CENTER);
 
@@ -190,15 +191,15 @@ public class HelloApplication extends Application {
     private void processSymbols(TextField p1, TextField p2, TextField p3, Label updateText) {
         List<TextField> fields = Arrays.asList(p1, p2, p3);
         Set<String> count = new HashSet<>();
-        for(TextField tf : fields) {
-            if(tf.getText().isEmpty()) {
+        for (TextField tf : fields) {
+            if (tf.getText().isEmpty()) {
                 updateText.setText("Invalid symbols: missing value");
                 return;
             }
             count.add(tf.getText().strip());
         }
 
-        if(count.size() != 3) {
+        if (count.size() != 3) {
             updateText.setText("Invalid symbols: duplicate values");
             return;
         }
@@ -223,7 +224,7 @@ public class HelloApplication extends Application {
 
     private HBox getVersusBox(Label updateText) {
         Label versusText = new Label("Select Opponent:");
-        ComboBox<String> versusCBox= new ComboBox<>();
+        ComboBox<String> versusCBox = new ComboBox<>();
         versusCBox.getItems().addAll("Robot", "Player", "Random");
 
         //Fetch initial value
@@ -235,9 +236,9 @@ public class HelloApplication extends Application {
         }
         versusCBox.setValue(val);
 
-        versusCBox.setOnAction(actionEvent ->{
+        versusCBox.setOnAction(actionEvent -> {
             String tempVal = versusCBox.getValue();
-            switch(versusCBox.getValue()) {
+            switch (versusCBox.getValue()) {
                 case "Robot" -> Game.setGameMode(Game.VersusMode.VS_ROBOT);
                 case "Player" -> Game.setGameMode(Game.VersusMode.VS_PLAYER);
                 default -> Game.setGameMode(Game.VersusMode.VS_RANDOM);
@@ -245,7 +246,7 @@ public class HelloApplication extends Application {
             updateText.setText("GameMode set to '%s'".formatted(tempVal));
         });
 
-        HBox versusBox = new HBox(versusText,versusCBox);
+        HBox versusBox = new HBox(versusText, versusCBox);
         versusBox.setSpacing(10);
         versusBox.setAlignment(Pos.CENTER);
 
@@ -266,7 +267,7 @@ public class HelloApplication extends Application {
         }
         startCBox.setValue(val);
 
-        startCBox.setOnAction(actionEvent ->{
+        startCBox.setOnAction(actionEvent -> {
             String tempVal = startCBox.getValue();
             switch (tempVal) {
                 case "Player1" -> Game.setStartMode(Game.StartMode.FIRST_START);
@@ -300,9 +301,9 @@ public class HelloApplication extends Application {
     private Button getToggleShowScore(HBox scoreBar, Label settingsUpdateText) {
         Button toggleShowScore = new Button("Hide Score");
         //Make button interactive
-        toggleShowScore.setOnAction(actionEvent ->{
-            scoreBar.getChildren().forEach(child-> child.setVisible(!child.isVisible()));
-            if(toggleShowScore.textProperty().get().equals("Hide Score")) {
+        toggleShowScore.setOnAction(actionEvent -> {
+            scoreBar.getChildren().forEach(child -> child.setVisible(!child.isVisible()));
+            if (toggleShowScore.textProperty().get().equals("Hide Score")) {
                 toggleShowScore.setText("Show Score");
                 settingsUpdateText.setText("Scoreboard hidden!");
             } else {
@@ -323,21 +324,21 @@ public class HelloApplication extends Application {
         TextField[] textFields = new TextField[3];
 
         //Populate hBox with label and corresponding textField
-        for(int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) {
 
             Label label = new Label();
             TextField textField = getTextField();
 
-            switch(i) {
-                case 0-> {
+            switch (i) {
+                case 0 -> {
                     label.setText("Player 1:");
                     textField.promptTextProperty().bind(Game.playerOneSymbolProperty());
                 }
-                case 1-> {
+                case 1 -> {
                     label.setText("Player 2:");
                     textField.promptTextProperty().bind(Game.playerTwoSymbolProperty());
                 }
-                default-> {
+                default -> {
                     label.setText("Empty:");
                     textField.promptTextProperty().bind(Game.emptySymbolProperty());
                 }
@@ -349,13 +350,13 @@ public class HelloApplication extends Application {
 
         //Filter: max string length for textField
         UnaryOperator<TextFormatter.Change> filter = change -> {
-            if(change.getControlNewText().length() > 2) {
+            if (change.getControlNewText().length() > 2) {
                 return null;
             }
             return change;
         };
 
-        for(TextField textField : textFields) {
+        for (TextField textField : textFields) {
             textField.setTextFormatter(new TextFormatter<>(filter));
         }
 

@@ -9,8 +9,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53c17163-cb5a-430e-832b-13bb0ad331c5" name="Changes" comment="Not sure what I did, but I fixed it?&#10;&#10;Launcher class is now strictly required to load project from IDE, jar file still works perfectly.">
+    <list default="true" id="53c17163-cb5a-430e-832b-13bb0ad331c5" name="Changes" comment="Major cleanup and comments on Game.java">
+      <change afterPath="$PROJECT_DIR$/JavaProject-TicTacToe-1.0-SNAPSHOT.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/HelloApplication.java" afterDir="false" />
     </list>
@@ -38,46 +40,39 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Launcher.executor&quot;: &quot;Run&quot;,
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;JAR Application.JavaProject-TicTacToe.jar.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.JavaProject-TicTacToe [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.JavaProject-TicTacToe [compile].executor&quot;: &quot;Run&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.runner&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.HelloApplication.executor": "Run",
+    "Application.Launcher.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "false",
+    "JAR Application.JavaProject-TicTacToe-1.0-SNAPSHOT.jar (1).executor": "Run",
+    "JAR Application.JavaProject-TicTacToe-1.0-SNAPSHOT.jar.executor": "Run",
+    "JAR Application.JavaProject-TicTacToe.jar.executor": "Run",
+    "JAR Application.original-JavaProject-TicTacToe-1.0-SNAPSHOT.jar.executor": "Run",
+    "Maven.JavaProject-TicTacToe [clean,package].executor": "Run",
+    "Maven.JavaProject-TicTacToe [clean].executor": "Run",
+    "Maven.JavaProject-TicTacToe [compile].executor": "Run",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/lance/Documents/CodingJava/JavaProject-TicTacToe",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.17",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.runner"
   }
-}</component>
+}]]></component>
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="mvn clean" />
       <command value="mvn compile" />
+      <command value="mvn clean package" />
     </option>
   </component>
-  <component name="RunManager" selected="Application.Launcher">
-    <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.example.javaprojecttictactoe.HelloApplication" />
-      <module name="JavaProject-TicTacToe" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.javaprojecttictactoe.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JAR Application.JavaProject-TicTacToe-1.0-SNAPSHOT.jar (1)">
     <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.javaprojecttictactoe.Launcher" />
       <module name="JavaProject-TicTacToe" />
@@ -91,15 +86,29 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="JavaProject-TicTacToe-1.0-SNAPSHOT.jar (1)" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/JavaProject-TicTacToe-1.0-SNAPSHOT.jar" />
+      <method v="2" />
+    </configuration>
+    <configuration name="JavaProject-TicTacToe-1.0-SNAPSHOT.jar" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/target/JavaProject-TicTacToe-1.0-SNAPSHOT.jar" />
+      <method v="2" />
+    </configuration>
     <configuration name="JavaProject-TicTacToe.jar" type="JarApplication" temporary="true">
       <option name="JAR_PATH" value="$PROJECT_DIR$/JavaProject-TicTacToe.jar" />
       <method v="2" />
     </configuration>
+    <configuration name="original-JavaProject-TicTacToe-1.0-SNAPSHOT.jar" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/target/original-JavaProject-TicTacToe-1.0-SNAPSHOT.jar" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Launcher" />
-        <item itemvalue="Application.HelloApplication" />
+        <item itemvalue="JAR Application.JavaProject-TicTacToe-1.0-SNAPSHOT.jar (1)" />
+        <item itemvalue="JAR Application.JavaProject-TicTacToe-1.0-SNAPSHOT.jar" />
+        <item itemvalue="JAR Application.original-JavaProject-TicTacToe-1.0-SNAPSHOT.jar" />
         <item itemvalue="JAR Application.JavaProject-TicTacToe.jar" />
+        <item itemvalue="Application.Launcher" />
       </list>
     </recent_temporary>
   </component>
@@ -120,11 +129,20 @@
       <option name="project" value="LOCAL" />
       <updated>1726830026194</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Major cleanup and comments on Game.java">
+      <option name="closed" value="true" />
+      <created>1727076885531</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1727076885532</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Not sure what I did, but I fixed it?&#10;&#10;Launcher class is now strictly required to load project from IDE, jar file still works perfectly." />
-    <option name="LAST_COMMIT_MESSAGE" value="Not sure what I did, but I fixed it?&#10;&#10;Launcher class is now strictly required to load project from IDE, jar file still works perfectly." />
+    <MESSAGE value="Major cleanup and comments on Game.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="Major cleanup and comments on Game.java" />
   </component>
 </project>
