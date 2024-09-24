@@ -9,12 +9,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53c17163-cb5a-430e-832b-13bb0ad331c5" name="Changes" comment="Major cleanup and comments on Game.java">
-      <change afterPath="$PROJECT_DIR$/JavaProject-TicTacToe-1.0-SNAPSHOT.jar" afterDir="false" />
+    <list default="true" id="53c17163-cb5a-430e-832b-13bb0ad331c5" name="Changes" comment="Minor formatting (IntelliJ's built-in)&#10;&#10;Included new uber jar file, with intent to allow users to use the program without needing JRE installed on their device.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/HelloApplication.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,6 +61,11 @@
     "settings.editor.selected.configurable": "reference.settings.project.maven.runner"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\lance\Documents\CodingJava\JavaProject-TicTacToe" />
+    </key>
+  </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="mvn clean" />
@@ -137,12 +138,21 @@
       <option name="project" value="LOCAL" />
       <updated>1727076885532</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Minor formatting (IntelliJ's built-in)&#10;&#10;Included new uber jar file, with intent to allow users to use the program without needing JRE installed on their device.">
+      <option name="closed" value="true" />
+      <created>1727162365738</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1727162365738</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Not sure what I did, but I fixed it?&#10;&#10;Launcher class is now strictly required to load project from IDE, jar file still works perfectly." />
     <MESSAGE value="Major cleanup and comments on Game.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="Major cleanup and comments on Game.java" />
+    <MESSAGE value="Minor formatting (IntelliJ's built-in)&#10;&#10;Included new uber jar file, with intent to allow users to use the program without needing JRE installed on their device." />
+    <option name="LAST_COMMIT_MESSAGE" value="Minor formatting (IntelliJ's built-in)&#10;&#10;Included new uber jar file, with intent to allow users to use the program without needing JRE installed on their device." />
   </component>
 </project>
