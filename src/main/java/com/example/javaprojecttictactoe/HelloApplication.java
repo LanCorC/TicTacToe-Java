@@ -8,16 +8,14 @@ import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.function.UnaryOperator;
 
 
@@ -106,6 +104,10 @@ public class HelloApplication extends Application {
                 getLabel("Scoreboard Settings"), getSeparator(), scoreHBox,
                 getLabel("Symbol Settings"), getSeparator(), symbolTextHBox, symbolButtonHBox, settingsUpdateText);
         settingsRoot.setSpacing(5);
+
+        //Add icon
+        Image icon = new Image(getClass().getClassLoader().getResourceAsStream("icon-round.png"));
+        stage.getIcons().add(icon);
 
         stage.setTitle(programName);
         stage.setScene(mainScene);
