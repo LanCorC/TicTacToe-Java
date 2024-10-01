@@ -11,8 +11,8 @@
   <component name="ChangeListManager">
     <list default="true" id="53c17163-cb5a-430e-832b-13bb0ad331c5" name="Changes" comment="Fixed window size snapping between Settings and Main&#10;Adjusted button resizing for window size responsiveness">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/XOs Game-1.0.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/HelloApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaProject-TicTacToe.jar" beforeDir="false" afterPath="$PROJECT_DIR$/JavaProject-TicTacToe.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/XOs Game-1.0.exe" beforeDir="false" afterPath="$PROJECT_DIR$/XOs Game-1.0.exe" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,31 +38,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Launcher.executor&quot;: &quot;Run&quot;,
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;JAR Application.JavaProject-TicTacToe-1.0-SNAPSHOT.jar (1).executor&quot;: &quot;Run&quot;,
-    &quot;JAR Application.JavaProject-TicTacToe-1.0-SNAPSHOT.jar.executor&quot;: &quot;Run&quot;,
-    &quot;JAR Application.JavaProject-TicTacToe.jar.executor&quot;: &quot;Run&quot;,
-    &quot;JAR Application.original-JavaProject-TicTacToe-1.0-SNAPSHOT.jar.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.JavaProject-TicTacToe [clean,package].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.JavaProject-TicTacToe [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.JavaProject-TicTacToe [compile].executor&quot;: &quot;Run&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/lance/Documents/CodingJava/JavaProject-TicTacToe/src/main/resources&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.runner&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.HelloApplication.executor": "Run",
+    "Application.Launcher.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "false",
+    "JAR Application.JavaProject-TicTacToe-1.0-SNAPSHOT.jar (1).executor": "Run",
+    "JAR Application.JavaProject-TicTacToe-1.0-SNAPSHOT.jar.executor": "Run",
+    "JAR Application.JavaProject-TicTacToe.jar.executor": "Run",
+    "JAR Application.original-JavaProject-TicTacToe-1.0-SNAPSHOT.jar.executor": "Run",
+    "Maven.JavaProject-TicTacToe [clean,package].executor": "Run",
+    "Maven.JavaProject-TicTacToe [clean].executor": "Run",
+    "Maven.JavaProject-TicTacToe [compile].executor": "Run",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/lance/Documents/CodingJava/JavaProject-TicTacToe",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.17",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.runner"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\lance\Documents\CodingJava\JavaProject-TicTacToe\src\main\resources" />
@@ -190,7 +190,15 @@
       <option name="project" value="LOCAL" />
       <updated>1727746693636</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Fixed window size snapping between Settings and Main&#10;Adjusted button resizing for window size responsiveness">
+      <option name="closed" value="true" />
+      <created>1727747598727</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1727747598727</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
