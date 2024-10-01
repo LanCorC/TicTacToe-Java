@@ -14,7 +14,7 @@ To install Java on your device, download and install either the latest [Java Run
 
 ## Demo
 ![xoDemoWinLoss](https://github.com/user-attachments/assets/4d25bc79-d674-45e1-9fdc-2877d109112d)
-* [Full video here, or click below](http://www.youtube.com/watch?v=UEF5DQFDf60)
+* Full demo video [here](http://www.youtube.com/watch?v=UEF5DQFDf60) (1min50s), or click below
 
 [![Youtube demo video](http://img.youtube.com/vi/UEF5DQFDf60/0.jpg)](http://www.youtube.com/watch?v=UEF5DQFDf60)
 
