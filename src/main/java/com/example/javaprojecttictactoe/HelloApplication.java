@@ -60,9 +60,11 @@ public class HelloApplication extends Application {
         VBox settingsRoot = new VBox();
         Scene settingsScene = new Scene(settingsRoot, 500, 550);
         settings.setOnAction(actionEvent -> {
+            double x = stage.getWidth();
+            double y = stage.getHeight();
             stage.setScene(settingsScene);
-            stage.setHeight(mainScene.getHeight());
-            stage.setWidth(mainScene.getWidth());
+            stage.setWidth(x);
+            stage.setHeight(y);
             stage.setTitle(programName + " - Settings");
             settingsUpdateText.setText("Welcome to the Settings menu");
         });
