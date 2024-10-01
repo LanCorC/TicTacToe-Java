@@ -27,4 +27,4 @@ To install Java on your device, download and install either the latest [Java Run
 * Game modes: two player 👥, versus robot 🤖, versus random 🎲
 * Scoreboard toggle and reset
 * Custom symbols (max 3 characters each)
-![xoDemoGusLiv2](https://github.com/user-attachments/assets/4f9c0a6c-d9d3-44dd-9154-5382e8b7b162)
+![xoDemoGusLiv](https://github.com/user-attachments/assets/4f9c0a6c-d9d3-44dd-9154-5382e8b7b162)
