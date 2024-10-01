@@ -335,6 +335,7 @@ public class HelloApplication extends Application {
 
             Label label = new Label();
             TextField textField = getTextField();
+            textField.setMaxWidth(45);
 
             switch (i) {
                 case 0 -> {
@@ -357,7 +358,7 @@ public class HelloApplication extends Application {
 
         //Filter: max string length for textField
         UnaryOperator<TextFormatter.Change> filter = change -> {
-            if (change.getControlNewText().length() > 2) {
+            if (change.getControlNewText().length() > 3) {
                 return null;
             }
             return change;
