@@ -61,6 +61,8 @@ public class HelloApplication extends Application {
         Scene settingsScene = new Scene(settingsRoot, 500, 550);
         settings.setOnAction(actionEvent -> {
             stage.setScene(settingsScene);
+            stage.setHeight(mainScene.getHeight());
+            stage.setWidth(mainScene.getWidth());
             stage.setTitle(programName + " - Settings");
             settingsUpdateText.setText("Welcome to the Settings menu");
         });
@@ -155,7 +157,7 @@ public class HelloApplication extends Application {
             //Construct play buttons
             for (int j = 0; j < 3; j++) {
                 Button button = new Button(Game.getEmptySymbol());
-                button.widthProperty().addListener((observableValue, oldValue, newValue) ->
+                button.heightProperty().addListener((observableValue, oldValue, newValue) ->
                         button.setFont(new Font(newValue.doubleValue() / 3.0)));
                 button.setStyle("-fx-background-color: %s; -fx-background-radius: 0".formatted("WHITESMOKE"));
 

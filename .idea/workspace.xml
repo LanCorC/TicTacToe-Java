@@ -9,14 +9,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53c17163-cb5a-430e-832b-13bb0ad331c5" name="Changes" comment="Windows .exe installer and installer icon added">
-      <change afterPath="$PROJECT_DIR$/XOs Game-1.0.exe" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/icon-192.ico" afterDir="false" />
+    <list default="true" id="53c17163-cb5a-430e-832b-13bb0ad331c5" name="Changes" comment="Installer icon, try installer to be added soon">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaProject-TicTacToe-1.0-SNAPSHOT.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/XOsGame.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/HelloController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/javaprojecttictactoe/hello-view.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaProject-TicTacToe.jar" beforeDir="false" afterPath="$PROJECT_DIR$/JavaProject-TicTacToe.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/HelloApplication.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +76,20 @@
       <command value="mvn clean package" />
     </option>
   </component>
-  <component name="RunManager" selected="JAR Application.JavaProject-TicTacToe.jar">
+  <component name="RunManager" selected="Application.Launcher">
+    <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.javaprojecttictactoe.HelloApplication" />
+      <module name="JavaProject-TicTacToe" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.javaprojecttictactoe.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.javaprojecttictactoe.Launcher" />
       <module name="JavaProject-TicTacToe" />
@@ -106,17 +115,13 @@
       <option name="JAR_PATH" value="$PROJECT_DIR$/JavaProject-TicTacToe.jar" />
       <method v="2" />
     </configuration>
-    <configuration name="original-JavaProject-TicTacToe-1.0-SNAPSHOT.jar" type="JarApplication" temporary="true">
-      <option name="JAR_PATH" value="$PROJECT_DIR$/target/original-JavaProject-TicTacToe-1.0-SNAPSHOT.jar" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JAR Application.JavaProject-TicTacToe.jar" />
         <item itemvalue="Application.Launcher" />
+        <item itemvalue="Application.HelloApplication" />
+        <item itemvalue="JAR Application.JavaProject-TicTacToe.jar" />
         <item itemvalue="JAR Application.JavaProject-TicTacToe-1.0-SNAPSHOT.jar (1)" />
         <item itemvalue="JAR Application.JavaProject-TicTacToe-1.0-SNAPSHOT.jar" />
-        <item itemvalue="JAR Application.original-JavaProject-TicTacToe-1.0-SNAPSHOT.jar" />
       </list>
     </recent_temporary>
   </component>
@@ -169,8 +174,27 @@
       <option name="project" value="LOCAL" />
       <updated>1727667436501</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Installer icon, try installer to be added soon">
+      <option name="closed" value="true" />
+      <created>1727680548548</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1727680548548</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Not sure what I did, but I fixed it?&#10;&#10;Launcher class is now strictly required to load project from IDE, jar file still works perfectly." />
@@ -179,6 +203,7 @@
     <MESSAGE value="Added .exe using Launch4J" />
     <MESSAGE value="Added app icon and to jar file" />
     <MESSAGE value="Windows .exe installer and installer icon added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Windows .exe installer and installer icon added" />
+    <MESSAGE value="Installer icon, try installer to be added soon" />
+    <option name="LAST_COMMIT_MESSAGE" value="Installer icon, try installer to be added soon" />
   </component>
 </project>
