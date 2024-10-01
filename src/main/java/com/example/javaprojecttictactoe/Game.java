@@ -434,7 +434,6 @@ public class Game {
                     if (currentPlayer == PLAYER2) {
                         playTurn();
                     }
-                    break;
                 default:
                     updateText.setText(currentSymbol() + "'s turn!");
             }
