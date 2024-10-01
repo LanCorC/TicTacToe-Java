@@ -9,9 +9,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53c17163-cb5a-430e-832b-13bb0ad331c5" name="Changes" comment="Updated the jar files and windows executable to reflect changes">
+    <list default="true" id="53c17163-cb5a-430e-832b-13bb0ad331c5" name="Changes" comment="Fixed minor bug, &quot;Bad move!&quot; update text lingering when versing non player">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaProject-TicTacToe.jar" beforeDir="false" afterPath="$PROJECT_DIR$/JavaProject-TicTacToe.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/XOs Game-1.0.exe" beforeDir="false" afterPath="$PROJECT_DIR$/XOs Game-1.0.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/javaprojecttictactoe/HelloApplication.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -205,7 +208,15 @@
       <option name="project" value="LOCAL" />
       <updated>1727749082908</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Fixed minor bug, &quot;Bad move!&quot; update text lingering when versing non player">
+      <option name="closed" value="true" />
+      <created>1727757464681</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1727757464681</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -229,6 +240,7 @@
     <MESSAGE value="Installer icon, try installer to be added soon" />
     <MESSAGE value="Fixed window size snapping between Settings and Main&#10;Adjusted button resizing for window size responsiveness" />
     <MESSAGE value="Updated the jar files and windows executable to reflect changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated the jar files and windows executable to reflect changes" />
+    <MESSAGE value="Fixed minor bug, &quot;Bad move!&quot; update text lingering when versing non player" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed minor bug, &quot;Bad move!&quot; update text lingering when versing non player" />
   </component>
 </project>

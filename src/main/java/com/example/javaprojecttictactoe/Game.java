@@ -162,13 +162,10 @@ public class Game {
             //The game has already ended
             return;
         }
+        updateText.setText(currentSymbol() + "'s turn!");
         if (currentPlayer == PLAYER2 && gameMode != VersusMode.VS_PLAYER) {
             playTurn();
-        } else if (currentPlayer == PLAYER1) {
-            updateText.setText(currentSymbol() + "'s turn!");
-            System.out.println("Player1's go!");
         }
-
     }
 
     public static void playRobot() {
@@ -429,14 +426,7 @@ public class Game {
             }
         } else {
             currentPlayer *= -1;
-            switch (gameMode) {
-                case VS_RANDOM, VS_ROBOT:
-                    if (currentPlayer == PLAYER2) {
-                        playTurn();
-                    }
-                default:
-                    updateText.setText(currentSymbol() + "'s turn!");
-            }
+            resume();
         }
     }
 

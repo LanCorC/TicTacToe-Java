@@ -212,6 +212,7 @@ public class HelloApplication extends Application {
 
         //else, all valid
         Game.setSymbols(p1.getText(), p2.getText(), p3.getText());
+        fields.forEach(textField -> textField.setText(""));
         updateText.setText("Symbols updated!");
     }
 
