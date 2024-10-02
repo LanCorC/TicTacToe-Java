@@ -4,12 +4,14 @@ This simple project is an interpretation of the classic tic-tac-toe game. This p
 ## How to run the app
 ### Without Java installed (Windows-only)
 1. Download the [XOs Game-1.0.exe](XOs%20Game-1.0.exe "Follow the link and press 'CTRL + SHIFT + S'") file
+   - Follow the link and press 'CTRL + SHIFT + S' or find the download option
 2. Double click from downloads to install the program
    - **Windows protected your PC: click "More info" then "Run anyway"**
-4. Launch the XOs Game application from your Start menu or desktop shortcut
+3. Launch the XOs Game application from your Start menu or desktop shortcut
 ### With Java installed (Windows, macOS, Linux)
 To install Java on your device, download and install either the latest [Java Runtime Environment](https://www.oracle.com/nz/java/technologies/downloads/) or [Java Development Kit](https://www.oracle.com/java/technologies/downloads/) appropriate for your operating system.
 1. Download the [JavaProject-TicTacToe.jar](JavaProject-TicTacToe.jar "Follow the link and press 'CTRL + SHIFT + S'") file
+   - Follow the link and press 'CTRL + SHIFT + S' or find the download option
 2. Double click from downloads to launch
 
 ## Demo
