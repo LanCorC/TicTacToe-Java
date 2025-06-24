@@ -1,6 +1,12 @@
 # Tic-Tac-Toe
 This simple project is an interpretation of the classic tic-tac-toe game. This program comes with two-player, versus robot, and versus random modes. 
 
+## Demo
+![xoDemoWinLoss](https://github.com/user-attachments/assets/4d25bc79-d674-45e1-9fdc-2877d109112d)
+* Full demo video [here](http://www.youtube.com/watch?v=UEF5DQFDf60) (1min50s), or click below
+
+[![Youtube demo video](http://img.youtube.com/vi/UEF5DQFDf60/0.jpg)](http://www.youtube.com/watch?v=UEF5DQFDf60)
+
 ## How to run the app
 ### Without Java installed (Windows-only)
 1. Download the [XOs Game-1.0.exe](XOs%20Game-1.0.exe "Follow the link and press 'CTRL + SHIFT + S'") file
@@ -13,12 +19,6 @@ To install Java on your device, download and install either the latest [Java Run
 1. Download the [JavaProject-TicTacToe.jar](JavaProject-TicTacToe.jar "Follow the link and press 'CTRL + SHIFT + S'") file
    - Follow the link and press 'CTRL + SHIFT + S' or find the download option
 2. Double click from downloads to launch
-
-## Demo
-![xoDemoWinLoss](https://github.com/user-attachments/assets/4d25bc79-d674-45e1-9fdc-2877d109112d)
-* Full demo video [here](http://www.youtube.com/watch?v=UEF5DQFDf60) (1min50s), or click below
-
-[![Youtube demo video](http://img.youtube.com/vi/UEF5DQFDf60/0.jpg)](http://www.youtube.com/watch?v=UEF5DQFDf60)
 
 ## Technologies
 * Editing and language: IntelliJ, Java
