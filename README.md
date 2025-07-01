@@ -29,6 +29,5 @@ To install Java on your device, download and install either the latest [Java Run
 2. Double click from downloads to launch
 
 ## License
-<!--
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+[![License](https://img.shields.io/badge/License-UNLICENSE-green)](./UNLICENSE)
 
