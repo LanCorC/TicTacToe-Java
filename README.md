@@ -29,5 +29,5 @@ To install Java on your device, download and install either the latest [Java Run
 2. Double click from downloads to launch
 
 ## License
-[![License](https://img.shields.io/badge/License-UNLICENSE-green)](./UNLICENSE)
+[![License](https://img.shields.io/badge/License-UNLICENSE-green)](./UNLICENSE.txt)
 
